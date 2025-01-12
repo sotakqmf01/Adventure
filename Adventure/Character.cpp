@@ -2,7 +2,7 @@
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 using namespace std;
-//test dev123
+
 Character::Character(const string& name)
 	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), gold(0)
 {
