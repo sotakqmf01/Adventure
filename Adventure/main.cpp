@@ -17,7 +17,9 @@ int main() {
 		gameManager.battle(player);
 		player->displayStatus();
 	}
-	// test
+	//
+	// pull request test 머지 테스트
+	// 
 	// 3. 상점 들릴꺼니?
 	//gameManager.vishtShop(player);
 
