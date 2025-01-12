@@ -5,6 +5,8 @@
 #include "GameManager.h"
 using namespace std;
 
+// dev.gameManager test commit
+
 int main() {
 	GameManager gameManager;
 
@@ -17,7 +19,9 @@ int main() {
 		gameManager.battle(player);
 		player->displayStatus();
 	}
-	// test
+	//
+	// pull request test 머지 테스트
+	// 
 	// 3. 상점 들릴꺼니?
 	//gameManager.vishtShop(player);
 	// 1234566778
