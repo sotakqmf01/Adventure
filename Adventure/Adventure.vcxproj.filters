@@ -28,6 +28,12 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{b720cc04-7c16-4116-b611-63810468e8ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Monster\Monsters">
+      <UniqueIdentifier>{97c078ae-3b4d-47e9-bae4-17f0583380eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Items">
+      <UniqueIdentifier>{3cc911f4-a0ae-47ce-ba78-79521f00d8db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +45,27 @@
     <ClCompile Include="GenerateRandomNumber.cpp">
       <Filter>Headers</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackBoost.cpp">
+      <Filter>Item\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>Item\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Orc.cpp">
+      <Filter>Monster\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Monster\Monsters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -46,6 +73,27 @@
     </ClInclude>
     <ClInclude Include="GenerateRandomNumber.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBoost.h">
+      <Filter>Item\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPotion.h">
+      <Filter>Item\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Orc.h">
+      <Filter>Monster\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Monster\Monsters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
