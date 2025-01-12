@@ -17,7 +17,7 @@ int main() {
 		gameManager.battle(player);
 		player->displayStatus();
 	}
-
+	// test
 	// 3. 상점 들릴꺼니?
 	//gameManager.vishtShop(player);
 
