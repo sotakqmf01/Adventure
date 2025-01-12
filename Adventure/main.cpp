@@ -19,10 +19,12 @@ int main() {
 		gameManager.battle(player);
 		player->displayStatus();
 	}
-
+	//
+	// pull request test 머지 테스트
+	// 
 	// 3. 상점 들릴꺼니?
 	//gameManager.vishtShop(player);
-
+	// 1234566778
 	// 4. 캐릭터 사망 시 게임 종료
 	// 게임 종료 시 결과 출력
 	if (player->isDead()) {
