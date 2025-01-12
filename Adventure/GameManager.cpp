@@ -49,7 +49,7 @@ void GameManager::printIntro()
 	textColor(7); 
 	cout << "| |   | |  /  \\/\\| |   | |  ";
 	textColor(9); 
-	cout << "|  ___  || |   | |( (   ) ) |  __) | (\\ \\) |   | |   | |   | ||     __) | __)   " << endl;
+	cout << "|  ___  || |   | |( (   ) )|  __)  | (\\ \\) |   | |   | |   | ||     __) | __)   " << endl;
 	textColor(12);
 	cout << "   | |   "; 
 	textColor(7); 
