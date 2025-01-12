@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdlib>
 #include <windows.h>
 #include "GameManager.h"
@@ -165,6 +165,9 @@ void GameManager::battle(Character* player)
 			totalGold += gainGold;
 			totalKilledMonster++;
 
+			if (dynamic_cast< BossMonster*>(monster) != nullptr)
+				killBoss = true;
+
 			delete monster;
 			break;
 		}
@@ -202,9 +205,9 @@ int GameManager::randomGold()
 
 void GameManager::printCongratulations()
 {
-	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★" << endl;
+	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl;
 	cout << "  축하합니다. Devil을 처치하고 게임을 클리어 하셨습니다!" << endl;
-	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★" << endl;
+	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl;
 }
 
 void GameManager::displayRPGResult()
