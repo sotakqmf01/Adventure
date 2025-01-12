@@ -34,6 +34,9 @@
     <Filter Include="Item\Items">
       <UniqueIdentifier>{3cc911f4-a0ae-47ce-ba78-79521f00d8db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shop">
+      <UniqueIdentifier>{253b5942-49c3-4def-a268-573feb70ae69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,6 +69,9 @@
     <ClCompile Include="Slime.cpp">
       <Filter>Monster\Monsters</Filter>
     </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -94,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Slime.h">
       <Filter>Monster\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
