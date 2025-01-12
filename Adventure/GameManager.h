@@ -15,6 +15,8 @@ public:
 	int totalUsedPowerPotion = 0;
 
 public:
+	void textColor(unsigned short color);
+	void printIntro();
 	string createCharacter();
 	Monster* generateMonster(int level);
 	void battle(Character* player);

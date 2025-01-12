@@ -9,7 +9,8 @@ using namespace std;
 // fork test
 int main() {
 	GameManager gameManager;
-
+	gameManager.printIntro();
+  
 	// 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
