@@ -1,5 +1,5 @@
 #pragma once
-#include "Orc.h"
+#include "Goblin.h"
 #include <time.h>
 #include <iostream>
 #include "GenerateRandomNumber.h"
@@ -10,39 +10,39 @@ using namespace std;
 
 extern random_device rd;
 
-// --------------------- ORC ----------------------------
-Orc::Orc(int level)
+// --------------------- Goblin ----------------------------
+Goblin::Goblin(int level)
 {
-	vector<string> orcNames = { "크라취", "아그쉬", "발로쉬", "아자그", "바드룩", "고크묵", "나크둠", "고르막", "카이막", "발라취", "코드룩"};
-	int vectorsize = orcNames.size()-1;
-	difficulty = 1.1;
+	vector<string> goblinNames = { "나스고르", "고르로크", "마크기트", "나스코르", "가르코르", "아흐로드", "케르륵", "께륵께륵", "케케륵", "무카기트", "가바나트" };
+	int vectorsize = goblinNames.size() - 1;
+	difficulty = 0.8;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
-	name = "오크 " + orcNames[generateRandomNumber(0,vectorsize)];
-	
+	name = "고블린 " + goblinNames[generateRandomNumber(0, vectorsize)];
+
 }
 
-string Orc::getName()
+string Goblin::getName()
 {
 	return name;
 }
 
-int Orc::getHealth() const
+int Goblin::getHealth() const
 {
 	return health;
 }
 
-int Orc::getAttack() const
+int Goblin::getAttack() const
 {
 	return attack;
 }
 
-float Orc::getDifficulty() const
+float Goblin::getDifficulty() const
 {
 	return difficulty;
 }
 
-void Orc::takeDamage(int damage)
+void Goblin::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
@@ -55,12 +55,12 @@ void Orc::takeDamage(int damage)
 	}
 }
 
-bool Orc::isDead()
+bool Goblin::isDead()
 {
 	return health <= 0 ? true : false;
 }
 
-Item* Orc::dropItem()
+Item* Goblin::dropItem()
 {
 	Item* item = nullptr;
 	int dropProbability = generateRandomNumber(1, 100);

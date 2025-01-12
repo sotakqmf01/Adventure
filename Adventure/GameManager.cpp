@@ -6,8 +6,71 @@
 #include "Monster.h"
 #include "Slime.h"
 #include "Orc.h"
+#include "Goblin.h"
+#include "Troll.h"
+#include "BossMonster.h"
 #include "Item.h"
 #include "GenerateRandomNumber.h"
+
+void GameManager::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
+{
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hCon, color);
+}
+
+void GameManager::printIntro()
+{
+	textColor(12);
+	cout << "_________";
+	textColor(7);
+	cout << "______     __    ______     ";
+	textColor(9);	
+	cout << "_______  ______            _______  _       _________          _______  _______ " << endl;
+	textColor(12);
+	cout << "\\__   __/";
+	textColor(7);
+	cout << "(  __  \\   /__\\  (  __  \\   "; 
+	textColor(9); 
+	cout << "(  ___  )(  __  \\ |\\     /|(  ____ \\( (    /|\\__   __/|\\     /|(  ____ )(  ____ \\" << endl;
+	textColor(12);
+	cout << "   ) (   ";
+	textColor(7); 
+	cout << "| (  \\  ) ( \\/ ) | (  \\  )  ";
+	textColor(9); 
+	cout << "| (   ) || (  \\  )| )   ( || (    \\/|  \\  ( |   ) (   | )   ( || (    )|| (    \\/" << endl;
+	textColor(12);
+	cout << "   | |   ";
+	textColor(7); 
+	cout << "| |   ) |  \\  /  | |   ) |  "; 
+	textColor(9); 
+	cout << "| (___) || |   ) || |   | || (__    |   \\ | |   | |   | |   | || (____)|| (__    " << endl;
+	textColor(12);
+	cout << "   | |   "; 
+	textColor(7); 
+	cout << "| |   | |  /  \\/\\| |   | |  ";
+	textColor(9); 
+	cout << "| ___  || |   | |(()) | __) | (\\ \\) |   | |   | |   | ||     __) | __)   " << endl;
+	textColor(12);
+	cout << "   | |   "; 
+	textColor(7); 
+	cout << "| |   ) | / /\\  /| |   ) |  "; 
+	textColor(9); 
+	cout << "| (   ) || |   ) | \\ \\_/ / | (      | | \\   |   | |   | |   | || (\\ (   | (      " << endl;
+	textColor(12);
+	cout << "   | |   "; 
+	textColor(7); 
+	cout << "| (__/  )(  \\/  \\| (__/  )  "; 
+	textColor(9); 
+	cout << "| )   ( || (__/  )  \\   /  | (____/\\| )  \\  |   | |   | (___) || ) \\ \\__| (____/\\" << endl;
+	textColor(12);
+	cout << "   )_(   "; 
+	textColor(7); 
+	cout << "(______/  \\___/\\/(______/   "; 
+	textColor(9); 
+	cout << "|/     \\|(______/    \\_/   (_______/|/    )_)   )_(   (_______)|/   \\__/(_______/" << endl;
+	textColor(7);
+	Sleep(3000);
+}
 
 string GameManager::createCharacter()
 {
@@ -30,12 +93,18 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 1)) {
+	switch (generateRandomNumber(0, 3)) {
 	case 0:
 		monster = new Slime(level);
 		break;
 	case 1:
 		monster = new Orc(level);
+		break;
+	case 2:
+		monster = new Goblin(level);
+		break;
+	case 3:
+		monster = new Troll(level);
 		break;
 	default:
 		break;

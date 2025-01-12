@@ -4,23 +4,24 @@ using namespace std;
 
 int main() {
 	GameManager gameManager;
-
-	// 1. Ä³¸¯ÅÍ »ý¼º - createCharacter()
+	gameManager.printIntro();
+  
+	// 1. ìºë¦­í„° ìƒì„± - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 
-	// 2. ÀüÅõ
-	while (!player->isDead()) 
-	{
+	// 2. ì „íˆ¬
+	while (!player->isDead()) {
+
 		gameManager.battle(player);
 		player->displayStatus();
 
-		// 3. »óÁ¡ µé¸±²¨´Ï?
+		// 3. ï¿½ï¿½ï¿½ï¿½ ï¿½é¸±ï¿½ï¿½ï¿½ï¿½?
 		gameManager.visitShop(player);
 	}
 
-	// 4. Ä³¸¯ÅÍ »ç¸Á ½Ã °ÔÀÓ Á¾·á
-	// °ÔÀÓ Á¾·á ½Ã °á°ú Ãâ·Â
+	// 4. Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	if (player->isDead())
 	{
 		gameManager.displayRPGResult();
