@@ -32,6 +32,7 @@ public:
 	void addExperience(int exp);	// 전투 승리 시 경험치 획득
 	void addGold(int _gold);		// 전투 승리 시 골드 획득/상점 구매/상점 판매
 	void getDropedItem(Item* item);
+	void showInventory();
 
 	// get/set 없이 하는 방법이 있나? 일단 만들어보고 다 함수로 만드는 거 생각해보자
 	// 몬스터의 체력, 공격력에 레벨이 필요
