@@ -13,7 +13,7 @@ public:
 	int totalKilledMonster = 0;
 	int totalUsedHealthPotion = 0;
 	int totalUsedPowerPotion = 0;
-	bool killBoss = false;			// º¸½º ¸ó½ºÅÍ¸¦ ÀâÀ¸¸é true
+	bool killBoss = false;			// ë³´ìŠ¤ ëª¬ìŠ¤í„° ìž¡ìœ¼ë©´ true
 
 public:
 	void textColor(unsigned short color);
