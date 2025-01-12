@@ -16,16 +16,16 @@ int main() {
 		gameManager.battle(player);
 		player->displayStatus();
 
-		// 3. ���� �鸱����?
+		// 3. 상점 들릴꺼니?
 		gameManager.visitShop(player);
 	}
 
-	// 4. ĳ���� ��� �� ���� ����
-	// ���� ���� �� ��� ���
-	if (player->isDead())
-	{
-		gameManager.displayRPGResult();
-	}
+	// 캐릭터가 사망한게 아닌 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
+	if (gameManager.killBoss == true)
+		gameManager.printCongratulations();
+
+	// 4. 게임 종료 시 결과 출력
+	gameManager.displayRPGResult();
 
 	return 0;
 }

@@ -113,11 +113,30 @@ Monster* GameManager::generateMonster(int level)
 	return monster;
 }
 
+Monster* GameManager::generateBossMonster(int level)
+{
+	Monster* monster = new BossMonster(level);
+
+	return monster;
+}
+
 void GameManager::battle(Character* player)
 {
-	Monster* monster = generateMonster(player->getLevel());
-	Sleep(2000);
-	//system("cls");
+	Monster* monster = nullptr;
+
+	if (player->getLevel() < 10)
+	{
+		// 일반 몬스터 소환
+		monster = generateMonster(player->getLevel());
+		Sleep(1000);
+		//system("cls");
+	}
+	else
+	{
+		// 보스 몬스터 소환
+		monster = generateBossMonster(player->getLevel());
+		Sleep(1000);
+	}
 
 	cout << "*************************************************" << endl;
 	cout << "          " << monster->getName()
@@ -181,13 +200,21 @@ int GameManager::randomGold()
 	return generateRandomNumber(10, 20);
 }
 
+void GameManager::printCongratulations()
+{
+	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★" << endl;
+	cout << "  축하합니다. Devil을 처치하고 게임을 클리어 하셨습니다!" << endl;
+	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★" << endl;
+}
+
 void GameManager::displayRPGResult()
 {
 	char lookResult;
 	cout << "게임 결과를 보시겠습니까? (Y/N) : ";
 	cin >> lookResult;
-	if (lookResult == 'y' || lookResult == 'Y') {
-		system("cls");
+	if (lookResult == 'y' || lookResult == 'Y')
+	{
+		//system("cls");
 		cout << "=============게임 결과=============" << endl;
 		cout << "> 몬스터 처치 수 : " << totalKilledMonster << endl;
 		cout << "> 획득 골드량 : " << totalGold << endl;
