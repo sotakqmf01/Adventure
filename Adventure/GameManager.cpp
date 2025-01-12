@@ -180,3 +180,17 @@ int GameManager::randomGold()
 {
 	return generateRandomNumber(10, 20);
 }
+
+void GameManager::displayRPGResult()
+{
+	char lookResult;
+	cout << "게임 결과를 보시겠습니까? (Y/N) : ";
+	cin >> lookResult;
+	if (lookResult == 'y' || lookResult == 'Y') {
+		system("cls");
+		cout << "=============게임 결과=============" << endl;
+		cout << "> 몬스터 처치 수 : " << totalKilledMonster << endl;
+		cout << "> 획득 골드량 : " << totalGold << endl;
+		cout << "==================================" << endl;
+	}
+}
