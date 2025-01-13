@@ -17,8 +17,8 @@ public:
 class ItemList
 {
 public:
-	~ItemList();
-	vector<Item*> items;		//¾ÆÀÌÅÛ ¸ñ·Ï
-	void additem(Item* item);	// ¾ÆÀÌÅÛ Ãß°¡
+	vector<Item*> items;		//Â¾Ã†Ã€ÃŒÃ…Ã› Â¸Ã±Â·Ã
+	void additem(Item* item);	// Â¾Ã†Ã€ÃŒÃ…Ã› ÃƒÃŸÂ°Â¡
 	void itemlistSet();
+	~ItemList();
 };

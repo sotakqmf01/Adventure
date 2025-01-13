@@ -86,6 +86,8 @@
     </ClCompile>
     <ClCompile Include="printMessage.cpp">
       <Filter>Headers</Filter>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +135,8 @@
     </ClInclude>
     <ClInclude Include="printMessage.h">
       <Filter>Headers</Filter>
+    <ClInclude Include="Shop.h">
+      <Filter>Shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
