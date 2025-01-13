@@ -7,7 +7,7 @@ using namespace std;
 
 class Character {
 private:
-	static Character* instance;		// ÃÊ±âÈ­ .cpp¿¡¼­ ÇØÁÖ±â
+	static Character* instance;		// ì´ˆê¸°í™” .cppì—ì„œ í•´ì£¼ê¸°
 	string name;
 	int level;
 	int health;
@@ -24,21 +24,22 @@ public:
 	static Character* getInstance(const string& name);
 	void displayStatus();
 	void levelUp();
-	void useRandomItem();		// inventory¿¡ ÀÖ´Â index¹ø Â° ¾ÆÀÌÅÛ »ç¿ë
+	void useRandomItem();		// inventoryì— ìˆëŠ” indexë²ˆ ì§¸ ì•„ì´í…œ ì‚¬ìš©
 	void enhanceAttack(int attackIncrease);
 	void Heal(int heal);
-	void takeDamage(int damage);	// ÀüÅõ Áß ÇÇ°İ
-	bool isDead();					// Ä³¸¯ÅÍ°¡ »ç¸ÁÇß³ª?
-	void addExperience(int exp);	// ÀüÅõ ½Â¸® ½Ã °æÇèÄ¡ È¹µæ
-	void addGold(int _gold);		// ÀüÅõ ½Â¸® ½Ã °ñµå È¹µæ/»óÁ¡ ±¸¸Å/»óÁ¡ ÆÇ¸Å
+	void takeDamage(int damage);	// ì „íˆ¬ ì¤‘ í”¼ê²©
+	bool isDead();					// ìºë¦­í„°ê°€ ì‚¬ë§í–ˆë‚˜?
+	void addExperience(int exp);	// ì „íˆ¬ ìŠ¹ë¦¬ ì‹œ ê²½í—˜ì¹˜ íšë“
+	void addGold(int _gold);		// ì „íˆ¬ ìŠ¹ë¦¬ ì‹œ ê³¨ë“œ íšë“/ìƒì  êµ¬ë§¤/ìƒì  íŒë§¤
 	void getDropedItem(Item* item);
+	void showInventory();
 
-	// get/set ¾øÀÌ ÇÏ´Â ¹æ¹ıÀÌ ÀÖ³ª? ÀÏ´Ü ¸¸µé¾îº¸°í ´Ù ÇÔ¼ö·Î ¸¸µå´Â °Å »ı°¢ÇØº¸ÀÚ
-	// ¸ó½ºÅÍÀÇ Ã¼·Â, °ø°İ·Â¿¡ ·¹º§ÀÌ ÇÊ¿ä
-	// ¾î¶² Çàµ¿¿¡ ´ëÇÑ Ã³¸®¸¦ ¿©±â¼­ ÇØ¹ö¸®¸é µÊ(takeDamage, addExperience µî)
+	// get/set ì—†ì´ í•˜ëŠ” ë°©ë²•ì´ ìˆë‚˜? ì¼ë‹¨ ë§Œë“¤ì–´ë³´ê³  ë‹¤ í•¨ìˆ˜ë¡œ ë§Œë“œëŠ” ê±° ìƒê°í•´ë³´ì
+	// ëª¬ìŠ¤í„°ì˜ ì²´ë ¥, ê³µê²©ë ¥ì— ë ˆë²¨ì´ í•„ìš”
+	// ì–´ë–¤ í–‰ë™ì— ëŒ€í•œ ì²˜ë¦¬ë¥¼ ì—¬ê¸°ì„œ í•´ë²„ë¦¬ë©´ ë¨(takeDamage, addExperience ë“±)
 	int getLevel() { return level; }
 	string& getName() { return name; }
 
-	// ÀüÅõ¿¡ °ø°İ·Â ¾Ë¾Æ¾ß ÇÔ
+	// ì „íˆ¬ì— ê³µê²©ë ¥ ì•Œì•„ì•¼ í•¨
 	int getAttack() { return attack; }
 };

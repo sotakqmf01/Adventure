@@ -1,5 +1,5 @@
 #pragma once
-#include "Orc.h"
+#include "Troll.h"
 #include <time.h>
 #include <iostream>
 #include "GenerateRandomNumber.h"
@@ -10,39 +10,35 @@ using namespace std;
 
 extern random_device rd;
 
-// --------------------- ORC ----------------------------
-Orc::Orc(int level)
+// --------------------- Troll ----------------------------
+Troll::Troll(int level) : name("트롤")
 {
-	vector<string> orcNames = { "크라취", "아그쉬", "발로쉬", "아자그", "바드룩", "고크묵", "나크둠", "고르막", "카이막", "발라취", "코드룩"};
-	int vectorsize = orcNames.size()-1;
-	difficulty = 1.1;
+	difficulty = 1.4;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
-	name = "오크 " + orcNames[generateRandomNumber(0,vectorsize)];
-	
 }
 
-string Orc::getName()
+string Troll::getName()
 {
 	return name;
 }
 
-int Orc::getHealth() const
+int Troll::getHealth() const
 {
 	return health;
 }
 
-int Orc::getAttack() const
+int Troll::getAttack() const
 {
 	return attack;
 }
 
-float Orc::getDifficulty() const
+float Troll::getDifficulty() const
 {
 	return difficulty;
 }
 
-void Orc::takeDamage(int damage)
+void Troll::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
@@ -55,19 +51,26 @@ void Orc::takeDamage(int damage)
 	}
 }
 
-bool Orc::isDead()
+bool Troll::isDead()
 {
 	return health <= 0 ? true : false;
 }
 
-Item* Orc::dropItem()
+Item* Troll::dropItem()
 {
 	Item* item = nullptr;
-	ItemList* itemlist = nullptr;
-	itemlist->itemlistSet();
-
-	int index = generateRandomNumber(0, (int)itemlist->items.size());
-	item = itemlist->items[index];
-
+	int dropProbability = generateRandomNumber(1, 100);
+	if (dropProbability <= 30) {
+		switch (generateRandomNumber(0, 1)) {
+		case 0:
+			item = new HealthPotion();
+			break;
+		case 1:
+			item = new AttackBoost();
+			break;
+		default:
+			cout << "? 아이템 생성에 문제가 생겼습니다\n\n";
+		}
+	}
 	return item;
 }

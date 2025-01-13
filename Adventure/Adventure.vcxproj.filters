@@ -69,8 +69,6 @@
     <ClCompile Include="Slime.cpp">
       <Filter>Monster\Monsters</Filter>
     </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,8 +99,6 @@
     <ClInclude Include="Slime.h">
       <Filter>Monster\Monsters</Filter>
     </ClInclude>
-    <ClInclude Include="Shop.h">
-      <Filter>Shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
