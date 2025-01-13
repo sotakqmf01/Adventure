@@ -53,7 +53,7 @@ void Shop::Reroll()
 Character* Shop:: sellItem(int index) 
 {
 	
-	Character* inventory;
+	Character* inventory = nullptr;
 
 
 };
