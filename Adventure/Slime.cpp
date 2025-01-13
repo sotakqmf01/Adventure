@@ -11,11 +11,13 @@ using namespace std;
 // --------------------- SLIME ----------------------------
 Slime::Slime(int level) : name("슬라임")
 {
-	health = level * generateRandomNumber(50, 60);
-	attack = level * generateRandomNumber(3, 8);
+	difficulty = 0.5;
+	health = level * getDifficulty() * generateRandomNumber(50, 60);
+	attack = level * getDifficulty() * generateRandomNumber(5, 10);
+	
 }
 
-string Slime::getName() const
+string Slime::getName()
 {
 	return name;
 }
@@ -29,7 +31,10 @@ int Slime::getAttack() const
 {
 	return attack;
 }
-
+float Slime::getDifficulty() const
+{
+	return difficulty;
+}
 void Slime::takeDamage(int damage)
 {
 	// 피격 시 체력 감소

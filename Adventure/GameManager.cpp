@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <cstdlib>
 #include <windows.h>
 #include "GameManager.h"
@@ -6,21 +6,84 @@
 #include "Monster.h"
 #include "Slime.h"
 #include "Orc.h"
+#include "Goblin.h"
+#include "Troll.h"
+#include "BossMonster.h"
 #include "Item.h"
 #include "GenerateRandomNumber.h"
+
+void GameManager::textColor(unsigned short color)	// ì»¬ëŸ¬ í…ìŠ¤íŠ¸ í•¨ìˆ˜ 0(ê²€ì€ìƒ‰)~15(ë°ì€ í•˜ì–€ìƒ‰)ê¹Œì§€ ì…ë ¥
+{
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hCon, color);
+}
+
+void GameManager::printIntro()
+{
+	textColor(12);
+	cout << "_________";
+	textColor(7);
+	cout << " ______     __    ______     ";
+	textColor(9);	
+	cout << "_______  ______            _______  _       _________          _______  _______ " << endl;
+	textColor(12);
+	cout << "\\__   __/";
+	textColor(7);
+	cout << "(  __  \\   /__\\  (  __  \\   "; 
+	textColor(9); 
+	cout << "(  ___  )(  __  \\ |\\     /|(  ____ \\( (    /|\\__   __/|\\     /|(  ____ )(  ____ \\" << endl;
+	textColor(12);
+	cout << "   ) (   ";
+	textColor(7); 
+	cout << "| (  \\  ) ( \\/ ) | (  \\  )  ";
+	textColor(9); 
+	cout << "| (   ) || (  \\  )| )   ( || (    \\/|  \\  ( |   ) (   | )   ( || (    )|| (    \\/" << endl;
+	textColor(12);
+	cout << "   | |   ";
+	textColor(7); 
+	cout << "| |   ) |  \\  /  | |   ) |  "; 
+	textColor(9); 
+	cout << "| (___) || |   ) || |   | || (__    |   \\ | |   | |   | |   | || (____)|| (__    " << endl;
+	textColor(12);
+	cout << "   | |   "; 
+	textColor(7); 
+	cout << "| |   | |  /  \\/\\| |   | |  ";
+	textColor(9); 
+	cout << "|  ___  || |   | |( (   ) )|  __)   | (\\ \\) |   | |   | |   | ||     __)|  __)   " << endl;
+	textColor(12);
+	cout << "   | |   "; 
+	textColor(7); 
+	cout << "| |   ) | / /\\  /| |   ) |  "; 
+	textColor(9); 
+	cout << "| (   ) || |   ) | \\ \\_/ / | (      | | \\   |   | |   | |   | || (\\ (   | (      " << endl;
+	textColor(12);
+	cout << "   | |   "; 
+	textColor(7); 
+	cout << "| (__/  )(  \\/  \\| (__/  )  "; 
+	textColor(9); 
+	cout << "| )   ( || (__/  )  \\   /  | (____/\\| )  \\  |   | |   | (___) || ) \\ \\__| (____/\\" << endl;
+	textColor(12);
+	cout << "   )_(   "; 
+	textColor(7); 
+	cout << "(______/  \\___/\\/(______/   "; 
+	textColor(9); 
+	cout << "|/     \\|(______/    \\_/   (_______/|/    )_)   )_(   (_______)|/   \\__/(_______/" << endl;
+	textColor(7);
+	Sleep(3000);
+}
 
 string GameManager::createCharacter()
 {
 	string name;
 	cout << "============================================" << endl;
-	cout << "            È¯¿µÇÕ´Ï´Ù. ¸ğÇè°¡´Ô!\n";
+	cout << "            í™˜ì˜í•©ë‹ˆë‹¤. ëª¨í—˜ê°€ë‹˜!\n";
 	cout << "============================================" << endl;
-	cout << " Ä³¸¯ÅÍ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä : ";
-	getline(cin, name);			// ÀÌ¸§ÀÌ °ø¹éÀÌ¸é ´Ù½Ã ÀÔ·ÂÇÏµµ·ÏÇÏ´Â ºÎºĞ ³ªÁß¿¡ Ãß°¡?
+	cout << " ìºë¦­í„°ëª…ì„ ì…ë ¥í•˜ì„¸ìš” : ";
+	getline(cin, name);			// ì´ë¦„ì´ ê³µë°±ì´ë©´ ë‹¤ì‹œ ì…ë ¥í•˜ë„ë¡í•˜ëŠ” ë¶€ë¶„ ë‚˜ì¤‘ì— ì¶”ê°€?
 	cout << endl;
 
 	Character* player = Character::getInstance(name);
-	cout << "        ** Ä³¸¯ÅÍ [" << name << "] »ı¼º ¿Ï·á! **" << endl;
+	cout << "        ** ìºë¦­í„° [" << name << "] ìƒì„± ì™„ë£Œ! **" << endl;
 	player->displayStatus();
 
 	return name;
@@ -30,12 +93,18 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 1)) {
+	switch (generateRandomNumber(0, 3)) {
 	case 0:
 		monster = new Slime(level);
 		break;
 	case 1:
 		monster = new Orc(level);
+		break;
+	case 2:
+		monster = new Goblin(level);
+		break;
+	case 3:
+		monster = new Troll(level);
 		break;
 	default:
 		break;
@@ -44,53 +113,75 @@ Monster* GameManager::generateMonster(int level)
 	return monster;
 }
 
+Monster* GameManager::generateBossMonster(int level)
+{
+	Monster* monster = new BossMonster(level);
+
+	return monster;
+}
+
 void GameManager::battle(Character* player)
 {
-	Monster* monster = generateMonster(player->getLevel());
-	Sleep(2000);
-	//system("cls");
+	Monster* monster = nullptr;
+
+	if (player->getLevel() < 10)
+	{
+		// ì¼ë°˜ ëª¬ìŠ¤í„° ì†Œí™˜
+		monster = generateMonster(player->getLevel());
+		Sleep(1000);
+		//system("cls");
+	}
+	else
+	{
+		// ë³´ìŠ¤ ëª¬ìŠ¤í„° ì†Œí™˜
+		monster = generateBossMonster(player->getLevel());
+		Sleep(1000);
+	}
 
 	cout << "*************************************************" << endl;
 	cout << "          " << monster->getName()
-		<< " ¹ß°ß (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
+		<< " ë°œê²¬ (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
 	cout << "*************************************************" << endl;
 
 	while (!player->isDead() && !monster->isDead()) {
-		// ÇÃ·¹ÀÌ¾î -> ¸ó½ºÅÍ °ø°İ
-		cout << " " << player->getName() << "°¡(ÀÌ) " << monster->getName() << "À»(¸¦) °ø°İ!  ";
+		// í”Œë ˆì´ì–´ -> ëª¬ìŠ¤í„° ê³µê²©
+		cout << " " << player->getName() << "ê°€(ì´) " << monster->getName() << "ì„(ë¥¼) ê³µê²©!  ";
 		monster->takeDamage(player->getAttack());
 
-		// ¸ó½ºÅÍ°¡ Á×À¸¸é °æÇèÄ¡¿Í °ñµå È¹µæ, °¡²û ¾ÆÀÌÅÛµµ µå·Ó + ÀüÅõ Á¾·á
+		// ëª¬ìŠ¤í„°ê°€ ì£½ìœ¼ë©´ ê²½í—˜ì¹˜ì™€ ê³¨ë“œ íšë“, ê°€ë” ì•„ì´í…œë„ ë“œë¡­ + ì „íˆ¬ ì¢…ë£Œ
 		if (monster->isDead()) {
-			// ¾ÆÀÌÅÛ µå·Ó(¸ó½ºÅÍ) ¹× ¾ÆÀÌÅÛ È¹µæ(ÇÃ·¹ÀÌ¾î)
+			// ì•„ì´í…œ ë“œë¡­(ëª¬ìŠ¤í„°) ë° ì•„ì´í…œ íšë“(í”Œë ˆì´ì–´)
 			cout << "-------------------------------------------------" << endl;
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
 				player->getDropedItem(dropedItem);
 
-			// °æÇèÄ¡ ¹× °ñµå È¹µæ
+			// ê²½í—˜ì¹˜ ë° ê³¨ë“œ íšë“
 			int gainGold = randomGold();
-			cout << ">> " << player->getName() << "°¡(ÀÌ) 50EXP¿Í " << gainGold << " °ñµå¸¦ È¹µæ" << endl;
-			player->addExperience(50);
+			cout << ">> " << player->getName() << "ê°€(ì´) 30EXPì™€ " << gainGold << " ê³¨ë“œë¥¼ íšë“" << endl;
+			player->addExperience(30);
 			player->addGold(gainGold);
 
 			totalGold += gainGold;
 			totalKilledMonster++;
 
+			if (dynamic_cast< BossMonster*>(monster) != nullptr)
+				killBoss = true;
+
 			delete monster;
 			break;
 		}
 
-		// 30% È®·ü·Î ¾ÆÀÌÅÛ »ç¿ë -> ±×³É useRandomItem¿¡ È®·üÀûÀ¸·Î »ç¿ëÇÏµµ·Ï ÇÒ±î?
+		// 30% í™•ë¥ ë¡œ ì•„ì´í…œ ì‚¬ìš© -> ê·¸ëƒ¥ useRandomItemì— í™•ë¥ ì ìœ¼ë¡œ ì‚¬ìš©í•˜ë„ë¡ í• ê¹Œ?
 		if (generateRandomNumber(1, 100) <= 30) {
 			player->useRandomItem();
 		}
 
-		// ¸ó½ºÅÍ -> ÇÃ·¹ÀÌ¾î °ø°İ
-		cout << " " << monster->getName() << "°¡(ÀÌ) " << player->getName() << "À»(¸¦) °ø°İ!  ";
+		// ëª¬ìŠ¤í„° -> í”Œë ˆì´ì–´ ê³µê²©
+		cout << " " << monster->getName() << "ê°€(ì´) " << player->getName() << "ì„(ë¥¼) ê³µê²©!  ";
 		player->takeDamage(monster->getAttack());
 
-		// ÇÃ·¹ÀÌ¾î°¡ Á×À¸¸é ÀüÅõ Á¾·á
+		// í”Œë ˆì´ì–´ê°€ ì£½ìœ¼ë©´ ì „íˆ¬ ì¢…ë£Œ
 		if (player->isDead()) {
 			break;
 		}
@@ -100,7 +191,7 @@ void GameManager::battle(Character* player)
 void GameManager::visitShop(Character* player)
 {
 	char visitShop;
-	cout << "»óÁ¡À» ¹æ¹®ÇÏ½Ã°Ú½À´Ï±î? (Y/N) : ";
+	cout << "ìƒì ì„ ë°©ë¬¸í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
 	cin >> visitShop;
 	if (visitShop == 'y' || visitShop == 'Y') {
 
@@ -110,4 +201,26 @@ void GameManager::visitShop(Character* player)
 int GameManager::randomGold()
 {
 	return generateRandomNumber(10, 20);
+}
+
+void GameManager::printCongratulations()
+{
+	cout << "â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜…" << endl;
+	cout << "  ì¶•í•˜í•©ë‹ˆë‹¤. Devilì„ ì²˜ì¹˜í•˜ê³  ê²Œì„ì„ í´ë¦¬ì–´ í•˜ì…¨ìŠµë‹ˆë‹¤!" << endl;
+	cout << "â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜…" << endl;
+}
+
+void GameManager::displayRPGResult()
+{
+	char lookResult;
+	cout << "ê²Œì„ ê²°ê³¼ë¥¼ ë³´ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
+	cin >> lookResult;
+	if (lookResult == 'y' || lookResult == 'Y')
+	{
+		//system("cls");
+		cout << "=============ê²Œì„ ê²°ê³¼=============" << endl;
+		cout << "> ëª¬ìŠ¤í„° ì²˜ì¹˜ ìˆ˜ : " << totalKilledMonster << endl;
+		cout << "> íšë“ ê³¨ë“œëŸ‰ : " << totalGold << endl;
+		cout << "==================================" << endl;
+	}
 }
