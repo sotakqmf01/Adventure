@@ -76,7 +76,7 @@ Character* Shop::sellItem(int index, Character* character)				// 아이템을 판매
 	if (index < 0 || index >= inven.size()) 
 	{
 		cout << "잘못된 번호입니다. 판매할 아이템을 다시 선택하세요." << endl;
-		return;
+		return nullptr; 
 	}
 
 	if (inven.size() >= 1)
