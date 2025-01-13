@@ -8,69 +8,13 @@
 #include "Orc.h"
 #include "Goblin.h"
 #include "Troll.h"
+#include "Bandit.h"
 #include "BossMonster.h"
 #include "Item.h"
 #include "GenerateRandomNumber.h"
+#include "printMessage.h"
+#include <conio.h>		// _getch() 로 입력대기 받기 위해서 필요함
 
-void GameManager::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
-{
-	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hCon, color);
-}
-
-void GameManager::printIntro()
-{
-	textColor(12);
-	cout << "_________";
-	textColor(7);
-	cout << " ______     __    ______     ";
-	textColor(9);	
-	cout << "_______  ______            _______  _       _________          _______  _______ " << endl;
-	textColor(12);
-	cout << "\\__   __/";
-	textColor(7);
-	cout << "(  __  \\   /__\\  (  __  \\   "; 
-	textColor(9); 
-	cout << "(  ___  )(  __  \\ |\\     /|(  ____ \\( (    /|\\__   __/|\\     /|(  ____ )(  ____ \\" << endl;
-	textColor(12);
-	cout << "   ) (   ";
-	textColor(7); 
-	cout << "| (  \\  ) ( \\/ ) | (  \\  )  ";
-	textColor(9); 
-	cout << "| (   ) || (  \\  )| )   ( || (    \\/|  \\  ( |   ) (   | )   ( || (    )|| (    \\/" << endl;
-	textColor(12);
-	cout << "   | |   ";
-	textColor(7); 
-	cout << "| |   ) |  \\  /  | |   ) |  "; 
-	textColor(9); 
-	cout << "| (___) || |   ) || |   | || (__    |   \\ | |   | |   | |   | || (____)|| (__    " << endl;
-	textColor(12);
-	cout << "   | |   "; 
-	textColor(7); 
-	cout << "| |   | |  /  \\/\\| |   | |  ";
-	textColor(9); 
-	cout << "|  ___  || |   | |( (   ) )|  __)   | (\\ \\) |   | |   | |   | ||     __)|  __)   " << endl;
-	textColor(12);
-	cout << "   | |   "; 
-	textColor(7); 
-	cout << "| |   ) | / /\\  /| |   ) |  "; 
-	textColor(9); 
-	cout << "| (   ) || |   ) | \\ \\_/ / | (      | | \\   |   | |   | |   | || (\\ (   | (      " << endl;
-	textColor(12);
-	cout << "   | |   "; 
-	textColor(7); 
-	cout << "| (__/  )(  \\/  \\| (__/  )  "; 
-	textColor(9); 
-	cout << "| )   ( || (__/  )  \\   /  | (____/\\| )  \\  |   | |   | (___) || ) \\ \\__| (____/\\" << endl;
-	textColor(12);
-	cout << "   )_(   "; 
-	textColor(7); 
-	cout << "(______/  \\___/\\/(______/   "; 
-	textColor(9); 
-	cout << "|/     \\|(______/    \\_/   (_______/|/    )_)   )_(   (_______)|/   \\__/(_______/" << endl;
-	textColor(7);
-	Sleep(3000);
-}
 
 string GameManager::createCharacter()
 {
@@ -93,7 +37,7 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 3)) {
+	switch (generateRandomNumber(0, 4)) {
 	case 0:
 		monster = new Slime(level);
 		break;
@@ -105,6 +49,9 @@ Monster* GameManager::generateMonster(int level)
 		break;
 	case 3:
 		monster = new Troll(level);
+		break;
+	case 4:
+		monster = new Bandit(level);
 		break;
 	default:
 		break;
@@ -123,7 +70,7 @@ Monster* GameManager::generateBossMonster(int level)
 void GameManager::battle(Character* player)
 {
 	Monster* monster = nullptr;
-
+	turnCounter = 1;
 	if (player->getLevel() < 10)
 	{
 		// 일반 몬스터 소환
@@ -184,11 +131,16 @@ void GameManager::battle(Character* player)
 		if (player->isDead()) {
 			break;
 		}
+		Sleep(500);
+		cout << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
+		_getch();
+		turnCounter++;
 	}
 }
 
 void GameManager::visitShop(Character* player)
 {
+	turnCounter = 0;
 	char visitShop;
 	cout << "상점을 방문하시겠습니까? (Y/N) : ";
 	cin >> visitShop;
@@ -216,6 +168,7 @@ void GameManager::displayRPGResult()
 	cin >> lookResult;
 	if (lookResult == 'y' || lookResult == 'Y')
 	{
+		
 		//system("cls");
 		cout << "=============게임 결과=============" << endl;
 		cout << "> 몬스터 처치 수 : " << totalKilledMonster << endl;

@@ -19,10 +19,10 @@ Character* Character::getInstance(const string& name)
 void Character::displayStatus()
 {
 	cout << "        ---------- stat ----------" << endl;
-	cout << "        name :       " << name << endl;
-	cout << "        level :      " << level << endl;
-	cout << "        health :     " << health << "/" << maxHealth << endl;
-	cout << "        attack :     " << attack << endl;
+	cout << "        name		: " << name << endl;
+	cout << "        level		: " << level << endl;
+	cout << "        health		: " << health << "/" << maxHealth << endl;
+	cout << "        attack		: " << attack << endl;
 	cout << "        experience : " << experience << "/100" << endl;
 	cout << "        gold :       " << gold << endl;
 	showInventory();
