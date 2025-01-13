@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
+#include "Shop.h"
 using namespace std;
 
 Character::Character(const string& name)
@@ -132,6 +133,16 @@ void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
 	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
+}
+
+const vector<Item*>& Character::getInventory()
+{
+	return inventory;
+}
+
+void Character::setInventory(const vector<Item*>& newInventory)
+{
+	inventory = newInventory;
 }
 
 Character* Character::instance = nullptr;
