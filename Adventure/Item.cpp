@@ -13,7 +13,7 @@ void ItemList::itemlistSet()
 	items.push_back(new LagePotion);
 	items.push_back(new PoisonPotion);
 	items.push_back(new BigPotion);
-	// À§Ä­Àº Æ÷¼Ç ¾ÆÀÌÅÛ
+	// 위에는 포션 아래는 스크롤
 	items.push_back(new SmallScroll);
 	items.push_back(new SmallDebuffScroll);
 	items.push_back(new BigScroll);
