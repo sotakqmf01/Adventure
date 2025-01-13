@@ -70,6 +70,12 @@
       <Filter>Monster\Monsters</Filter>
     </ClCompile>
     </ClCompile>
+    <ClCompile Include="Bandit.cpp">
+      <Filter>Monster\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="printMessage.cpp">
+      <Filter>Headers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -99,6 +105,12 @@
     <ClInclude Include="Slime.h">
       <Filter>Monster\Monsters</Filter>
     </ClInclude>
+    </ClInclude>
+    <ClInclude Include="Bandit.h">
+      <Filter>Monster\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="printMessage.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
