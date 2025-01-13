@@ -11,12 +11,14 @@ using namespace std;
 
 Shop::Shop()
 {
+	item->itemlistSet();
+
 	vector<Item*> ShopItems;
 
 	for (int i = 0; i < 5; i++)
 	{
-		int e = generateRandomNumber(0, (int)itemlist->items.size());
-		ShopItems.push_back(itemlist->items[e]);
+		int e = generateRandomNumber(0, (int)item->items.size());
+		ShopItems.push_back(item->items[e]);
 	};
 
 };
@@ -43,8 +45,8 @@ void Shop::Reroll()
 	ShopItems.clear();
 	for (int i = 0; i < 5; i++)
 	{
-		int e = generateRandomNumber(0, (int)itemlist->items.size());
-		ShopItems.push_back(itemlist->items[e]);
+		int e = generateRandomNumber(0, (int)item->items.size());
+		ShopItems.push_back(item->items[e]);
 	};
 };
 

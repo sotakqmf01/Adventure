@@ -12,7 +12,9 @@ class Shop
 {
 private:
 	vector<Item*> ShopItems;
-	ItemList* itemlist;
+	Item* item;
+	
+
 public:
 	Shop() {};
 	~Shop() {};	
