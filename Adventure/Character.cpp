@@ -1,17 +1,17 @@
-#include <iostream>
+Ôªø#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 using namespace std;
-//test dev123
+
 Character::Character(const string& name)
-	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), gold(0)
+	: name(name) , level(1) , health(200) , maxHealth(2000) , attack(300) , experience(0) , gold(0)
 {
-	cout << name << " ª˝º∫ :" << " ∑π∫ß, " << level << "√º∑¬: " << health << "∞Ê«Ëƒ°: " << experience << "∞ÒµÂ: " << gold << endl;
+	cout << name << " ÏÉùÏÑ± :" << " Î†àÎ≤®, " << level << "Ï≤¥Î†•: " << health << "Í≤ΩÌóòÏπò: " << experience << "Í≥®Îìú: " << gold << endl;
 }
 
 Character* Character::getInstance(const string& name)
 {
-	if (instance == nullptr)
+	if ( instance == nullptr )
 		instance = new Character(name);
 	return instance;
 }
@@ -27,37 +27,37 @@ void Character::displayStatus()
 	cout << "        gold :       " << gold << endl;
 	showInventory();
 	cout << "        --------------------------" << endl << endl << endl;
-	
+
 }
 
 void Character::levelUp()
 {
-	if (level < 10) {
+	if ( level < 10 ) {
 		level++;
-		maxHealth = maxHealth + (level * 13);
-		attack = attack + (level * 2);
+		maxHealth = maxHealth + ( level * 13 );
+		attack = attack + ( level * 2 );
 		health = maxHealth;
 		cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-		cout << "           LEVEL UP°Ë √º∑¬°Ë ∞¯∞›∑¬°Ë " << endl;
-		cout << "  √÷¥Î √º∑¬ : " << maxHealth - (level * 20) << " -> " << maxHealth
-			<< ", ∞¯∞›∑¬ : " << attack - (level * 5) << " -> " << attack << endl;
+		cout << "           LEVEL UP‚Üë Ï≤¥Î†•‚Üë Í≥µÍ≤©Î†•‚Üë " << endl;
+		cout << "  ÏµúÎåÄ Ï≤¥Î†• : " << maxHealth - ( level * 20 ) << " -> " << maxHealth
+			<< ", Í≥µÍ≤©Î†• : " << attack - ( level * 5 ) << " -> " << attack << endl;
 		cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" << endl;
 	}
 }
 
 void Character::useRandomItem()
 {
-	// æ∆¿Ã≈€¿Ã ¿÷¿∏∏È ∑£¥˝ ªÁøÎ
-	if (inventory.size() >= 1)
+	// ÏïÑÏù¥ÌÖúÏù¥ ÏûàÏúºÎ©¥ ÎûúÎç§ ÏÇ¨Ïö©
+	if ( inventory.size() >= 1 )
 	{
-		// 30%∑Œæ∆¿Ã≈€ ªÁøÎ
-		if (generateRandomNumber(0, 30))
+		// 30%Î°úÏïÑÏù¥ÌÖú ÏÇ¨Ïö©
+		if ( generateRandomNumber(0 , 30) )
 		{
-			int maxIndex = (int)inventory.size() - 1;
-			int index = generateRandomNumber(0, maxIndex);
+			int maxIndex = ( int ) inventory.size() - 1;
+			int index = generateRandomNumber(0 , maxIndex);
 
-			inventory[index]->use(instance);
-			// ªÁøÎ«œ∞Ì≥™∏È ∫§≈Õø°º≠ ªË¡¶
+			inventory[ index ]->use(instance);
+			// ÏÇ¨Ïö©ÌïòÍ≥†ÎÇòÎ©¥ Î≤°ÌÑ∞ÏóêÏÑú ÏÇ≠Ï†ú
 			inventory.erase(inventory.begin() + index);
 		}
 	}
@@ -65,15 +65,15 @@ void Character::useRandomItem()
 
 void Character::showInventory()
 {
-	if (inventory.size() < 1)
+	if ( inventory.size() < 1 )
 	{
-		cout << "        ¿Œ∫•≈‰∏Æ∞° ∫ÒæÓ ¿÷Ω¿¥œ¥Ÿ." << endl;
+		cout << "        Ïù∏Î≤§ÌÜ†Î¶¨Í∞Ä ÎπÑÏñ¥ ÏûàÏäµÎãàÎã§." << endl;
 	}
 	else
 	{
-		for (size_t i = 0; i < inventory.size(); ++i)
+		for ( size_t i = 0; i < inventory.size(); ++i )
 		{
-			cout << "        "<< i + 1 << ". " << inventory[i]->getName() << endl;
+			cout << "        " << i + 1 << ". " << inventory[ i ]->getName() << endl;
 		}
 	}
 }
@@ -88,7 +88,7 @@ void Character::enhanceAttack(int attackIncrease)
 void Character::Heal(int heal)
 {
 	health += heal;
-	if (health > maxHealth)
+	if ( health > maxHealth )
 		health = maxHealth;
 	cout << " (" << health - heal << " -> " << health << ")" << endl;
 }
@@ -96,14 +96,14 @@ void Character::Heal(int heal)
 void Character::takeDamage(int damage)
 {
 	health -= damage;
-	if (health <= 0) {
+	if ( health <= 0 ) {
 		health = 0;
-		cout << "(" << name << " √º∑¬ : " << health << ")" << endl;
+		cout << "(" << name << " Ï≤¥Î†• : " << health << ")" << endl;
 		cout << "-------------------------------------------------" << endl;
-		cout << ">> §–§– " << name << "∞°(¿Ã) ªÁ∏¡«ﬂΩ¿¥œ¥Ÿ. GAME OVER" << endl;
+		cout << ">> „Ö†„Ö† " << name << "Í∞Ä(Ïù¥) ÏÇ¨ÎßùÌñàÏäµÎãàÎã§. GAME OVER" << endl;
 	}
 	else {
-		cout << "(" << name << " √º∑¬ : " << health << ")" << endl;
+		cout << "(" << name << " Ï≤¥Î†• : " << health << ")" << endl;
 	}
 }
 
@@ -114,9 +114,9 @@ bool Character::isDead()
 
 void Character::addExperience(int exp)
 {
-	if (level < 10) {
+	if ( level < 10 ) {
 		experience += exp;
-		if (experience >= 100) {
+		if ( experience >= 100 ) {
 			levelUp();
 			experience -= 100;
 		}
@@ -131,7 +131,7 @@ void Character::addGold(int _gold)
 void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
-	cout << ">> " << name << "∞°(¿Ã) [°⁄ " << item->getName() << "]¿ª(∏¶) æÚæ˙Ω¿¥œ¥Ÿ!" << endl;
+	cout << ">> " << name << "Í∞Ä(Ïù¥) [‚òÖ " << item->getName() << "]ÏùÑ(Î•º) ÏñªÏóàÏäµÎãàÎã§!" << endl;
 }
 
 Character* Character::instance = nullptr;

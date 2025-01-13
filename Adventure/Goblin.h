@@ -1,7 +1,7 @@
 #pragma once
 #include "Monster.h"
 
-class Orc : public Monster
+class Goblin : public Monster
 {
 private:
 	string name;
@@ -10,7 +10,7 @@ private:
 	float difficulty;
 
 public:
-	Orc(int level);
+	Goblin(int level);
 	string getName() override;
 	int getHealth() const override;
 	int getAttack() const override;
