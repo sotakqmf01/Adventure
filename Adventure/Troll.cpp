@@ -1,5 +1,5 @@
 #pragma once
-#include "Slime.h"
+#include "Troll.h"
 #include <time.h>
 #include <iostream>
 #include "GenerateRandomNumber.h"
@@ -8,34 +8,37 @@
 #include "HealthPotion.h"
 using namespace std;
 
-// --------------------- SLIME ----------------------------
-Slime::Slime(int level) : name("슬라임")
+extern random_device rd;
+
+// --------------------- Troll ----------------------------
+Troll::Troll(int level) : name("트롤")
 {
-	difficulty = 0.5;
+	difficulty = 1.4;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
-	
 }
 
-string Slime::getName()
+string Troll::getName()
 {
 	return name;
 }
 
-int Slime::getHealth() const
+int Troll::getHealth() const
 {
 	return health;
 }
 
-int Slime::getAttack() const
+int Troll::getAttack() const
 {
 	return attack;
 }
-float Slime::getDifficulty() const
+
+float Troll::getDifficulty() const
 {
 	return difficulty;
 }
-void Slime::takeDamage(int damage)
+
+void Troll::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
@@ -48,22 +51,26 @@ void Slime::takeDamage(int damage)
 	}
 }
 
-bool Slime::isDead()
+bool Troll::isDead()
 {
 	return health <= 0 ? true : false;
 }
 
-Item* Slime::dropItem()
+Item* Troll::dropItem()
 {
 	Item* item = nullptr;
-	ItemList* itemlist = new ItemList();
-	itemlist->itemlistSet();
-
-	int index = generateRandomNumber(0, (int)itemlist->items.size()-1);
-	item = itemlist->items[index];
-
-	itemlist->items.erase(itemlist->items.begin() + index);
-
-	delete itemlist;
+	int dropProbability = generateRandomNumber(1, 100);
+	if (dropProbability <= 30) {
+		switch (generateRandomNumber(0, 1)) {
+		case 0:
+			item = new HealthPotion();
+			break;
+		case 1:
+			item = new AttackBoost();
+			break;
+		default:
+			cout << "? 아이템 생성에 문제가 생겼습니다\n\n";
+		}
+	}
 	return item;
 }

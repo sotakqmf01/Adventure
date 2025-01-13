@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <cstdlib>
 #include <windows.h>
 #include "GameManager.h"
@@ -6,21 +6,28 @@
 #include "Monster.h"
 #include "Slime.h"
 #include "Orc.h"
+#include "Goblin.h"
+#include "Troll.h"
+#include "Bandit.h"
+#include "BossMonster.h"
 #include "Item.h"
 #include "GenerateRandomNumber.h"
+#include "printMessage.h"
+#include <conio.h>		// _getch() ë¡œ ì…ë ¥ëŒ€ê¸° ë°›ê¸° ìœ„í•´ì„œ í•„ìš”í•¨
+
 
 string GameManager::createCharacter()
 {
 	string name;
 	cout << "============================================" << endl;
-	cout << "            È¯¿µÇÕ´Ï´Ù. ¸ğÇè°¡´Ô!\n";
+	cout << "            í™˜ì˜í•©ë‹ˆë‹¤. ëª¨í—˜ê°€ë‹˜!\n";
 	cout << "============================================" << endl;
-	cout << " Ä³¸¯ÅÍ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä : ";
-	getline(cin, name);			// ÀÌ¸§ÀÌ °ø¹éÀÌ¸é ´Ù½Ã ÀÔ·ÂÇÏµµ·ÏÇÏ´Â ºÎºĞ ³ªÁß¿¡ Ãß°¡?
+	cout << " ìºë¦­í„°ëª…ì„ ì…ë ¥í•˜ì„¸ìš” : ";
+	getline(cin, name);			// ì´ë¦„ì´ ê³µë°±ì´ë©´ ë‹¤ì‹œ ì…ë ¥í•˜ë„ë¡í•˜ëŠ” ë¶€ë¶„ ë‚˜ì¤‘ì— ì¶”ê°€?
 	cout << endl;
 
 	Character* player = Character::getInstance(name);
-	cout << "        ** Ä³¸¯ÅÍ [" << name << "] »ı¼º ¿Ï·á! **" << endl;
+	cout << "        ** ìºë¦­í„° [" << name << "] ìƒì„± ì™„ë£Œ! **" << endl;
 	player->displayStatus();
 
 	return name;
@@ -30,12 +37,21 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 1)) {
+	switch (generateRandomNumber(0, 4)) {
 	case 0:
 		monster = new Slime(level);
 		break;
 	case 1:
 		monster = new Orc(level);
+		break;
+	case 2:
+		monster = new Goblin(level);
+		break;
+	case 3:
+		monster = new Troll(level);
+		break;
+	case 4:
+		monster = new Bandit(level);
 		break;
 	default:
 		break;
@@ -44,63 +60,91 @@ Monster* GameManager::generateMonster(int level)
 	return monster;
 }
 
+Monster* GameManager::generateBossMonster(int level)
+{
+	Monster* monster = new BossMonster(level);
+
+	return monster;
+}
+
 void GameManager::battle(Character* player)
 {
-	Monster* monster = generateMonster(player->getLevel());
-	Sleep(2000);
-	//system("cls");
+	Monster* monster = nullptr;
+	turnCounter = 1;
+	if (player->getLevel() < 10)
+	{
+		// ì¼ë°˜ ëª¬ìŠ¤í„° ì†Œí™˜
+		monster = generateMonster(player->getLevel());
+		Sleep(1000);
+		//
+	}
+	else
+	{
+		// ë³´ìŠ¤ ëª¬ìŠ¤í„° ì†Œí™˜
+		monster = generateBossMonster(player->getLevel());
+		Sleep(1000);
+		system("cls");
+		PrintMessage printMessage;
+		printMessage.bossAppears();
+	}
 
 	cout << "*************************************************" << endl;
 	cout << "          " << monster->getName()
-		<< " ¹ß°ß (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
+		<< " ë°œê²¬ (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
 	cout << "*************************************************" << endl;
 
 	while (!player->isDead() && !monster->isDead()) {
-		// ÇÃ·¹ÀÌ¾î -> ¸ó½ºÅÍ °ø°İ
-		cout << " " << player->getName() << "°¡(ÀÌ) " << monster->getName() << "À»(¸¦) °ø°İ!  ";
+		// í”Œë ˆì´ì–´ê°€ ê³µê²©í•˜ê¸° ì „ì— ì•„ì´í…œ ì‚¬ìš©
+		player->useRandomItem();
+
+		// í”Œë ˆì´ì–´ -> ëª¬ìŠ¤í„° ê³µê²©
+		cout << " " << player->getName() << "ê°€(ì´) " << monster->getName() << "ì„(ë¥¼) ê³µê²©!  ";
 		monster->takeDamage(player->getAttack());
 
-		// ¸ó½ºÅÍ°¡ Á×À¸¸é °æÇèÄ¡¿Í °ñµå È¹µæ, °¡²û ¾ÆÀÌÅÛµµ µå·Ó + ÀüÅõ Á¾·á
+		// ëª¬ìŠ¤í„°ê°€ ì£½ìœ¼ë©´ ê²½í—˜ì¹˜ì™€ ê³¨ë“œ íšë“, ê°€ë” ì•„ì´í…œë„ ë“œë¡­ + ì „íˆ¬ ì¢…ë£Œ
 		if (monster->isDead()) {
-			// ¾ÆÀÌÅÛ µå·Ó(¸ó½ºÅÍ) ¹× ¾ÆÀÌÅÛ È¹µæ(ÇÃ·¹ÀÌ¾î)
+			// ì•„ì´í…œ ë“œë¡­(ëª¬ìŠ¤í„°) ë° ì•„ì´í…œ íšë“(í”Œë ˆì´ì–´)
 			cout << "-------------------------------------------------" << endl;
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
 				player->getDropedItem(dropedItem);
 
-			// °æÇèÄ¡ ¹× °ñµå È¹µæ
+			// ê²½í—˜ì¹˜ ë° ê³¨ë“œ íšë“
 			int gainGold = randomGold();
-			cout << ">> " << player->getName() << "°¡(ÀÌ) 50EXP¿Í " << gainGold << " °ñµå¸¦ È¹µæ" << endl;
-			player->addExperience(50);
+			cout << ">> " << player->getName() << "ê°€(ì´) 30EXPì™€ " << gainGold << " ê³¨ë“œë¥¼ íšë“" << endl;
+			player->addExperience(30);
 			player->addGold(gainGold);
 
 			totalGold += gainGold;
 			totalKilledMonster++;
 
+			if (dynamic_cast< BossMonster*>(monster) != nullptr)
+				killBoss = true;
+
 			delete monster;
 			break;
 		}
-
-		// 30% È®·ü·Î ¾ÆÀÌÅÛ »ç¿ë -> ±×³É useRandomItem¿¡ È®·üÀûÀ¸·Î »ç¿ëÇÏµµ·Ï ÇÒ±î?
-		if (generateRandomNumber(1, 100) <= 30) {
-			player->useRandomItem();
-		}
-
-		// ¸ó½ºÅÍ -> ÇÃ·¹ÀÌ¾î °ø°İ
-		cout << " " << monster->getName() << "°¡(ÀÌ) " << player->getName() << "À»(¸¦) °ø°İ!  ";
+		
+		// ëª¬ìŠ¤í„° -> í”Œë ˆì´ì–´ ê³µê²©
+		cout << " " << monster->getName() << "ê°€(ì´) " << player->getName() << "ì„(ë¥¼) ê³µê²©!  ";
 		player->takeDamage(monster->getAttack());
 
-		// ÇÃ·¹ÀÌ¾î°¡ Á×À¸¸é ÀüÅõ Á¾·á
+		// í”Œë ˆì´ì–´ê°€ ì£½ìœ¼ë©´ ì „íˆ¬ ì¢…ë£Œ
 		if (player->isDead()) {
 			break;
 		}
+
+		cout << turnCounter << " í„´ ì¢…ë£Œ. ì•„ë¬´ í‚¤ë‚˜ ëˆŒëŸ¬ ë‹¤ìŒ í„´ ì§„í–‰." << endl;
+		_getch();
+		turnCounter++;
 	}
 }
 
 void GameManager::visitShop(Character* player)
 {
+	turnCounter = 0;
 	char visitShop;
-	cout << "»óÁ¡À» ¹æ¹®ÇÏ½Ã°Ú½À´Ï±î? (Y/N) : ";
+	cout << "ìƒì ì„ ë°©ë¬¸í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
 	cin >> visitShop;
 	if (visitShop == 'y' || visitShop == 'Y') {
 
@@ -110,4 +154,27 @@ void GameManager::visitShop(Character* player)
 int GameManager::randomGold()
 {
 	return generateRandomNumber(10, 20);
+}
+
+void GameManager::printCongratulations()
+{
+	cout << "â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜…" << endl;
+	cout << "  ì¶•í•˜í•©ë‹ˆë‹¤. Devilì„ ì²˜ì¹˜í•˜ê³  ê²Œì„ì„ í´ë¦¬ì–´ í•˜ì…¨ìŠµë‹ˆë‹¤!" << endl;
+	cout << "â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜… â˜† â˜…" << endl;
+}
+
+void GameManager::displayRPGResult()
+{
+	char lookResult;
+	cout << "ê²Œì„ ê²°ê³¼ë¥¼ ë³´ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
+	cin >> lookResult;
+	if (lookResult == 'y' || lookResult == 'Y')
+	{
+		
+		//system("cls");
+		cout << "=============ê²Œì„ ê²°ê³¼=============" << endl;
+		cout << "> ëª¬ìŠ¤í„° ì²˜ì¹˜ ìˆ˜ : " << totalKilledMonster << endl;
+		cout << "> íšë“ ê³¨ë“œëŸ‰ : " << totalGold << endl;
+		cout << "==================================" << endl;
+	}
 }

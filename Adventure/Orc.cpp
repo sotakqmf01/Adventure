@@ -8,16 +8,19 @@
 #include "HealthPotion.h"
 using namespace std;
 
-extern random_device rd;
-
 // --------------------- ORC ----------------------------
-Orc::Orc(int level) : name("오크")
+Orc::Orc(int level)
 {
-	health = level * generateRandomNumber(50, 60);
-	attack = level * generateRandomNumber(3, 8);
+	vector<string> orcNames = { "크라취", "아그쉬", "발로쉬", "아자그", "바드룩", "고크묵", "나크둠", "고르막", "카이막", "발라취", "코드룩"};
+	int vectorsize = orcNames.size()-1;
+	difficulty = 1.1;
+	health = level * getDifficulty() * generateRandomNumber(50, 60);
+	attack = level * getDifficulty() * generateRandomNumber(5, 10);
+	name = "오크 " + orcNames[generateRandomNumber(0,vectorsize)];
+	
 }
 
-string Orc::getName() const
+string Orc::getName()
 {
 	return name;
 }
@@ -30,6 +33,11 @@ int Orc::getHealth() const
 int Orc::getAttack() const
 {
 	return attack;
+}
+
+float Orc::getDifficulty() const
+{
+	return difficulty;
 }
 
 void Orc::takeDamage(int damage)
@@ -53,18 +61,14 @@ bool Orc::isDead()
 Item* Orc::dropItem()
 {
 	Item* item = nullptr;
-	int dropProbability = generateRandomNumber(1, 100);
-	if (dropProbability <= 30) {
-		switch (generateRandomNumber(0, 1)) {
-		case 0:
-			item = new HealthPotion();
-			break;
-		case 1:
-			item = new AttackBoost();
-			break;
-		default:
-			cout << "? 아이템 생성에 문제가 생겼습니다\n\n";
-		}
-	}
+	ItemList* itemlist = new ItemList();
+	itemlist->itemlistSet();
+
+	int index = generateRandomNumber(0, (int)itemlist->items.size()-1);
+	item = itemlist->items[index];
+
+	itemlist->items.erase(itemlist->items.begin() + index);
+
+	delete itemlist;
 	return item;
 }

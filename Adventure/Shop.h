@@ -16,8 +16,9 @@ private:
 public:
 	Shop();
 	~Shop();
-	void showShop();				// »óÁ¡ º¸¿©ÁÖ±â	
-	Item* buyItem(int index, Character* character);	// ¾ÆÀÌÅÛ ±¸¸Å	
-	void Reroll();					// »óÁ¡ ¸®·Ñ
-	Character* sellItem(int index, Character* character); // ¾ÆÀÌÅÛ ÆÇ¸Å
+	void showShop();				// ìƒì  ë³´ì—¬ì£¼ê¸°	
+	Item* buyItem(int index, Character* character);	// ì•„ì´í…œ êµ¬ë§¤	
+	void Reroll();					// ìƒì  ë¦¬ë¡¤
+	Character* sellItem(int index, Character* character); // ì•„ì´í…œ íŒë§¤
 };
+

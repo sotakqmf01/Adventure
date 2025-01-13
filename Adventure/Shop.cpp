@@ -7,7 +7,9 @@
 
 using namespace std;
 
-Shop::Shop() : itemlist(new ItemList())			// »óÁ¡¿¡ ¾ÆÀÌÅÛµéÀ» ¹«ÀÛÀ§·Î ³ÖÀ½
+
+Shop::Shop() : itemlist(new ItemList())			// ìƒì ì— ì•„ì´í…œë“¤ì„ ë¬´ì‘ìœ„ë¡œ ë„£ìŒ
+
 {
 	itemlist->itemlistSet();
 
@@ -21,38 +23,38 @@ Shop::Shop() : itemlist(new ItemList())			// »óÁ¡¿¡ ¾ÆÀÌÅÛµéÀ» ¹«ÀÛÀ§·Î ³ÖÀ½
 };
 
 
-void Shop::showShop()							// »óÁ¡¿¡ Áø¿­µÈ ¾ÆÀÌÅÛÀ» Ãâ·Â
+void Shop::showShop()							// ìƒì ì— ì§„ì—´ëœ ì•„ì´í…œì„ ì¶œë ¥
 {
 	for (int i = 0; i < ShopItems.size(); i++)
 	{
-		cout << i + 1 << "¹ø" << ShopItems[i]->getName() << " °¡°İÀº : " << ShopItems[i]->getPrice() << endl;
+		cout << i + 1 << "ë²ˆ" << ShopItems[i]->getName() << " ê°€ê²©ì€ : " << ShopItems[i]->getPrice() << endl;
 	};
 };
 
-Item* Shop::buyItem(int index, Character* character)						// ¾ÆÀÌÅÛ ±¸¸Å
+Item* Shop::buyItem(int index, Character* character)						// ì•„ì´í…œ êµ¬ë§¤
 {
 	vector<Item*> inven = character->getInventory();
 	Item* item = ShopItems[index];
 
 	if (index < 0 || index >= ShopItems.size())
 	{
-		cout << "Àß¸øµÈ ¹øÈ£ÀÔ´Ï´Ù." << endl;
+		cout << "ì˜ëª»ëœ ë²ˆí˜¸ì…ë‹ˆë‹¤." << endl;
 		return nullptr;
 	}
-	if (character->getGold() > ShopItems[index]->getPrice())		// º¸À¯ÇÑ ±İ¾×ÀÌ Æ÷¼Ç °ªº¸´Ù Å¬¶§
+	if (character->getGold() > ShopItems[index]->getPrice())		// ë³´ìœ í•œ ê¸ˆì•¡ì´ í¬ì…˜ ê°’ë³´ë‹¤ í´ë•Œ
 	{
 		character->setGold(character->getGold() - ShopItems[index]->getPrice());
 		inven.push_back(ShopItems[index]);
 		character->setInventory(inven);
 
-		cout << ShopItems[index]->getName() << " À»(¸¦) ±¸¸Å ÇÏ¿´½À´Ï´Ù." << " º¸À¯ÇÑ ±İ¾× : " << character->getGold() << " ¿ø ÀÔ´Ï´Ù." << endl;
+		cout << ShopItems[index]->getName() << " ì„(ë¥¼) êµ¬ë§¤ í•˜ì˜€ìŠµë‹ˆë‹¤." << " ë³´ìœ í•œ ê¸ˆì•¡ : " << character->getGold() << " ì› ì…ë‹ˆë‹¤." << endl;
 
 		ShopItems.erase(ShopItems.begin() + index);
 	}
 	return nullptr;
 };
 
-void Shop::Reroll()								// È¤½Ã ¸ô¶ó¼­ ¸¸µç°Çµ¥ »óÁ¡ÀÇ ¾ÆÀÌÅÛÀ» »èÁ¦ÇÏ°í ´Ù½Ã ¾ÆÀÌÅÛÀ» ³Ö¾î¼­ Ãâ·Â
+void Shop::Reroll()								// í˜¹ì‹œ ëª°ë¼ì„œ ë§Œë“ ê±´ë° ìƒì ì˜ ì•„ì´í…œì„ ì‚­ì œí•˜ê³  ë‹¤ì‹œ ì•„ì´í…œì„ ë„£ì–´ì„œ ì¶œë ¥
 {
 	ShopItems.clear();
 	for (int i = 0; i < 4; i++)
@@ -63,19 +65,19 @@ void Shop::Reroll()								// È¤½Ã ¸ô¶ó¼­ ¸¸µç°Çµ¥ »óÁ¡ÀÇ ¾ÆÀÌÅÛÀ» »èÁ¦ÇÏ°í ´Ù½Ã
 };
 
 
-Character* Shop::sellItem(int index, Character* character)				// ¾ÆÀÌÅÛÀ» ÆÇ¸Å
+Character* Shop::sellItem(int index, Character* character)				// ì•„ì´í…œì„ íŒë§¤
 {
 	vector<Item*> inven = character->getInventory();
 
 	if (inven.empty())
 	{
-		cout << "ÀÎº¥Åä¸®°¡ ºñ¾îÀÖ½À´Ï´Ù." << endl;
+		cout << "ì¸ë²¤í† ë¦¬ê°€ ë¹„ì–´ìˆìŠµë‹ˆë‹¤." << endl;
 		return nullptr;
 	}
 
 	if (index < 0 || index >= inven.size()) 
 	{
-		cout << "Àß¸øµÈ ¹øÈ£ÀÔ´Ï´Ù. ÆÇ¸ÅÇÒ ¾ÆÀÌÅÛÀ» ´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä." << endl;
+		cout << "ì˜ëª»ëœ ë²ˆí˜¸ì…ë‹ˆë‹¤. íŒë§¤í•  ì•„ì´í…œì„ ë‹¤ì‹œ ì„ íƒí•˜ì„¸ìš”." << endl;
 		return nullptr; 
 	}
 
@@ -84,7 +86,7 @@ Character* Shop::sellItem(int index, Character* character)				// ¾ÆÀÌÅÛÀ» ÆÇ¸Å
 		int gold = inven[index]->getPrice();
 		character->addGold(gold);
 
-		cout << inven[index]->getName() << " À»(¸¦) ÆÇ¸Å ÇÏ¿´½À´Ï´Ù." << " º¸À¯ÇÑ ±İ¾× : " << character->getGold() << " ¿ø ÀÔ´Ï´Ù." << endl;
+		cout << inven[index]->getName() << " ì„(ë¥¼) íŒë§¤ í•˜ì˜€ìŠµë‹ˆë‹¤." << " ë³´ìœ í•œ ê¸ˆì•¡ : " << character->getGold() << " ì› ì…ë‹ˆë‹¤." << endl;
 
 		inven.erase(inven.begin() + index);
 	}
@@ -97,3 +99,4 @@ Shop::~Shop()
 {
 	delete itemlist;
 }
+

@@ -1,16 +1,19 @@
 #pragma once
 #include "Monster.h"
+#include <string>
+#include <vector>
 
-class Orc : public Monster
+class Bandit : public Monster
 {
 private:
+	vector<string> banditNames;
 	string name;
 	int health;
 	int attack;
 	float difficulty;
 
 public:
-	Orc(int level);
+	Bandit(int level);
 	string getName() override;
 	int getHealth() const override;
 	int getAttack() const override;

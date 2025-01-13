@@ -1,44 +1,46 @@
-#include <iostream>
-#include <cstdlib>
-#include <windows.h>		// Ä³¸¯ÅÍ »ı¼º ½Ã ¾à°£ ½Ã°£ °É¸®´Â °ÍÃ³·³ º¸ÀÌ±â À§ÇØ Sleep(1500) »ç¿ëÇÏ±â À§ÇØ 
-#include "Character.h"
+ï»¿#include "Character.h"
 #include "GameManager.h"
+#include "printMessage.h"
 using namespace std;
 
-// dev.gameManager test commit
+	// ì•ˆë…•í•˜ì„¸ìš”
 
 int main() {
 	GameManager gameManager;
-
-	// 1. Ä³¸¯ÅÍ »ı¼º - createCharacter()
+	PrintMessage printMessage;
+	printMessage.printIntro();
+ 
+// 1. ìºë¦­í„° ìƒì„± - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 
-	// 2. ÀüÅõ
+	// 2. ì „íˆ¬
 	while (!player->isDead()) {
 		gameManager.battle(player);
 		player->displayStatus();
+
+		if (player->isDead())
+			break;
+
+		// ë³´ìŠ¤ë¥¼ ì¡ì•˜ë‹¤ëŠ” ê²ƒì„ í™•ì¸í•  ìˆ˜ ìˆë„ë¡
+		if (gameManager.killBoss == true)
+			break;
+
+		// 3. ìƒì  ë“¤ë¦´êº¼ë‹ˆ?
+		gameManager.visitShop(player);
 	}
-	//
-	// pull request test ¸ÓÁö Å×½ºÆ®
-	// 
-	// 3. »óÁ¡ µé¸±²¨´Ï?
-	//gameManager.vishtShop(player);
-	// 1234566778
-	// 4. Ä³¸¯ÅÍ »ç¸Á ½Ã °ÔÀÓ Á¾·á
-	// °ÔÀÓ Á¾·á ½Ã °á°ú Ãâ·Â
-	if (player->isDead()) {
-		char lookResult;
-		cout << "°ÔÀÓ °á°ú¸¦ º¸½Ã°Ú½À´Ï±î? (Y/N) : ";
-		cin >> lookResult;
-		if (lookResult == 'y' || lookResult == 'Y') {
-			system("cls");
-			cout << "=============°ÔÀÓ °á°ú=============" << endl;
-			cout << "> ¸ó½ºÅÍ Ã³Ä¡ ¼ö : " << gameManager.totalKilledMonster << endl;
-			cout << "> È¹µæ °ñµå·® : " << gameManager.totalGold << endl;
-			cout << "==================================" << endl;
-		}
-	}
+
+	// ìºë¦­í„°ê°€ ì‚¬ë§í•˜ì—¬ ê²Œì„ ì¢…ë£Œ ì‹œ ë¹„ì„ ë©”ì‹œì§€ ì¶œë ¥
+	if (player->isDead())
+		printMessage.displayEpitaph(name);
+
+	// ë³´ìŠ¤ë¥¼ ì¡ê³  ê²Œì„ì„ í´ë¦¬ì–´ í–ˆì„ ë•Œ ì¶•í•˜ ë©”ì‹œì§€ ì¶œë ¥
+	if (gameManager.killBoss == true)
+		printMessage.printCongratulations();
+		//gameManager.printCongratulations();
+
+	// 4. ê²Œì„ ì¢…ë£Œ ì‹œ ê²°ê³¼ ì¶œë ¥
+	gameManager.displayRPGResult();
 
 	return 0;
 }
