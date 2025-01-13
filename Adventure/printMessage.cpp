@@ -436,72 +436,72 @@ void PrintMessage::bossAppears()
 
 void PrintMessage::displayEpitaph(string name)
 {
-cout << "                   _____  _____" << endl;
-cout << "                  <     `/     |" << endl;
-cout << "                   >          (" << endl;
-cout << "                  |   _     _  |" << endl;
-cout << "                  |  |_) | |_) |" << endl;
-cout << "                  |  | \\ | |   |" << endl;
-cout << "                  |            |" << endl;
-cout << "   ______.______%_|            |__________  _____" << endl;
-cout << " _/                                       \\|     |" << endl;
-cout << "|               "; 
-textColor(15);
-cout << "      " << name;
-textColor(7);
-cout << "              <" << endl;
-cout << "|_____.-._________              ____/|___________|" << endl;
-cout << "                  | * fi/ll/in |" << endl;
-cout << "                  | + 17/01/25 |" << endl;
-cout << "                  |            |" << endl;
-cout << "                  |            |" << endl;
-cout << "                  |   _        <" << endl;
-cout << "                  |__/         |" << endl;
-cout << "                   / `--.      |" << endl;
-textColor(2);
-cout << "                 %";
-textColor(7);
-cout << "|            |"; 
-textColor(2);
-cout << "%" << endl;
-cout << "             |/.%%";
-textColor(7);
-cout << "|          -< "; 
-textColor(2); 
-cout << "@%%%" << endl;
-cout << "             `\\%`@";
-textColor(7);
-cout << "|     v      |";
-textColor(2); 
-cout << "@@%@%%    " << endl;
-cout << "           .%%%@@@";
-textColor(7); 
-cout << "|%    |    "; 
-textColor(2); 
-cout << "% @@@%%@%%%%" << endl;
-cout << "      _.%%%%%%@@@@@@%%_/%\\_%@@%%@@@@@@@%%%%%%" << endl;
-textColor(7);
+	cout << "                   _____  _____" << endl;
+	cout << "                  <     `/     |" << endl;
+	cout << "                   >          (" << endl;
+	cout << "                  |   _     _  |" << endl;
+	cout << "                  |  |_) | |_) |" << endl;
+	cout << "                  |  | \\ | |   |" << endl;
+	cout << "                  |            |" << endl;
+	cout << "   ______.______%_|            |__________  _____" << endl;
+	cout << " _/                                       \\|     |" << endl;
+	cout << "|               "; 
+	textColor(15);
+	cout << "      " << name;
+	textColor(7);
+	cout << "              <" << endl;
+	cout << "|_____.-._________              ____/|___________|" << endl;
+	cout << "                  | * fi/ll/in |" << endl;
+	cout << "                  | + 17/01/25 |" << endl;
+	cout << "                  |            |" << endl;
+	cout << "                  |            |" << endl;
+	cout << "                  |   _        <" << endl;
+	cout << "                  |__/         |" << endl;
+	cout << "                   / `--.      |" << endl;
+	textColor(2);
+	cout << "                 %";
+	textColor(7);
+	cout << "|            |"; 
+	textColor(2);
+	cout << "%" << endl;
+	cout << "             |/.%%";
+	textColor(7);
+	cout << "|          -< "; 
+	textColor(2); 
+	cout << "@%%%" << endl;
+	cout << "             `\\%`@";
+	textColor(7);
+	cout << "|     v      |";
+	textColor(2); 
+	cout << "@@%@%%    " << endl;
+	cout << "           .%%%@@@";
+	textColor(7); 
+	cout << "|%    |    "; 
+	textColor(2); 
+	cout << "% @@@%%@%%%%" << endl;
+	cout << "      _.%%%%%%@@@@@@%%_/%\\_%@@%%@@@@@@@%%%%%%" << endl;
+	textColor(7);
 }
 
 void PrintMessage::printCongratulations()
 {
-textColor(15);
-
-cout << "  .-----------------------------------------------------------------." << endl;
-cout << " /  .-.            축하합니다!                                     .-. \\" << endl;
-cout << "|  /   \\       고대의 악마를 무찔렀습니다.                       /   \\ |" << endl;
-cout << "| |\\_.  |    먼 옛날 봉인되었던 악마는 봉인 속에서              |    /| |" << endl;
-cout << "|\\|  | /|    물질계를 파멸시킬 사악한 음모를 꾸미고 있었습니다  |\\  | |/|" << endl;
-cout << "| `---' |                                                       | `---' |" << endl;
-cout << "|       |   그러나 당신의 영웅적인 활약으로                     |       |" << endl;
-cout << "|       |   악마의 사악한 계획은 무너지고 물질계의 평화가       |       |" << endl;
-cout << "|       |   다시 한 번 지켜졌습니다.                            |       |" << endl;
-cout << "|       |   이에 우리는 당신에게 무한한 감사와 축복을 전합니다  |       |" << endl;
-cout << "|       |-------------------------------------------------------|       |" << endl;
-cout << "\\       |                                                       |       /" << endl;
-cout << " \\     /                                                         \\     /" << endl;
-cout << "  `---'                                                           `---'" << endl;
-
-textColor(7);
-Sleep(3000);
+	textColor(15);
+	
+	cout << "  .-----------------------------------------------------------------." << endl;
+	cout << " /  .-.            축하합니다!                                     .-. \\" << endl;
+	cout << "|  /   \\       고대의 악마를 무찔렀습니다.                       /   \\ |" << endl;
+	cout << "| |\\_.  |    먼 옛날 봉인되었던 악마는 봉인 속에서              |    /| |" << endl;
+	cout << "|\\|  | /|    물질계를 파멸시킬 사악한 음모를 꾸미고 있었습니다  |\\  | |/|" << endl;
+	cout << "| `---' |                                                       | `---' |" << endl;
+	cout << "|       |   그러나 당신의 영웅적인 활약으로                     |       |" << endl;
+	cout << "|       |   악마의 사악한 계획은 무너지고 물질계의 평화가       |       |" << endl;
+	cout << "|       |   다시 한 번 지켜졌습니다.                            |       |" << endl;
+	cout << "|       |   이에 우리는 당신에게 무한한 감사와 축복을 전합니다  |       |" << endl;
+	cout << "|       |-------------------------------------------------------|       |" << endl;
+	cout << "\\       |                                                       |       /" << endl;
+	cout << " \\     /                                                         \\     /" << endl;
+	cout << "  `---'                                                           `---'" << endl;
+	
+	textColor(7);
+	Sleep(3000);
 }

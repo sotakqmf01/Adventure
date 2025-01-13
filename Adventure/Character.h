@@ -25,13 +25,13 @@ public:
 	void displayStatus();
 	void levelUp();
 	void useRandomItem();		
-	void enhanceAttack(int attackIncrease);
-	void Heal(int heal);
-	void takeDamage(int damage);	
-	bool isDead();					
-	void addExperience(int exp);	
-	void addGold(int _gold);		
-	void getDropedItem(Item* item);
+	void enhanceAttack(int attackIncrease);		// 공격력을 상승시키기 위한 함수
+	void Heal(int heal);						// 현재 체력 회복
+	void takeDamage(int damage);				// 공격을 받았을 때
+	bool isDead();
+	void addExperience(int exp);				// 경험치 획득	
+	void addGold(int _gold);					// 골드 획득
+	void getDropedItem(Item* item);				// 몬스터 처치 후 드랍된 아이템 획득
 	void showInventory();
 	vector<Item*>& getInventory();
 	void setInventory(const vector<Item*>& newInventory);
@@ -42,7 +42,6 @@ public:
 	int getLevel() { return level; }
 	string& getName() { return name; }
 
-	
 	int getGold() { return gold; }
 	int setGold(int golds) { return gold; }
 	// 전투에 공격력 알아야 함

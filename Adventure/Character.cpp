@@ -82,7 +82,6 @@ void Character::showInventory()
 	}
 }
 
-
 void Character::enhanceAttack(int attackIncrease)
 {
 	attack += attackIncrease;
@@ -142,7 +141,6 @@ void Character::getDropedItem(Item* item)
 	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
 }
 
-
 vector<Item*>& Character::getInventory()
 {
 	return inventory;
@@ -152,6 +150,5 @@ void Character::setInventory(const vector<Item*>& newInventory)
 {
 	inventory = newInventory;
 }
-
 
 Character* Character::instance = nullptr;
