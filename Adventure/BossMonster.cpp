@@ -8,9 +8,7 @@
 #include "HealthPotion.h"
 using namespace std;
 
-extern random_device rd;
-
-// --------------------- Troll ----------------------------
+// --------------------- Devil ----------------------------
 BossMonster::BossMonster(int level) : name("고대의 악마")
 {
 	difficulty = 1.8;
@@ -40,7 +38,7 @@ float BossMonster::getDifficulty() const
 
 void BossMonster::takeDamage(int damage)
 {
-	// ??? ?? ??? ????
+	// 피격 시 체력 감소
 	health -= damage;
 	if (health <= 0) {
 		health = 0;
