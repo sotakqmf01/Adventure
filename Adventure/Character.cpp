@@ -1,4 +1,4 @@
-癤#include <iostream>
+﻿#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 #include "Shop.h"
@@ -107,7 +107,7 @@ void Character::takeDamage(int damage)
 		health = 0;
 		cout << "(" << name << " 泥대 : " << health << ")" << endl;
 		cout << "-------------------------------------------------" << endl;
-		cout << ">>  " << name << "媛() щ듬. GAME OVER" << endl;
+		cout << ">>  " << name << "媛() щ듬. GAME OVER" << endl;
 	}
 	else
 	{
@@ -141,11 +141,11 @@ void Character::addGold(int _gold)
 void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
-	cout << ">> " << name << "媛() [ " << item->getName() << "](瑜) 살듬!" << endl;
+	cout << ">> " << name << "媛() [" << item->getName() << " " << endl;
 }
 
 
-const vector<Item*>& Character::getInventory()
+vector<Item*>& Character::getInventory()
 {
 	return inventory;
 }

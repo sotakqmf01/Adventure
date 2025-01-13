@@ -19,17 +19,17 @@ Shop::Shop() : itemlist(new ItemList())			// 상점에 아이템들을 무작위
 	{
 		int e = generateRandomNumber(0, (int)itemlist->items.size() - 1);
 		ShopItems.push_back(itemlist->items[e]);
-	};
-};
+	}
+}
 
 
 void Shop::showShop()							// 상점에 진열된 아이템을 출력
 {
 	for (int i = 0; i < ShopItems.size(); i++)
 	{
-		cout << i + 1 << "번" << ShopItems[i]->getName() << " 가격은 : " << ShopItems[i]->getPrice() << endl;
-	};
-};
+		cout << i + 1 << "번" << ShopItems[i]->getName() << " " << ShopItems[i]->getPrice() << endl;
+	}
+}
 
 Item* Shop::buyItem(int index, Character* character)						// 아이템 구매
 {
@@ -52,7 +52,7 @@ Item* Shop::buyItem(int index, Character* character)						// 아이템 구매
 		ShopItems.erase(ShopItems.begin() + index);
 	}
 	return nullptr;
-};
+}
 
 void Shop::Reroll()								// 혹시 몰라서 만든건데 상점의 아이템을 삭제하고 다시 아이템을 넣어서 출력
 {
@@ -61,8 +61,8 @@ void Shop::Reroll()								// 혹시 몰라서 만든건데 상점의 아이템�
 	{
 		int e = generateRandomNumber(0, (int)itemlist->items.size() - 1);
 		ShopItems.push_back(itemlist->items[e]);
-	};
-};
+	}
+}
 
 
 Character* Shop::sellItem(int index, Character* character)				// 아이템을 판매
@@ -93,7 +93,7 @@ Character* Shop::sellItem(int index, Character* character)				// 아이템을 �
 	character->setInventory(inven);
 
 	return character;
-};
+}
 
 Shop::~Shop()
 {
