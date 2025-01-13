@@ -1,11 +1,11 @@
-#include "printMessage.h"
+﻿#include "printMessage.h"
 #include <iostream>
 #include <string>
 #include <windows.h>
 
 using namespace std;
 
-void PrintMessage::textColor(unsigned short color)	// �÷� �ؽ�Ʈ �Լ� 0(������)~15(���� �Ͼ��)���� �Է�
+void PrintMessage::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
 {
 	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hCon, color);
@@ -481,4 +481,27 @@ textColor(2);
 cout << "% @@@%%@%%%%" << endl;
 cout << "      _.%%%%%%@@@@@@%%_/%\\_%@@%%@@@@@@@%%%%%%" << endl;
 textColor(7);
+}
+
+void PrintMessage::printCongratulations()
+{
+textColor(15);
+
+cout << "  .-----------------------------------------------------------------." << endl;
+cout << " /  .-.            축하합니다!                                     .-. \\" << endl;
+cout << "|  /   \\       고대의 악마를 무찔렀습니다.                       /   \\ |" << endl;
+cout << "| |\\_.  |    먼 옛날 봉인되었던 악마는 봉인 속에서              |    /| |" << endl;
+cout << "|\\|  | /|    물질계를 파멸시킬 사악한 음모를 꾸미고 있었습니다  |\\  | |/|" << endl;
+cout << "| `---' |                                                       | `---' |" << endl;
+cout << "|       |   그러나 당신의 영웅적인 활약으로                     |       |" << endl;
+cout << "|       |   악마의 사악한 계획은 무너지고 물질계의 평화가       |       |" << endl;
+cout << "|       |   다시 한 번 지켜졌습니다.                            |       |" << endl;
+cout << "|       |   이에 우리는 당신에게 무한한 감사와 축복을 전합니다  |       |" << endl;
+cout << "|       |-------------------------------------------------------|       |" << endl;
+cout << "\\       |                                                       |       /" << endl;
+cout << " \\     /                                                         \\     /" << endl;
+cout << "  `---'                                                           `---'" << endl;
+
+textColor(7);
+Sleep(3000);
 }

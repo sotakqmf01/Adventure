@@ -6,14 +6,16 @@ using namespace std;
 int main() {
 	GameManager gameManager;
 	PrintMessage printMessage;
-//	printMessage.bossAppears(); 보스 출현 연출
+//	printMessage.bossAppears(); //보스 출현 연출
+//  printMessage.printCongratulations();
 	printMessage.printIntro();
-  
-	// 1. 캐릭터 생성 - createCharacter()
+ 
+
+// 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 
-	// printMessage.displayEpitaph(name); 묘비 테스트용 코드
+//	printMessage.displayEpitaph(name); //묘비 테스트용 코드
 
 	// 2. 전투
 	while (!player->isDead()) {

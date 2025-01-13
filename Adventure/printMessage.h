@@ -10,4 +10,5 @@ public:
 	void printIntro();
 	void bossAppears();
 	void displayEpitaph(string name);
+	void printCongratulations();
 };
