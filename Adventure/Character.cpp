@@ -43,9 +43,6 @@ void Character::levelUp()
 		attack = attack + ( level * 2 );
 		health = maxHealth;
 		cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-		cout << "           LEVEL UP 泥대β 怨듦꺽�β " << endl;
-		cout << "  理 泥대 : " << maxHealth - ( level * 20 ) << " -> " << maxHealth
-			<< ", 怨듦꺽� : " << attack - ( level * 5 ) << " -> " << attack << endl;
 		cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" << endl;
 	}
 }
@@ -105,13 +102,11 @@ void Character::takeDamage(int damage)
 	if ( health <= 0 )
 	{
 		health = 0;
-		cout << "(" << name << " 泥대 : " << health << ")" << endl;
-		cout << "-------------------------------------------------" << endl;
-		cout << ">>  " << name << "媛() щ듬. GAME OVER" << endl;
+		
 	}
 	else
 	{
-		cout << "(" << name << " 泥대 : " << health << ")" << endl;
+		cout << "(" << name << " " << health << ")" << endl;
 	}
 }
 
@@ -141,7 +136,7 @@ void Character::addGold(int _gold)
 void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
-	cout << ">> " << name << "媛() [" << item->getName() << " " << endl;
+	cout << ">> " << name << " " << item->getName() << " " << endl;
 }
 
 

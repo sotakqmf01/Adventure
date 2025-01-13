@@ -43,6 +43,5 @@ public:
 	
 	int getGold() { return gold; }
 	int setGold(int golds) { return gold; }
-	// 전투에 공격력 알아야 함
 	int getAttack() { return attack; }
 };
