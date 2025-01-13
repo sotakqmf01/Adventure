@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 using namespace std;
