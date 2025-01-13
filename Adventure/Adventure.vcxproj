@@ -139,7 +139,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Orc.cpp" />
+
     <ClCompile Include="printMessage.cpp" />
+
+    <ClCompile Include="Shop.cpp" />
+
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Troll.cpp" />
   </ItemGroup>
@@ -154,7 +158,11 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
+
     <ClInclude Include="printMessage.h" />
+
+    <ClInclude Include="Shop.h" />
+
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Troll.h" />
     <ClInclude Include="BossMonster.h" />

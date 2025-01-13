@@ -34,6 +34,9 @@
     <Filter Include="Item\Items">
       <UniqueIdentifier>{3cc911f4-a0ae-47ce-ba78-79521f00d8db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shop">
+      <UniqueIdentifier>{253b5942-49c3-4def-a268-573feb70ae69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,14 +69,6 @@
     <ClCompile Include="Slime.cpp">
       <Filter>Monster\Monsters</Filter>
     </ClCompile>
-    <ClCompile Include="Goblin.cpp">
-      <Filter>Monster\Monsters</Filter>
-    </ClCompile>
-    <ClCompile Include="Troll.cpp">
-      <Filter>Monster\Monsters</Filter>
-    </ClCompile>
-    <ClCompile Include="BossMonster.cpp">
-      <Filter>Monster\Monsters</Filter>
     </ClCompile>
     <ClCompile Include="Bandit.cpp">
       <Filter>Monster\Monsters</Filter>
@@ -110,14 +105,6 @@
     <ClInclude Include="Slime.h">
       <Filter>Monster\Monsters</Filter>
     </ClInclude>
-    <ClInclude Include="Goblin.h">
-      <Filter>Monster\Monsters</Filter>
-    </ClInclude>
-    <ClInclude Include="Troll.h">
-      <Filter>Monster\Monsters</Filter>
-    </ClInclude>
-    <ClInclude Include="BossMonster.h">
-      <Filter>Monster\Monsters</Filter>
     </ClInclude>
     <ClInclude Include="Bandit.h">
       <Filter>Monster\Monsters</Filter>
