@@ -6,7 +6,7 @@ using namespace std;
 Character::Character(const string& name)
 	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), gold(0)
 {
-	cout << name << " »ı¼º :" << " ·¹º§, " << level << "Ã¼·Â: " << health << "°æÇèÄ¡: " << experience << "°ñµå: " << gold << endl;
+	cout << name << " ìƒì„± :" << " ë ˆë²¨, " << level << "ì²´ë ¥: " << health << "ê²½í—˜ì¹˜: " << experience << "ê³¨ë“œ: " << gold << endl;
 }
 
 Character* Character::getInstance(const string& name)
@@ -34,30 +34,30 @@ void Character::levelUp()
 {
 	if (level < 10) {
 		level++;
-		maxHealth = maxHealth + (level * 13);
-		attack = attack + (level * 2);
+		maxHealth += level * 20;
+		attack += level * 2;
 		health = maxHealth;
 		cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-		cout << "           LEVEL UP¡è Ã¼·Â¡è °ø°İ·Â¡è " << endl;
-		cout << "  ÃÖ´ë Ã¼·Â : " << maxHealth - (level * 20) << " -> " << maxHealth
-			<< ", °ø°İ·Â : " << attack - (level * 5) << " -> " << attack << endl;
+		cout << "           LEVEL UPâ†‘ ì²´ë ¥â†‘ ê³µê²©ë ¥â†‘ " << endl;
+		cout << "  ìµœëŒ€ ì²´ë ¥ : " << maxHealth - (level * 20) << " -> " << maxHealth
+			<< ", ê³µê²©ë ¥ : " << attack - (level * 5) << " -> " << attack << endl;
 		cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" << endl;
 	}
 }
 
 void Character::useRandomItem()
 {
-	// ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é ·£´ı »ç¿ë
+	// ì•„ì´í…œì´ ìˆìœ¼ë©´ ëœë¤ ì‚¬ìš©
 	if (inventory.size() >= 1)
 	{
-		// 30%·Î¾ÆÀÌÅÛ »ç¿ë
+		// 30%ë¡œì•„ì´í…œ ì‚¬ìš©
 		if (generateRandomNumber(0, 30))
 		{
 			int maxIndex = (int)inventory.size() - 1;
 			int index = generateRandomNumber(0, maxIndex);
 
 			inventory[index]->use(instance);
-			// »ç¿ëÇÏ°í³ª¸é º¤ÅÍ¿¡¼­ »èÁ¦
+			// ì‚¬ìš©í•˜ê³ ë‚˜ë©´ ë²¡í„°ì—ì„œ ì‚­ì œ
 			inventory.erase(inventory.begin() + index);
 		}
 	}
@@ -67,7 +67,7 @@ void Character::showInventory()
 {
 	if (inventory.size() < 1)
 	{
-		cout << "        ÀÎº¥Åä¸®°¡ ºñ¾î ÀÖ½À´Ï´Ù." << endl;
+		cout << "        ì¸ë²¤í† ë¦¬ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤." << endl;
 	}
 	else
 	{
@@ -98,12 +98,12 @@ void Character::takeDamage(int damage)
 	health -= damage;
 	if (health <= 0) {
 		health = 0;
-		cout << "(" << name << " Ã¼·Â : " << health << ")" << endl;
+		cout << "(" << name << " ì²´ë ¥ : " << health << ")" << endl;
 		cout << "-------------------------------------------------" << endl;
-		cout << ">> ¤Ğ¤Ğ " << name << "°¡(ÀÌ) »ç¸ÁÇß½À´Ï´Ù. GAME OVER" << endl;
+		cout << ">> ã… ã…  " << name << "ê°€(ì´) ì‚¬ë§í–ˆìŠµë‹ˆë‹¤. GAME OVER" << endl;
 	}
 	else {
-		cout << "(" << name << " Ã¼·Â : " << health << ")" << endl;
+		cout << "(" << name << " ì²´ë ¥ : " << health << ")" << endl;
 	}
 }
 
@@ -131,7 +131,7 @@ void Character::addGold(int _gold)
 void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
-	cout << ">> " << name << "°¡(ÀÌ) [¡Ú " << item->getName() << "]À»(¸¦) ¾ò¾ú½À´Ï´Ù!" << endl;
+	cout << ">> " << name << "ê°€(ì´) [â˜… " << item->getName() << "]ì„(ë¥¼) ì–»ì—ˆìŠµë‹ˆë‹¤!" << endl;
 }
 
 Character* Character::instance = nullptr;
