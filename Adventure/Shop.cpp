@@ -20,11 +20,6 @@ Shop::Shop() : itemlist(new ItemList())			// 상점에 아이템들을 무작위로 넣음
 	};
 };
 
-Shop::~Shop()
-{
-	delete itemlist;
-}
-
 
 void Shop::showShop()							// 상점에 진열된 아이템을 출력
 {
@@ -34,14 +29,16 @@ void Shop::showShop()							// 상점에 진열된 아이템을 출력
 	};
 };
 
-Item* Shop::buyItem(int index)						// 아이템 구매
+Item* Shop::buyItem(int index, Character* character)						// 아이템 구매
 {
-	Character* character = nullptr;
-	inven.clear();
-	inven = character->getInventory();
+	vector<Item*> inven = character->getInventory();
 	Item* item = ShopItems[index];
 
-
+	if (index < 0 || index >= ShopItems.size())
+	{
+		cout << "잘못된 번호입니다." << endl;
+		return nullptr;
+	}
 	if (character->getGold() > ShopItems[index]->getPrice())		// 보유한 금액이 포션 값보다 클때
 	{
 		character->setGold(character->getGold() - ShopItems[index]->getPrice());
@@ -66,17 +63,20 @@ void Shop::Reroll()								// 혹시 몰라서 만든건데 상점의 아이템을 삭제하고 다시
 };
 
 
-Character* Shop::sellItem(int index)				// 아이템을 판매
+Character* Shop::sellItem(int index, Character* character)				// 아이템을 판매
 {
-	Character* character = nullptr;
-	inven.clear();
-	inven = character->getInventory();
-
+	vector<Item*> inven = character->getInventory();
 
 	if (inven.empty())
 	{
 		cout << "인벤토리가 비어있습니다." << endl;
 		return nullptr;
+	}
+
+	if (index < 0 || index >= inven.size()) 
+	{
+		cout << "잘못된 번호입니다. 판매할 아이템을 다시 선택하세요." << endl;
+		return;
 	}
 
 	if (inven.size() >= 1)
@@ -92,3 +92,8 @@ Character* Shop::sellItem(int index)				// 아이템을 판매
 
 	return character;
 };
+
+Shop::~Shop()
+{
+	delete itemlist;
+}

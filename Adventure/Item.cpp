@@ -27,3 +27,10 @@ void ItemList::additem(Item* item)
 	items.push_back(item);
 };
 
+ItemList::~ItemList()
+{
+	for (Item* item : items) {
+		delete item;
+		items.clear();
+};
+

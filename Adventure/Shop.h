@@ -17,7 +17,7 @@ public:
 	Shop();
 	~Shop();
 	void showShop();				// 상점 보여주기	
-	Item* buyItem(int index);		// 아이템 구매	
+	Item* buyItem(int index, Character* character);	// 아이템 구매	
 	void Reroll();					// 상점 리롤
-	Character* sellItem(int index); // 아이템 판매
+	Character* sellItem(int index, Character* character); // 아이템 판매
 };
