@@ -16,9 +16,9 @@ public:
 };
 
 class ItemList
-{private:
+{
+public:
 	vector<Item*> items;
-public :
 	void itemlistSet() {};
 	void additem(Item* item) {};
 };
