@@ -17,6 +17,7 @@ public:
 class ItemList
 {
 public:
+	~ItemList();
 	vector<Item*> items;		//아이템 목록
 	void additem(Item* item);	// 아이템 추가
 	void itemlistSet();

@@ -8,8 +8,6 @@
 #include "HealthPotion.h"
 using namespace std;
 
-extern random_device rd;
-
 // --------------------- ORC ----------------------------
 Orc::Orc(int level)
 {
@@ -63,11 +61,14 @@ bool Orc::isDead()
 Item* Orc::dropItem()
 {
 	Item* item = nullptr;
-	ItemList* itemlist = nullptr;
+	ItemList* itemlist = new ItemList();
 	itemlist->itemlistSet();
 
-	int index = generateRandomNumber(0, (int)itemlist->items.size());
+	int index = generateRandomNumber(0, (int)itemlist->items.size()-1);
 	item = itemlist->items[index];
 
+	itemlist->items.erase(itemlist->items.begin() + index);
+
+	delete itemlist;
 	return item;
 }

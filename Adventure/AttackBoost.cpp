@@ -1,4 +1,4 @@
-#include "AttackBoost.h"
+﻿#include "AttackBoost.h"
 #include "Character.h"
 #include <iostream>
 #include "Item.h"
@@ -26,4 +26,4 @@ void AttackBoost::use(Character* character)
 
 	// 아이템이 사용되고 나면 객체 메모리 해제
 	delete this;
-
+}

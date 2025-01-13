@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 void ItemList::itemlistSet()
 {
 	items.push_back(new SmallPotion);
@@ -21,6 +19,12 @@ void ItemList::itemlistSet()
 	items.push_back(new BigScroll);
 	items.push_back(new BigDebuffScroll);
 };
+
+ItemList::~ItemList()
+{
+	for (Item* item : items)
+		delete item;
+}
 
 void ItemList ::additem(Item* item)
 {

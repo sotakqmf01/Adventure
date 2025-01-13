@@ -15,7 +15,7 @@ Shop::Shop() : itemlist(nullptr)
 
 	for (int i = 0; i < 5; i++)
 	{
-		int e = generateRandomNumber(0, (int)itemlist->items.size());
+		int e = generateRandomNumber(0, (int)itemlist->items.size()-1);
 		ShopItems.push_back(itemlist->items[e]);
 	};
 
@@ -44,7 +44,7 @@ void Shop::Reroll()
 	ShopItems.clear();
 	for (int i = 0; i < 5; i++)
 	{
-		int e = generateRandomNumber(0, (int)itemlist->items.size());
+		int e = generateRandomNumber(0, (int)itemlist->items.size()-1);
 		ShopItems.push_back(itemlist->items[e]);
 	};
 };
