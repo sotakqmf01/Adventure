@@ -1,12 +1,7 @@
-#include <iostream>
-#include <cstdlib>
-#include <windows.h>		// 캐릭터 생성 시 약간 시간 걸리는 것처럼 보이기 위해 Sleep(1500) 사용하기 위해 
 #include "Character.h"
 #include "GameManager.h"
 using namespace std;
 
-// dev.gameManager test commit
-// fork test
 int main() {
 	GameManager gameManager;
 	gameManager.printIntro();
@@ -19,27 +14,24 @@ int main() {
 	while (!player->isDead()) {
 		gameManager.battle(player);
 		player->displayStatus();
+
+		if (player->isDead())
+			break;
+
+		// 보스를 잡았다는 것을 확인할 수 있도록
+		if (gameManager.killBoss == true)
+			break;
+
+		// 3. 상점 들릴꺼니?
+		gameManager.visitShop(player);
 	}
-	//
-	// pull request test 머지 테스트
-	// 
-	// 3. 상점 들릴꺼니?
-	//gameManager.vishtShop(player);
-	// 1234566778
-	// 4. 캐릭터 사망 시 게임 종료
-	// 게임 종료 시 결과 출력
-	if (player->isDead()) {
-		char lookResult;
-		cout << "게임 결과를 보시겠습니까? (Y/N) : ";
-		cin >> lookResult;
-		if (lookResult == 'y' || lookResult == 'Y') {
-			system("cls");
-			cout << "=============게임 결과=============" << endl;
-			cout << "> 몬스터 처치 수 : " << gameManager.totalKilledMonster << endl;
-			cout << "> 획득 골드량 : " << gameManager.totalGold << endl;
-			cout << "==================================" << endl;
-		}
-	}
+
+	// 캐릭터가 사망한게 아닌 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
+	if (gameManager.killBoss == true)
+		gameManager.printCongratulations();
+
+	// 4. 게임 종료 시 결과 출력
+	gameManager.displayRPGResult();
 
 	return 0;
 }
