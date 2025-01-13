@@ -76,13 +76,16 @@ void GameManager::battle(Character* player)
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
 		Sleep(1000);
-		//system("cls");
+		//
 	}
 	else
 	{
 		// 보스 몬스터 소환
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
+		system("cls");
+		PrintMessage printMessage;
+		printMessage.bossAppears();
 	}
 
 	cout << "*************************************************" << endl;
@@ -91,6 +94,9 @@ void GameManager::battle(Character* player)
 	cout << "*************************************************" << endl;
 
 	while (!player->isDead() && !monster->isDead()) {
+		// 플레이어가 공격하기 전에 아이템 사용
+		player->useRandomItem();
+
 		// 플레이어 -> 몬스터 공격
 		cout << " " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
 		monster->takeDamage(player->getAttack());
@@ -118,11 +124,7 @@ void GameManager::battle(Character* player)
 			delete monster;
 			break;
 		}
-
-		// 30% 확률로 아이템 사용 -> 그냥 useRandomItem에 확률적으로 사용하도록 할까?
-		player->useRandomItem();
 		
-
 		// 몬스터 -> 플레이어 공격
 		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
 		player->takeDamage(monster->getAttack());
@@ -131,7 +133,7 @@ void GameManager::battle(Character* player)
 		if (player->isDead()) {
 			break;
 		}
-		Sleep(500);
+
 		cout << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
 		_getch();
 		turnCounter++;

@@ -11,8 +11,10 @@ Character::Character(const string& name)
 
 Character* Character::getInstance(const string& name)
 {
-	if ( instance == nullptr )
+	if (instance == nullptr) 
+	{
 		instance = new Character(name);
+	}
 	return instance;
 }
 
@@ -32,7 +34,8 @@ void Character::displayStatus()
 
 void Character::levelUp()
 {
-	if ( level < 10 ) {
+	if ( level < 10 )
+	{
 		level++;
 		maxHealth = maxHealth + ( level * 13 );
 		attack = attack + ( level * 2 );
@@ -51,7 +54,7 @@ void Character::useRandomItem()
 	if ( inventory.size() >= 1 )
 	{
 		// 30%로아이템 사용
-		if ( generateRandomNumber(0 , 30) )
+		if ( generateRandomNumber(1 , 100) <= 30)
 		{
 			int maxIndex = ( int ) inventory.size() - 1;
 			int index = generateRandomNumber(0 , maxIndex);
@@ -96,13 +99,15 @@ void Character::Heal(int heal)
 void Character::takeDamage(int damage)
 {
 	health -= damage;
-	if ( health <= 0 ) {
+	if ( health <= 0 )
+	{
 		health = 0;
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 		cout << "-------------------------------------------------" << endl;
 		cout << ">> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
 	}
-	else {
+	else
+	{
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
@@ -114,9 +119,11 @@ bool Character::isDead()
 
 void Character::addExperience(int exp)
 {
-	if ( level < 10 ) {
+	if ( level < 10 )
+	{
 		experience += exp;
-		if ( experience >= 100 ) {
+		if ( experience >= 100 )
+		{
 			levelUp();
 			experience -= 100;
 		}
