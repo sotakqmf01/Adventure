@@ -8,11 +8,11 @@ class Character;
 class Item
 {
 public:
+	virtual ~Item() {}
 	virtual string getName() = 0;
 	virtual int getPrice() = 0;
 	virtual void use(Character* character) = 0;
 };
-
 
 class ItemList
 {
@@ -22,4 +22,3 @@ public:
 	~ItemList();
 	void additem(Item* item);	// 아이템 추가
 
-};

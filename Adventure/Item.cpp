@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-ItemList::ItemList()
+void ItemList::itemlistSet()
 {
 	items.push_back(new SmallPotion);
 	items.push_back(new MiddlePotion);
@@ -21,11 +21,7 @@ ItemList::ItemList()
 	items.push_back(new BigScroll);
 	items.push_back(new BigDebuffScroll);
 };
-ItemList::~ItemList()
-{
-		for (auto item : items) delete item;
-		items.clear();
-};
+
 void ItemList ::additem(Item* item)
 {
 		items.push_back(item);

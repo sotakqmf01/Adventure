@@ -9,6 +9,8 @@ using namespace std;
 
 Shop::Shop() : itemlist(nullptr)
 {
+	itemlist->itemlistSet();
+
 	vector<Item*> ShopItems;
 
 	for (int i = 0; i < 5; i++)

@@ -11,6 +11,8 @@ class Shop
 private:
 	vector<Item*> ShopItems;
 	ItemList* itemlist;
+	
+
 public:
 	Shop();
 	~Shop();	
