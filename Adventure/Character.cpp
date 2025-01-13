@@ -51,7 +51,7 @@ void Character::useRandomItem()
 	if (inventory.size() >= 1)
 	{
 		// 30%로아이템 사용
-		if (generateRandomNumber(0, 30))
+		if (generateRandomNumber(0, 99)<30)
 		{
 			int maxIndex = (int)inventory.size() - 1;
 			int index = generateRandomNumber(0, maxIndex);
