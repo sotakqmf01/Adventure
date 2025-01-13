@@ -82,12 +82,10 @@
       <Filter>소스 파일\Shop</Filter>
     </ClCompile>
     <ClCompile Include="Bandit.cpp">
-      <Filter>Monster\Monsters</Filter>
+      <Filter>소스 파일\Monster\Monsters</Filter>
     </ClCompile>
     <ClCompile Include="printMessage.cpp">
-      <Filter>Headers</Filter>
-    <ClCompile Include="Shop.cpp">
-      <Filter>Shop</Filter>
+      <Filter>소스 파일\Headers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,12 +129,10 @@
       <Filter>소스 파일\Shop</Filter>
     </ClInclude>
     <ClInclude Include="Bandit.h">
-      <Filter>Monster\Monsters</Filter>
+      <Filter>소스 파일\Monster\Monsters</Filter>
     </ClInclude>
     <ClInclude Include="printMessage.h">
-      <Filter>Headers</Filter>
-    <ClInclude Include="Shop.h">
-      <Filter>Shop</Filter>
+      <Filter>소스 파일\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
