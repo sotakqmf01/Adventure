@@ -4,7 +4,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name) , level(1) , health(200) , maxHealth(2000) , attack(300) , experience(0) , gold(0)
+	: name(name) , level(1) , health(200) , maxHealth(200) , attack(30) , experience(0) , gold(0)
 {
 	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "경험치: " << experience << "골드: " << gold << endl;
 }
@@ -19,10 +19,10 @@ Character* Character::getInstance(const string& name)
 void Character::displayStatus()
 {
 	cout << "        ---------- stat ----------" << endl;
-	cout << "        name :       " << name << endl;
-	cout << "        level :      " << level << endl;
-	cout << "        health :     " << health << "/" << maxHealth << endl;
-	cout << "        attack :     " << attack << endl;
+	cout << "        name		: " << name << endl;
+	cout << "        level		: " << level << endl;
+	cout << "        health		: " << health << "/" << maxHealth << endl;
+	cout << "        attack		: " << attack << endl;
 	cout << "        experience : " << experience << "/100" << endl;
 	cout << "        gold :       " << gold << endl;
 	showInventory();
