@@ -40,7 +40,7 @@ float BossMonster::getDifficulty() const
 
 void BossMonster::takeDamage(int damage)
 {
-	// 피격 시 체력 감소
+	// ??? ?? ??? ????
 	health -= damage;
 	if (health <= 0) {
 		health = 0;

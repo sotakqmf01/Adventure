@@ -12,9 +12,15 @@ int main() {
 
 	// 2. 전투
 	while (!player->isDead()) {
-
 		gameManager.battle(player);
 		player->displayStatus();
+
+		if (player->isDead())
+			break;
+
+		// 보스를 잡았다는 것을 확인할 수 있도록
+		if (gameManager.killBoss == true)
+			break;
 
 		// 3. 상점 들릴꺼니?
 		gameManager.visitShop(player);
