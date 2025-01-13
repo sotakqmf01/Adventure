@@ -8,8 +8,6 @@
 #include "HealthPotion.h"
 using namespace std;
 
-extern random_device rd;
-
 // --------------------- Goblin ----------------------------
 Goblin::Goblin(int level)
 {

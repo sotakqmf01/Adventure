@@ -158,8 +158,8 @@ void GameManager::battle(Character* player)
 
 			// 경험치 및 골드 획득
 			int gainGold = randomGold();
-			cout << ">> " << player->getName() << "가(이) 50EXP와 " << gainGold << " 골드를 획득" << endl;
-			player->addExperience(50);
+			cout << ">> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
+			player->addExperience(30);
 			player->addGold(gainGold);
 
 			totalGold += gainGold;
