@@ -5,11 +5,9 @@
 #include <vector>
 #include "Shop.h"
 
-
 using namespace std;
 
-
-Shop::Shop()
+Shop::Shop() : itemlist(nullptr)
 {
 	vector<Item*> ShopItems;
 
@@ -20,7 +18,8 @@ Shop::Shop()
 	};
 
 };
-Shop::~Shop() {};
+
+Shop::~Shop() {}
 
 void Shop::showShop()
 {
@@ -51,7 +50,7 @@ void Shop::Reroll()
 Character* Shop:: sellItem(int index) 
 {
 	
-	Character* inventory;
-
+	//Character* inventory;
+	return nullptr;
 
 };

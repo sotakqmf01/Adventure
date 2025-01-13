@@ -1,6 +1,9 @@
 #pragma once
-#include "Item.h"
 #include <iostream>
+#include "Item.h"
+#include "Character.h"
+#include "AttackBoost.h"
+#include "HealthPotion.h"
 using namespace std;
 
 class HealthPotion : public Item
@@ -10,10 +13,10 @@ protected:
 	int healthRestore;
 	int price;
 public:
-	HealthPotion() {};
-	string getName() {};
-	 int getPrice() {};
-	 void use(Character* character) {};
+	HealthPotion();
+	string getName();
+	int getPrice();
+	void use(Character* character);
 };
 
 

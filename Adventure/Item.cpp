@@ -1,5 +1,7 @@
 #include "Item.h"
 #include "Character.h"
+#include "HealthPotion.h"
+#include "AttackBoost.h"
 #include <iostream>
 
 using namespace std;

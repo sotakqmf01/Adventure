@@ -10,10 +10,10 @@ protected:
 	int attackIncrease;
 	int price;
 public:
-	AttackBoost() {};
-	string getName() {};
-	int getPrice() {};
-	void use(Character* character) {};
+	AttackBoost();
+	string getName();
+	int getPrice();
+	void use(Character* character);
 };
 
 // 스크롤 리스트

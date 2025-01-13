@@ -14,7 +14,7 @@ string AttackBoost::getName()
 	return name;
 };
 
-int HealthPotion::getPrice()
+int AttackBoost::getPrice()
 {
 	return price;
 };
