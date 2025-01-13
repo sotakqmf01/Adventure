@@ -29,8 +29,10 @@ void ItemList::additem(Item* item)
 
 ItemList::~ItemList()
 {
-	for (Item* item : items) {
+	for (Item* item : items) 
+	{
 		delete item;
-		items.clear();
+	}	
+	items.clear();
 };
 
