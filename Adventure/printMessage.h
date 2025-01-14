@@ -7,7 +7,7 @@ class PrintMessage
 {
 public:
 	void textColor(unsigned short color);	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
-	void printOpening();
+	void printOpening();					// 오프닝. 구현예정
 	void printIntro();
 	void bossAppears();
 	void displayEpitaph(string name);
@@ -18,4 +18,5 @@ public:
 	void afterName(string name);			// 캐릭터 생성과정 2. 초기 스탯 표시
 	void printUpperFrame();
 	void printLowerFrame();
+	void printFrame();						// 프레임 중간부분 출력하는 함수
 };

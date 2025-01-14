@@ -1,5 +1,6 @@
 ﻿#include "printMessage.h"
 #include "Character.h"
+#include "GenerateRandomNumber.h"
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -21,6 +22,7 @@ int PrintMessage::getcursorlocationY() {
     int cursorY = csbi.dwCursorPosition.Y;
     return cursorY;
 }
+
 
 void PrintMessage::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
 {
@@ -247,6 +249,38 @@ void PrintMessage::printLowerFrame()
     cout << "           \\     /                                                                                       \\     /" << endl;
     cout << "            `---'                                                                                         `---'" << endl;
     textColor(7);
+}
+void PrintMessage::printFrame()
+{
+    int randomframe = generateRandomNumber(0, 3);
+
+    switch (randomframe)
+    {
+    case 0:
+        textColor(6);
+        cout << "          |       |                                                                                     |       |";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    case 1:
+        textColor(6);
+        cout << "          >       |                                                                                     <       |";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    case 2:
+        textColor(6);
+        cout << "          |       S                                                                                     |       |";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    case 3:
+        textColor(6);
+        cout << "          >       |                                                                                     |       <";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    }
 }
 
 void PrintMessage::bossAppears() 

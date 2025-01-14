@@ -87,7 +87,7 @@ void Character::levelUp()
 		experience = 0;													
 
 		experience += remainingExperience;
-		maxExperience += level * 25;
+		maxExperience += level * 1;
 	
 	printMessage.textColor(6);
 	cout << "          |       |                                                                                     |       |";
