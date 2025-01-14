@@ -130,7 +130,6 @@ void GameManager::battle(Character* player)
 			delete monster;
 			break;
 		}
-		
 		// 몬스터 -> 플레이어 공격
 		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
 		player->takeDamage(monster->getAttack());

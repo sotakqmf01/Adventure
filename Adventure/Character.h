@@ -5,44 +5,49 @@
 
 using namespace std;
 
-class Character {
+class Character 
+{
 private:
-	static Character* instance;		// ÃÊ±âÈ­ .cpp¿¡¼­ ÇØÁÖ±â
+
+	static Character* instance;		// ç¥Âˆæ¹²ê³ Â™Â” .cppÂ—ÂÂ„Âœ Â•ëŒï¼œæ¹²
 	string name;
 	int level;
 	int health;
 	int maxHealth;
 	int attack;
+	int remainingExperience;		// Â‚â‘¥ÂÂ€ å¯ƒì€Â—Â˜ç§»Â˜
+	int maxExperience;				// ï§¤ÂœÂŒÂ€ å¯ƒì€Â—Â˜ç§»Â˜
 	int experience;
 	int gold;
 	vector<Item*> inventory;
 
-private:
-	Character(const string& name);
 
 public:
+
 	static Character* getInstance(const string& name);
 	void displayStatus();
 	void levelUp();
 	void useRandomItem();		
-	void enhanceAttack(int attackIncrease);		// °ø°İ·ÂÀ» »ó½Â½ÃÅ°±â À§ÇÑ ÇÔ¼ö
-	void Heal(int heal);						// ÇöÀç Ã¼·Â È¸º¹
-	void takeDamage(int damage);				// °ø°İÀ» ¹Ş¾ÒÀ» ¶§
+	void enhanceAttack(int attackIncrease);		// æ€¨ë“¦êº½ï¿½Î¼ÂÂ„ ÂƒÂÂŠë±€Â‹ÂœÂ‚ã…ºë¦° ÂœÂ„Â•Âœ Â•â‘¥ÂˆÂ˜
+	void Heal(int heal);						// Â˜Â„Â ï§£ëŒ€ ÂšÂŒè¹‚
+	void takeDamage(int damage);				// æ€¨ë“¦êº½ÂÂ„ è«›Â›Â•Â˜ÂÂ„ Â•ÂŒ
 	bool isDead();
-	void addExperience(int exp);				// °æÇèÄ¡ È¹µæ	
-	void addGold(int _gold);					// °ñµå È¹µæ
-	void getDropedItem(Item* item);				// ¸ó½ºÅÍ Ã³Ä¡ ÈÄ µå¶øµÈ ¾ÆÀÌÅÛ È¹µæ
+	void addExperience(int exp);				// å¯ƒì€Â—Â˜ç§»Â˜ ÂšÂÂ“Â	
+	void addGold(int _gold);					// æ€¨â‘¤Â“Âœ ÂšÂÂ“Â
+	void getDropedItem(Item* item);				// ï§ÑŠÂŠã…½Â„ ï§£Â˜ç§»Â˜ Â›Â„ Â“ÂœÂÂÂÂœ Â•Â„ÂëŒ„Â…Âœ ÂšÂÂ“Â
 	void showInventory();
 	vector<Item*>& getInventory();
+	void sortInventoryByName();																//Â•Â„ÂëŒ„Âƒ ï¿½Â•ï¿½
 
-	// get/set ¾øÀÌ ÇÏ´Â ¹æ¹ıÀÌ ÀÖ³ª? ÀÏ´Ü ¸¸µé¾îº¸°í ´Ù ÇÔ¼ö·Î ¸¸µå´Â °Å »ı°¢ÇØº¸ÀÚ
-	// ¸ó½ºÅÍÀÇ Ã¼·Â, °ø°İ·Â¿¡ ·¹º§ÀÌ ÇÊ¿ä
-	// ¾î¶² Çàµ¿¿¡ ´ëÇÑ Ã³¸®¸¦ ¿©±â¼­ ÇØ¹ö¸®¸é µÊ(takeDamage, addExperience µî)
+	// get/set ì—†ì´ í•˜ëŠ” ë°©ë²•ì´ ìˆë‚˜? ì¼ë‹¨ ë§Œë“¤ì–´ë³´ê³  ë‹¤ í•¨ìˆ˜ë¡œ ë§Œë“œëŠ” ê±° ìƒê°í•´ë³´ì
+	// ëª¬ìŠ¤í„°ì˜ ì²´ë ¥, ê³µê²©ë ¥ì— ë ˆë²¨ì´ í•„ìš”
+	// ì–´ë–¤ í–‰ë™ì— ëŒ€í•œ ì²˜ë¦¬ë¥¼ ì—¬ê¸°ì„œ í•´ë²„ë¦¬ë©´ ë¨(takeDamage, addExperience ë“±)
+
 	int getLevel() { return level; }
 	string& getName() { return name; }
 
 	int getGold() { return gold; }
 	void setGold(int golds) { gold = golds; }
-	// ÀüÅõ¿¡ °ø°İ·Â ¾Ë¾Æ¾ß ÇÔ
+	// ì „íˆ¬ì— ê³µê²©ë ¥ ì•Œì•„ì•¼ í•¨
 	int getAttack() { return attack; }
 };

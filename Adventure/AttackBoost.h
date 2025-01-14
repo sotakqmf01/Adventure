@@ -16,3 +16,4 @@ public:
 	int getPrice();
 	void use(Character* character);
 };
+
