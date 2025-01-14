@@ -5,7 +5,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxExperience(100), gold(0), remainingExperience(0)
+	: name(name), level(1), health(500), maxHealth(500), attack(1000), experience(0), maxExperience(100), gold(0), remainingExperience(0)
 
 {
 	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
@@ -49,21 +49,21 @@ void Character::levelUp()
 		addhealth = level * 13;
 		maxHealth += addhealth;   //level * 13 -> addhealth
 		health = maxHealth;
-		attack += level * 2;
+		attack += level * 3;
 		experience = 0;													
 		experience += remainingExperience;
 		maxExperience += level * 25;
-		cout << "*************************************************" << endl;				//
-		cout << "  ##        ##     ##      ##     ## ########  " << endl;					//
-		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;					//
-		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;					//
-		cout << "  ##        ##     ##      ##     ## ########  " << endl;;					//
-		cout << "  ##         ##   ##       ##     ## ##        " << endl;					//
-		cout << "  ##          ## ##        ##     ## ##      " << endl;						//
-		cout << "  ########     ###          #######  ##    " << endl;						//
-		cout << "*************************************************" << endl;				//
-		cout << "  공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
-		cout << "  다음 레벨까지 " << maxExperience << "경험치 필요" << endl;					//변경
+		cout << "*************************************************" << endl;
+		cout << "  ##        ##     ##      ##     ## ########  " << endl;
+		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;
+		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;
+		cout << "  ##        ##     ##      ##     ## ########  " << endl;
+		cout << "  ##         ##   ##       ##     ## ##        " << endl;
+		cout << "  ##          ## ##        ##     ## ##      " << endl;
+		cout << "  ########     ###          #######  ##    " << endl;
+		cout << "*************************************************" << endl;
+		cout << "  공격력 " << level * 3 << "증가, 체력 " << addhealth << "증가" << endl;
+		cout << "  다음 레벨까지 " << maxExperience << "경험치 필요" << endl;
 
 	}
 }
@@ -125,7 +125,7 @@ void Character::enhanceAttack(int attackIncrease)
 
 void Character::Heal(int heal)
 {
-	health = +heal;
+	health =+ heal;
 	if (health > maxHealth)
 	{
 		health = maxHealth;
@@ -162,7 +162,6 @@ void Character::addExperience(int exp)
 		{
 			remainingExperience = experience - maxExperience;
 			levelUp();
-
 		}
 
 	}
@@ -199,3 +198,58 @@ void Character::setInventory(const vector<Item*>& newInventory)
 }
 
 Character* Character::instance = nullptr;
+
+
+
+
+
+
+
+
+
+//cout << "      /\\/\\   " << endl;
+//cout << "   *_/   /   " << endl;
+//cout << "    |^&_/    " << endl;
+//cout << "    //-^^+   " << endl;
+//cout << "   ()        " << endl;
+
+
+//cout << "          _  " << endl;
+//cout << "        _/ } " << endl;
+//cout << "       /   } " << endl;
+//cout << "      /   /  " << endl;
+//cout << "   *_/   /   " << endl;
+//cout << "    |^&_/    " << endl;
+//cout << "    //-^^+   " << endl;
+//cout << "   ()        " << endl;
+
+
+//cout << "    ___    " << endl;
+//cout << "   #*~-#   " << endl;
+//cout << "   #   #   " << endl;
+//cout << "  #     #  " << endl;
+//cout << " #'.,,,.'# " << endl;
+//cout << " #  \\/   # " << endl;
+//cout << " #  /\\   # " << endl;
+//cout << " .$$..$$#  " << endl;;
+
+
+//<< "    ___    " << endl
+//<< "   #*~-#   " << endl
+//<< "   #   #   " << endl
+//<< "  #     #  " << endl
+//<< " #'.,,,.'# " << endl
+//<< " #       # " << endl
+//<< " #       # " << endl
+//<< " .$$..$$#  " << endl;
+
+
+//cout << "    +===================================+" << endl;
+//cout << "   /                  _                  \\ " << endl;
+//cout << "  /                  (&)                  \\ " << endl;
+//cout << " |                                         | " << endl;
+//cout << " ########################################### " << endl;
+//cout << " |         인벤토리가 비어 있습니다.       | " << endl;       //간격 삭제
+//cout << " |_________________________________________| " << endl;
+
+

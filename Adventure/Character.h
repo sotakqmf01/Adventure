@@ -5,10 +5,8 @@
 
 using namespace std;
 
-class Character 
-{
+class Character{
 private:
-
 	static Character* instance;		// 초기화 .cpp에서 해주기
 	string name;
 	int level;
@@ -20,14 +18,12 @@ private:
 	int experience;
 	int gold;
 	vector<Item*> inventory;
-
-
+	Character(const string& name);
 public:
-
 	static Character* getInstance(const string& name);
 	void displayStatus();
 	void levelUp();
-	void useRandomItem();		
+	void useRandomItem();
 	void enhanceAttack(int attackIncrease);		// 공격력을 상승시키기 위한 함수
 	void Heal(int heal);						// 현재 체력 회복
 	void takeDamage(int damage);				// 공격을 받았을 때
