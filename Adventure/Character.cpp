@@ -2,11 +2,11 @@
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 #include "Shop.h"
+
 using namespace std;
 
 Character::Character(const string& name)
 	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxExperience(100), gold(0), remainingExperience(0)
-
 {
 	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
 }
