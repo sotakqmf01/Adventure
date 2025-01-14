@@ -173,9 +173,9 @@ void GameManager::battle(Character* player)
 		}
 
 		// 30% 확률로 아이템 사용 -> 그냥 useRandomItem에 확률적으로 사용하도록 할까?
-		if (generateRandomNumber(1, 100) <= 30) {
+		
 			player->useRandomItem();
-		}
+		
 
 		// 몬스터 -> 플레이어 공격
 		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";

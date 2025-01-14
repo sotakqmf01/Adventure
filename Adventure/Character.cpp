@@ -1,66 +1,76 @@
 ﻿#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
+
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name) , level(1) , health(200) , maxHealth(2000) , attack(300) , experience(0) , gold(0)
+	: name(name), level(1), health(200), maxHealth(200), attack(300), experience(0), maxexperience(100), gold(0)
 {
 	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "경험치: " << experience << "골드: " << gold << endl;
 }
 
 Character* Character::getInstance(const string& name)
 {
-	if ( instance == nullptr )
+	if (instance == nullptr)
+	{
 		instance = new Character(name);
+	}
 	return instance;
 }
 
 void Character::displayStatus()
 {
-	cout << "        ---------- stat ----------" << endl;
-	cout << "        name :       " << name << endl;
-	cout << "        level :      " << level << endl;
-	cout << "        health :     " << health << "/" << maxHealth << endl;
-	cout << "        attack :     " << attack << endl;
-	cout << "        experience : " << experience << "/100" << endl;
-	cout << "        gold :       " << gold << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	cout << " 레벨: " << level << endl; 
+	cout << " 체력: " << health << "/" << maxHealth << endl; 
+	cout << " 골드: " << gold << endl;
+	cout << " 대미지: " << attack << endl;
+	cout << " 경험치: " << experience << "/" << maxexperience << endl;
 	showInventory();
-	cout << "        --------------------------" << endl << endl << endl;
-
 }
 
 void Character::levelUp()
 {
-	if ( level < 10 ) {
+	if (experience >= 100)
+	{
 		level++;
-		maxHealth = maxHealth + ( level * 13 );
-		attack = attack + ( level * 2 );
+		maxHealth += level * 13;
 		health = maxHealth;
-		cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-		cout << "           LEVEL UP↑ 체력↑ 공격력↑ " << endl;
-		cout << "  최대 체력 : " << maxHealth - ( level * 20 ) << " -> " << maxHealth
-			<< ", 공격력 : " << attack - ( level * 5 ) << " -> " << attack << endl;
-		cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" << endl;
+		attack += level * 2;
+		experience = 0;
+		experience += RemainingExperience;
+		maxexperience += level * 25;
+		cout << "*************************************************" << endl;
+		cout << "##        ##     ##      ##     ## ########  "<< endl;
+		cout << "##        ##     ##      ##     ## ##     ## " << endl;;
+		cout << "##        ##     ##      ##     ## ##     ## " << endl;;
+		cout << "##        ##     ##      ##     ## ########  " << endl;;
+		cout << "##         ##   ##       ##     ## ##        " << endl;
+		cout << "##          ## ##        ##     ## ##      " << endl;
+		cout << "########     ###          #######  ##    " << endl;
+		cout << "*************************************************" << endl;
+
 	}
 }
 
 void Character::useRandomItem()
 {
 	// 아이템이 있으면 랜덤 사용
-	if ( inventory.size() >= 1 )
+	if (inventory.size() >= 1)
 	{
 		// 30%로아이템 사용
-		if (generateRandomNumber(0, 99)<30)
+		if (generateRandomNumber(0, 99) < 30)
 		{
-			int maxIndex = ( int ) inventory.size() - 1;
-			int index = generateRandomNumber(0 , maxIndex);
+			int maxIndex = (int)inventory.size() - 1;
+			int index = generateRandomNumber(0, maxIndex);
 
-			inventory[ index ]->use(instance);
+			inventory[index]->use(instance);
 			// 사용하고나면 벡터에서 삭제
 			inventory.erase(inventory.begin() + index);
 		}
 	}
+
 }
 
 void Character::showInventory()
@@ -82,44 +92,42 @@ void Character::showInventory()
 void Character::enhanceAttack(int attackIncrease)
 {
 	attack += attackIncrease;
-	cout << " (" << attack - attackIncrease << " -> " << attack << ")" << endl;
 }
 
 void Character::Heal(int heal)
 {
-	health += heal;
-	if ( health > maxHealth )
+	health = +heal;
+	if (health > maxHealth)
+	{
 		health = maxHealth;
-	cout << " (" << health - heal << " -> " << health << ")" << endl;
+	}
 }
 
 void Character::takeDamage(int damage)
 {
 	health -= damage;
-	if ( health <= 0 ) {
+	if (health <= 0)
+
+	{
 		health = 0;
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
-		cout << "-------------------------------------------------" << endl;
-		cout << ">> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
-	}
-	else {
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
 
 bool Character::isDead()
 {
-	return health <= 0 ? true : false;
+	return health <= 0;
 }
 
 void Character::addExperience(int exp)
 {
-	if ( level < 10 ) {
+	if (level < 10) {
 		experience += exp;
-		if ( experience >= 100 ) {
-			levelUp();
-			experience -= 100;
+		if (experience >= maxexperience)
+		{
+			RemainingExperience = experience - maxexperience;
+			levelUp(); 
 		}
+
 	}
 }
 
@@ -131,7 +139,6 @@ void Character::addGold(int _gold)
 void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
-	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
 }
 
 Character* Character::instance = nullptr;
