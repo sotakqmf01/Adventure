@@ -13,6 +13,7 @@
 #include "Item.h"
 #include "GenerateRandomNumber.h"
 #include "printMessage.h"
+#include "Shop.h"
 #include <conio.h>		// _getch() 로 입력대기 받기 위해서 필요함
 
 
@@ -148,13 +149,76 @@ void GameManager::battle(Character* player)
 
 void GameManager::visitShop(Character* player)
 {
+	
 	turnCounter = 0;
 	char visitShop;
 	cout << "상점을 방문하시겠습니까? (Y/N) : ";
 	cin >> visitShop;
 	if (visitShop == 'y' || visitShop == 'Y')
 	{
+		Shop shop;
+		int index = 0;
+		int	number = 0;
 
+		while (index != 3)
+		{
+			cout << "1. 아이템 구매" << endl;
+			cout << "2. 아이템 판매" << endl;
+			cout << "3. 나가기" << endl;
+			cin >> index;
+
+			switch (index)
+			{
+			case 1:
+				while (number != 9)
+				{
+					shop.showShop();
+					cout << "아이템 선택 : " << endl;
+					cout << "아이템 리롤 : 5" << endl;
+					cout << "뒤로가기 : 9" << endl;
+					cin >> number;
+					if (number == 5)
+					{
+						shop.Reroll();
+					}
+					else if (number == 9)
+					{
+						break;
+					}
+					else
+					{
+						shop.buyItem(number, player);
+					}
+				}
+				break;
+			case 2:
+				while (number != 9)
+				{
+					player->showInventory();
+					cout << "아이템 선택 : " << endl;
+					cout << "뒤로가기 : 9" << endl;
+					cin >> number;
+					if (number == 9)
+					{
+						break;
+					}
+					else
+					{
+						shop.sellItem(number, player);
+					}
+				}
+				break;
+			case 3:
+
+				break;
+
+			default:
+
+				cout << "잘못된 번호입니다." << endl;
+
+				break;
+			}
+		}
 	}
 }
 

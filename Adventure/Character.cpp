@@ -5,7 +5,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name), level(1), health(200), maxHealth(2000), attack(300), experience(0), gold(0)
+	: name(name), level(1), health(200), maxHealth(2000), attack(300), experience(0), gold(1000)
 {
 	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "경험치: " << experience << "골드: " << gold << endl;
 }
@@ -146,9 +146,5 @@ vector<Item*>& Character::getInventory()
 	return inventory;
 }
 
-void Character::setInventory(const vector<Item*>& newInventory)
-{
-	inventory = newInventory;
-}
 
 Character* Character::instance = nullptr;
