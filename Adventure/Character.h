@@ -13,6 +13,8 @@ private:
 	int health;
 	int maxHealth;
 	int attack;
+	int remainingExperience;
+	int maxExperience;
 	int experience;
 	int gold;
 	int RemainingExperience;       //남은 경험치

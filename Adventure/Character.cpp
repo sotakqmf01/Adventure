@@ -62,6 +62,16 @@ void Character::levelUp()
 		cout << "공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
 		cout << "다음 레벨까지 " << maxexperience << "경험치 필요" << endl;					//변경
 	}
+	maxExperience += level * 25;
+	cout << "************************************************" << endl;
+	cout << "  ##        ##     ##      ##     ## ########  " << endl;
+	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;
+	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;
+	cout << "  ##        ##     ##      ##     ## ########  " << endl;;
+	cout << "  ##         ##   ##       ##     ## ##        " << endl;
+	cout << "  ##          ## ##        ##     ## ##      " << endl;
+	cout << "  ########     ###          #######  ##    " << endl;
+	cout << "************************************************" << endl << endl;
 }
 
 void Character::useRandomItem()
@@ -142,7 +152,7 @@ void Character::takeDamage(int damage)
 
 bool Character::isDead()
 {
-	return health <= 0 ? true : false;
+	return health <= 0;
 }
 
 void Character::addExperience(int exp)
