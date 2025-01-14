@@ -5,9 +5,9 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxexperience(100), gold(0), RemainingExperience(0)    //  maxexperience(100), RemainingExperience(0) 추가 ,기본값 변경
+	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxExperience(100), gold(0), remainingExperience(0)
 {
-	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxexperience << "골드: " << gold << endl; //"/" << maxHealth <<, "/" << maxexperience << 추가
+	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
 }
 
 Character* Character::getInstance(const string& name)
@@ -28,11 +28,11 @@ void Character::displayStatus()
 	else
 	{
 		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;		//
-		cout << " 레벨: " << level << endl;											//
-		cout << " 체력: " << health << "/" << maxHealth << endl;					//
-		cout << " 골드: " << gold << endl;											//
+		cout << " 레벨:   " << level << endl;											//
+		cout << " 체력:   " << health << "/" << maxHealth << endl;					//
+		cout << " 골드:   " << gold << endl;											//
 		cout << " 대미지: " << attack << endl;										//
-		cout << " 경험치: " << experience << "/" << maxexperience << endl;          //변경
+		cout << " 경험치: " << experience << "/" << maxExperience << endl;          //변경
 		showInventory();
 	}
 }
@@ -48,30 +48,20 @@ void Character::levelUp()
 		health = maxHealth;
 		attack += level * 2;
 		experience = 0;													
-		experience += RemainingExperience;
-		maxexperience += level * 25;
+		experience += remainingExperience;
+		maxExperience += level * 25;
 		cout << "*************************************************" << endl;				//
-		cout << "##        ##     ##      ##     ## ########  " << endl;					//
-		cout << "##        ##     ##      ##     ## ##     ## " << endl;;					//
-		cout << "##        ##     ##      ##     ## ##     ## " << endl;;					//
-		cout << "##        ##     ##      ##     ## ########  " << endl;;					//
-		cout << "##         ##   ##       ##     ## ##        " << endl;					//
-		cout << "##          ## ##        ##     ## ##      " << endl;						//
-		cout << "########     ###          #######  ##    " << endl;						//
+		cout << "  ##        ##     ##      ##     ## ########  " << endl;					//
+		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;					//
+		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;					//
+		cout << "  ##        ##     ##      ##     ## ########  " << endl;;					//
+		cout << "  ##         ##   ##       ##     ## ##        " << endl;					//
+		cout << "  ##          ## ##        ##     ## ##      " << endl;						//
+		cout << "  ########     ###          #######  ##    " << endl;						//
 		cout << "*************************************************" << endl;				//
-		cout << "공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
-		cout << "다음 레벨까지 " << maxexperience << "경험치 필요" << endl;					//변경
+		cout << "  공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
+		cout << "  다음 레벨까지 " << maxExperience << "경험치 필요" << endl;					//변경
 	}
-	maxExperience += level * 25;
-	cout << "************************************************" << endl;
-	cout << "  ##        ##     ##      ##     ## ########  " << endl;
-	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;
-	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;
-	cout << "  ##        ##     ##      ##     ## ########  " << endl;;
-	cout << "  ##         ##   ##       ##     ## ##        " << endl;
-	cout << "  ##          ## ##        ##     ## ##      " << endl;
-	cout << "  ########     ###          #######  ##    " << endl;
-	cout << "************************************************" << endl << endl;
 }
 
 void Character::useRandomItem()
@@ -159,9 +149,9 @@ void Character::addExperience(int exp)
 {
 	if (level < 10) {
 		experience += exp;
-		if (experience >= maxexperience)					//100 -> maxexperience
+		if (experience >= maxExperience)					//100 -> maxexperience
 		{
-			RemainingExperience = experience - maxexperience;
+			remainingExperience = experience - maxExperience;
 			levelUp();
 		}
 	}

@@ -13,12 +13,10 @@ private:
 	int health;
 	int maxHealth;
 	int attack;
-	int remainingExperience;
-	int maxExperience;
+	int remainingExperience;		// 남은 경험치
+	int maxExperience;				// 최대 경험치
 	int experience;
 	int gold;
-	int RemainingExperience;       //남은 경험치
-	int maxexperience;             //최대 경험치
 	vector<Item*> inventory;
 
 private:
