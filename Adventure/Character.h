@@ -15,6 +15,8 @@ private:
 	int attack;
 	int experience;
 	int gold;
+	int RemainingExperience;       //남은 경험치
+	int maxexperience;             //최대 경험치
 	vector<Item*> inventory;
 
 private:
@@ -35,7 +37,7 @@ public:
 	void showInventory();
 	vector<Item*>& getInventory();
 	void setInventory(const vector<Item*>& newInventory);
-
+	void sortInventoryByName();																//아이탬 정렬
 	// get/set 없이 하는 방법이 있나? 일단 만들어보고 다 함수로 만드는 거 생각해보자
 	// 몬스터의 체력, 공격력에 레벨이 필요
 	// 어떤 행동에 대한 처리를 여기서 해버리면 됨(takeDamage, addExperience 등)

@@ -5,9 +5,9 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name), level(1), health(200), maxHealth(2000), attack(300), experience(0), gold(0)
+	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxexperience(100), gold(0), RemainingExperience(0)    //  maxexperience(100), RemainingExperience(0) 추가 ,기본값 변경
 {
-	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "경험치: " << experience << "골드: " << gold << endl;
+	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxexperience << "골드: " << gold << endl; //"/" << maxHealth <<, "/" << maxexperience << 추가
 }
 
 Character* Character::getInstance(const string& name)
@@ -19,32 +19,48 @@ Character* Character::getInstance(const string& name)
 	return instance;
 }
 
-void Character::displayStatus()
+void Character::displayStatus()													
 {
-	cout << "        ---------- stat ----------" << endl;
-	cout << "        name		: " << name << endl;
-	cout << "        level		: " << level << endl;
-	cout << "        health		: " << health << "/" << maxHealth << endl;
-	cout << "        attack		: " << attack << endl;
-	cout << "        experience : " << experience << "/100" << endl;
-	cout << "        gold :       " << gold << endl;
-	showInventory();
-	cout << "        --------------------------" << endl << endl << endl;
-
+	if (health == 0)  //캐릭터 사망시 출력
+	{
+		cout << "여기까지인가......" << endl;
+	}
+	else
+	{
+		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;		//
+		cout << " 레벨: " << level << endl;											//
+		cout << " 체력: " << health << "/" << maxHealth << endl;					//
+		cout << " 골드: " << gold << endl;											//
+		cout << " 대미지: " << attack << endl;										//
+		cout << " 경험치: " << experience << "/" << maxexperience << endl;          //변경
+		showInventory();
+	}
 }
 
-void Character::levelUp()
+void Character::levelUp()													
 {
-	if (level < 10) {
-		level++;
-		maxHealth = maxHealth + (level * 13);
-		attack = attack + (level * 2);
+	if (experience >= 100)											
+	{	
+		int addhealth;    //증가한 체력
+		level++;						
+		addhealth = level * 13;
+		maxHealth += addhealth;   //level * 13 -> addhealth
 		health = maxHealth;
-		cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
-		cout << "           LEVEL UP↑ 체력↑ 공격력↑ " << endl;
-		cout << "  최대 체력 : " << maxHealth - (level * 20) << " -> " << maxHealth
-			<< ", 공격력 : " << attack - (level * 5) << " -> " << attack << endl;
-		cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" << endl;
+		attack += level * 2;
+		experience = 0;													
+		experience += RemainingExperience;
+		maxexperience += level * 25;
+		cout << "*************************************************" << endl;				//
+		cout << "##        ##     ##      ##     ## ########  " << endl;					//
+		cout << "##        ##     ##      ##     ## ##     ## " << endl;;					//
+		cout << "##        ##     ##      ##     ## ##     ## " << endl;;					//
+		cout << "##        ##     ##      ##     ## ########  " << endl;;					//
+		cout << "##         ##   ##       ##     ## ##        " << endl;					//
+		cout << "##          ## ##        ##     ## ##      " << endl;						//
+		cout << "########     ###          #######  ##    " << endl;						//
+		cout << "*************************************************" << endl;				//
+		cout << "공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
+		cout << "다음 레벨까지 " << maxexperience << "경험치 필요" << endl;					//변경
 	}
 }
 
@@ -54,7 +70,7 @@ void Character::useRandomItem()
 	if (inventory.size() >= 1)
 	{
 		// 30%로아이템 사용
-		if (generateRandomNumber(0, 30))
+		if (generateRandomNumber(0, 99) < 30)					//test
 		{
 			int maxIndex = (int)inventory.size() - 1;
 			int index = generateRandomNumber(0, maxIndex);
@@ -68,23 +84,35 @@ void Character::useRandomItem()
 
 void Character::showInventory()
 {
-
 	if (inventory.size() < 1)
 	{
-		cout << "        인벤토리가 비어 있습니다." << endl;
+		cout << "인벤토리가 비어 있습니다." << endl;       //간격 삭제
 	}
 	else
 	{
 		for (size_t i = 0; i < inventory.size(); ++i)
 		{
-			cout << "        " << i + 1 << ". " << inventory[i]->getName() << endl;
+			sortInventoryByName();                         // 정렬 사용
+			cout << i + 1 << ". " << inventory[i]->getName() << endl;
 		}
 	}
+}
+
+void Character::sortInventoryByName()                 //정렬
+{
+	sort(inventory.begin(), inventory.end(), [](Item* a, Item* b) 
+		{
+		return a->getName() < b->getName(); // 이름을 기준으로 오름차순 정렬?
+		});
 }
 
 void Character::enhanceAttack(int attackIncrease)
 {
 	attack += attackIncrease;
+	if (attack <= 0)
+	{
+		attack = 0;				//공격력 음수 방지
+	}
 	cout << " (" << attack - attackIncrease << " -> " << attack << ")" << endl;
 }
 
@@ -119,17 +147,15 @@ bool Character::isDead()
 
 void Character::addExperience(int exp)
 {
-	if ( level < 10 )
-	{
+	if (level < 10) {
 		experience += exp;
-		if ( experience >= 100 )
+		if (experience >= maxexperience)					//100 -> maxexperience
 		{
+			RemainingExperience = experience - maxexperience;
 			levelUp();
-			experience -= 100;
 		}
 	}
 }
-
 void Character::addGold(int _gold)
 {
 	gold += _gold;
@@ -137,8 +163,17 @@ void Character::addGold(int _gold)
 
 void Character::getDropedItem(Item* item)
 {
-	inventory.push_back(item);
+	inventory.push_back(item);	
 	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
+	//if (inventory.size() > 9)              //최대 인벤토리10
+	//{
+	//	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었지만" << endl << "인벤토리가 가득 찼습니다!" << endl; 
+	//}
+	//else
+	//{
+	//	inventory.push_back(item);
+	//	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
+	//}
 }
 
 vector<Item*>& Character::getInventory()

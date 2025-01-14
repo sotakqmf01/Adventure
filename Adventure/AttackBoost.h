@@ -44,7 +44,7 @@ public:
 	};
 	string getName()
 	{
-		return "대형 공격력 디버프 스크롤";
+		return "소형 공격력 디버프 스크롤";				// 수정 대형 > 소형
 	};
 	int getPrice()
 	{
