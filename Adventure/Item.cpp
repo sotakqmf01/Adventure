@@ -3,10 +3,18 @@
 #include "HealthPotion.h"
 #include "AttackBoost.h"
 #include <iostream>
-
+#include "BigPotion.h"
+#include "MiddlePotion.h"
+#include "SmallPotion.h"
+#include "LagePotion.h"
+#include "PoisonPotion.h"
+#include "SmallScroll.h"
+#include "BigScroll.h"
+#include "BigDebuffScroll.h"
+#include "SmallDebuffScroll.h"
 using namespace std;
 
-void ItemList::itemlistSet()
+ItemList::ItemList() 
 {
 	items.push_back(new SmallPotion);
 	items.push_back(new MiddlePotion);
@@ -18,7 +26,7 @@ void ItemList::itemlistSet()
 	items.push_back(new SmallDebuffScroll);
 	items.push_back(new BigScroll);
 	items.push_back(new BigDebuffScroll);
-};
+}
 
 
 void ItemList::additem(Item* item)
