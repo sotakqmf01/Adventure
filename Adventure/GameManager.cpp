@@ -20,17 +20,21 @@
 string GameManager::createCharacter()
 {
 	string name;
-	cout << "============================================" << endl;
-	cout << "            환영합니다. 모험가님!\n";
-	cout << "============================================" << endl;
-	cout << " 캐릭터명을 입력하세요 : ";
+	PrintMessage printMessage;
+	printMessage.askName();
+	//cout << "============================================" << endl;
+	//cout << "            환영합니다. 모험가님!\n";
+	//cout << "============================================" << endl;
+	//cout << " 캐릭터명을 입력하세요 : ";
 	getline(cin, name);			// 이름이 공백이면 다시 입력하도록하는 부분 나중에 추가?
 	cout << endl;
-
+	/*system("cls");*/
 	Character* player = Character::getInstance(name);
-	cout << "        ** 캐릭터 [" << name << "] 생성 완료! **" << endl;
-	player->displayStatus();
-
+	printMessage.afterName(name);
+	
+	//cout << "        ** 캐릭터 [" << name << "] 생성 완료! **" << endl;
+	//player->displayStatus();
+	
 	return name;
 }
 
@@ -72,6 +76,7 @@ Monster* GameManager::generateBossMonster(int level)
 void GameManager::battle(Character* player)
 {
 	Monster* monster = nullptr;
+	PrintMessage printMessage;
 	turnCounter = 1;
 	if (player->getLevel() < 10)
 	{
@@ -85,27 +90,48 @@ void GameManager::battle(Character* player)
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
 		system("cls");
-		PrintMessage printMessage;
+		
 		printMessage.bossAppears();
 	}
-
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "*************************************************" << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "          " << monster->getName()
 		<< " 발견 (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "*************************************************" << endl;
 
 	while (!player->isDead() && !monster->isDead())
 	{
+		
+
 		// 플레이어가 공격하기 전에 아이템 사용
 		player->useRandomItem();
 
 		// 플레이어 -> 몬스터 공격
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << " " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
 		monster->takeDamage(player->getAttack());
 
 		// 몬스터가 죽으면 경험치와 골드 획득, 가끔 아이템도 드롭 + 전투 종료
 		if (monster->isDead()) {
 			// 아이템 드롭(몬스터) 및 아이템 획득(플레이어)
+			printMessage.textColor(6);
+			cout << "          |       |                                                                                     |       |";
+			printMessage.textColor(7);
+			printMessage.gotoXY(26, printMessage.getcursorlocationY());
 			cout << "-------------------------------------------------" << endl;
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
@@ -115,6 +141,10 @@ void GameManager::battle(Character* player)
 
 			// 경험치 및 골드 획득
 			int gainGold = randomGold();
+			printMessage.textColor(6);
+			cout << "          |       |                                                                                     |       |";
+			printMessage.textColor(7);
+			printMessage.gotoXY(26, printMessage.getcursorlocationY());
 			cout << ">> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
 			player->addExperience(30);
 			player->addGold(gainGold);
@@ -130,6 +160,12 @@ void GameManager::battle(Character* player)
 			delete monster;
 			break;
 		}
+
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
+
 		// 몬스터 -> 플레이어 공격
 		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
 		player->takeDamage(monster->getAttack());
@@ -139,7 +175,10 @@ void GameManager::battle(Character* player)
 		{
 			break;
 		}
-
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
 		_getch();
 		turnCounter++;
@@ -148,7 +187,12 @@ void GameManager::battle(Character* player)
 
 void GameManager::visitShop(Character* player)
 {
-	
+
+	PrintMessage printMessage;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	turnCounter = 0;
 	char visitShop;
 	cout << "상점을 방문하시겠습니까? (Y/N) : ";
@@ -237,15 +281,37 @@ void GameManager::printCongratulations()
 
 void GameManager::displayRPGResult()
 {
+	PrintMessage printMessage;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	char lookResult;
 	cout << "게임 결과를 보시겠습니까? (Y/N) : ";
 	cin >> lookResult;
 	if (lookResult == 'y' || lookResult == 'Y')
 	{
 		//system("cls");
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << "=============게임 결과=============" << endl;
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << "> 몬스터 처치 수 : " << totalKilledMonster << endl;
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << "> 획득 골드량 : " << totalGold << endl;
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << "==================================" << endl;
+		printMessage.printLowerFrame();
 	}
 }
