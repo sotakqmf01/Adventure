@@ -9,6 +9,7 @@ protected:
 	string name;
 	int attackIncrease;
 	int price;
+
 public:
 	SmallScroll();
 	string getName();

@@ -9,6 +9,7 @@ protected:
 	string name;
 	int healthRestore;
 	int price;
+
 public:
 	MiddlePotion();
 	string getName();

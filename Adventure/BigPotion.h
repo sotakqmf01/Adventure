@@ -9,6 +9,7 @@ protected:
 	string name;
 	int healthRestore;
 	int price;
+
 public:
 	BigPotion();
 	string getName();
