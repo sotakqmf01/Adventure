@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// 테스트
 int main() {
 	GameManager gameManager;
 	PrintMessage printMessage;
