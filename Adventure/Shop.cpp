@@ -15,8 +15,6 @@
 #include "BigScroll.h"
 #include "BigDebuffScroll.h"
 #include "SmallDebuffScroll.h"
-
-
 using namespace std;
 
 Shop::Shop()			// 상점에 아이템들을 무작위로 넣음
@@ -46,18 +44,15 @@ void Shop::buyItem(int index, Character* character)						// 아이템 구매
 		cout << "구매할 수 있는 아이템 없음" << endl;
 	}
 	else
-	{ 
-	
+	{
 		vector<Item*>& inven = character->getInventory();
 		Item* item = shopItems[index-1];
 
 		if (index <= 0 || index > shopItems.size())
-	
 		{
 			cout << "잘못된 번호입니다." << endl;
 	
 		}
-
 		else
 		{
 			if (character->getGold() > item->getPrice())		// 보유한 금액이 포션 값보다 클때
@@ -115,39 +110,23 @@ void Shop::makeShopList()
 		switch (randomNumber)
 		{
 		case 1:
-
 			item = new SmallPotion;
-
 			break;
 		case 2:
-
 			item = new MiddlePotion;
-
 			break;
 		case 3:
-
 			item = new LagePotion;
-
 			break;
-
 		case 4:
-
 			item = new BigPotion;
-
 			break;
 		case 5:
-
 			item = new SmallScroll;
-
 			break;
-
 		case 6:
-
 			item = new BigScroll;
-
 			break;
-
-
 		default:
 			break;
 		}

@@ -3,7 +3,6 @@
 #include "PoisonPotion.h"
 using namespace std;
 
-
 PoisonPotion::PoisonPotion() : name("µ¶ ¹°¾à"), price(-150), healthRestore(15)
 {
 	healthRestore = -30;

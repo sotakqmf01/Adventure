@@ -1,9 +1,26 @@
 ﻿#include "printMessage.h"
+#include "Character.h"
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <conio.h>
 
 using namespace std;
+
+void PrintMessage::gotoXY(int x, int y) 
+{
+    COORD Pos;
+    Pos.X = x;
+    Pos.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+
+int PrintMessage::getcursorlocationY() {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    int cursorY = csbi.dwCursorPosition.Y;
+    return cursorY;
+}
 
 void PrintMessage::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
 {
@@ -11,59 +28,225 @@ void PrintMessage::textColor(unsigned short color)	// 컬러 텍스트 함수 0(
 	SetConsoleTextAttribute(hCon, color);
 }
 
-void PrintMessage::printIntro()
+void PrintMessage::printOpening()
+{
+    // 구현예정
+}
+
+void PrintMessage::askName()
 {
     system("cls");
+    textColor(6);
+    gotoXY(43, 6);
+    cout << "   ______________________________" << endl;
+    gotoXY(43, 7);
+    cout << " / \\                             \\." << endl;
+    gotoXY(43, 8);
+    cout << "|   |                            |." << endl;
+    gotoXY(43, 9);
+    cout << " \\_/|                            |." << endl;
+    gotoXY(43, 10);
+    cout << "    |     ";
+    textColor(7);    
+    cout << "환영합니다.";
+    textColor(6);
+    cout << "            |." << endl;
+    gotoXY(43, 11);
+    cout << "    |     ";
+    textColor(7);
+    cout << "모험가님.";
+    textColor(6); 
+    cout << "              |." << endl;
+    gotoXY(43, 12);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 13);
+    cout << "    |     "; 
+    textColor(7); 
+    cout << "모험가님의 이름은";
+    textColor(6);    
+    cout << "      |." << endl;
+    gotoXY(43, 14);
+    cout << "    |     ";
+    textColor(7); 
+    cout << "무엇입니까?";
+    textColor(6);    
+    cout << "            |." << endl;
+    
+    gotoXY(43, 15);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 16);
+    cout << "    |     ";
+    textColor(15);    
+    cout << "__________________"; 
+    textColor(6);
+    cout << "     |." << endl;
+    gotoXY(43, 17);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 18);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 19);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 20);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 21);
+    cout << "    |                            |." << endl;
+    gotoXY(43, 22);
+    cout << "    |   _________________________|__" << endl;
+    gotoXY(43, 23);
+    cout << "    |  /                           /." << endl;
+    gotoXY(43, 24);
+    cout << "    \\_/___________________________/." << endl;
+    textColor(7);
+    gotoXY(53,16); // 이름 입력칸 좌표 (53, 16) 로 커서 갖다놓기
+}
+void PrintMessage::afterName(string name)
+{
+    Character* player = Character::getInstance(name);
+
+    for (int i = 10; i <= 16; i++)
+    {
+        gotoXY(53, i);
+        cout << "                       ";
+        Sleep(100);
+    }
+    
+    gotoXY(53, 10);
+    textColor(7);
+    cout << "반갑습니다.";
+    gotoXY(53, 11);
+    cout << player->getName() << ".";
+    Sleep(1500);
+    gotoXY(53, 13);
+    cout << "당신의 능력치입니다.";
+    Sleep(1000);
+    gotoXY(53, 15);
+    cout << "레벨: 1";
+    Sleep(800);
+    gotoXY(53, 16);
+    cout << "체력: 200/200";
+    Sleep(800);
+    gotoXY(53, 17);
+    cout << "골드: 0";
+    Sleep(800);
+    gotoXY(53, 18);
+    cout << "대미지: 30";
+    Sleep(800);
+    gotoXY(53, 19);
+    cout << "경험치: 0/100";
+    Sleep(800);
+    gotoXY(55, 21);
+    cout << "행운을 빕니다!";
+    Sleep(2000);
+    system("cls");
+}
+void PrintMessage::printIntro()
+{   
+    gotoXY(2, 8);
 	textColor(12);
 	cout << "_________";
 	textColor(7);
 	cout << " ______     __    ______     ";
 	textColor(9);
 	cout << "_______  ______            _______  _       _________          _______  _______ " << endl;
+    gotoXY(2, 9);
 	textColor(12);
 	cout << "\\__   __/";
 	textColor(7);
 	cout << "(  __  \\   /__\\  (  __  \\   ";
 	textColor(9);
 	cout << "(  ___  )(  __  \\ |\\     /|(  ____ \\( (    /|\\__   __/|\\     /|(  ____ )(  ____ \\" << endl;
+    gotoXY(2, 10);
 	textColor(12);
 	cout << "   ) (   ";
 	textColor(7);
 	cout << "| (  \\  ) ( \\/ ) | (  \\  )  ";
 	textColor(9);
 	cout << "| (   ) || (  \\  )| )   ( || (    \\/|  \\  ( |   ) (   | )   ( || (    )|| (    \\/" << endl;
+    gotoXY(2, 11);
 	textColor(12);
 	cout << "   | |   ";
 	textColor(7);
 	cout << "| |   ) |  \\  /  | |   ) |  ";
 	textColor(9);
 	cout << "| (___) || |   ) || |   | || (__    |   \\ | |   | |   | |   | || (____)|| (__    " << endl;
+    gotoXY(2, 12);
 	textColor(12);
 	cout << "   | |   ";
 	textColor(7);
 	cout << "| |   | |  /  \\/\\| |   | |  ";
 	textColor(9);
 	cout << "|  ___  || |   | |( (   ) )|  __)   | (\\ \\) |   | |   | |   | ||     __)|  __)   " << endl;
+    gotoXY(2, 13);
 	textColor(12);
 	cout << "   | |   ";
 	textColor(7);
 	cout << "| |   ) | / /\\  /| |   ) |  ";
 	textColor(9);
 	cout << "| (   ) || |   ) | \\ \\_/ / | (      | | \\   |   | |   | |   | || (\\ (   | (      " << endl;
+    gotoXY(2, 14);
 	textColor(12);
 	cout << "   | |   ";
 	textColor(7);
 	cout << "| (__/  )(  \\/  \\| (__/  )  ";
 	textColor(9);
 	cout << "| )   ( || (__/  )  \\   /  | (____/\\| )  \\  |   | |   | (___) || ) \\ \\__| (____/\\" << endl;
+    gotoXY(2, 15);
 	textColor(12);
 	cout << "   )_(   ";
 	textColor(7);
 	cout << "(______/  \\___/\\/(______/   ";
 	textColor(9);
 	cout << "|/     \\|(______/    \\_/   (_______/|/    )_)   )_(   (_______)|/   \\__/(_______/" << endl;
-	textColor(7);
-	Sleep(3000);
+	textColor(5);
+    Sleep(3000);
+    gotoXY(90, 17);
+    cout << "by 이것좀 해조" << endl;
+	Sleep(1500);
+    gotoXY(48, 20);
+    textColor(15);
+    cout << "캐릭터 작성을 시작합니다."; 
+    gotoXY(53, 21);
+    cout << "(Press any key)";
+    _getch();
+}
+
+void PrintMessage::printUpperFrame()
+{
+    textColor(6);
+    cout << "            .-------------------------------------------------------------------------------------------------." << endl;
+    cout << "           /  .-.                                                                                         .-.  \\" << endl;
+    cout << "          |  /   \\                                                                                       /   \\  |" << endl;
+    cout << "          | |\\_.  |                                                                                     |    /| |" << endl;
+    cout << "          |\\|  | /|                                                                                     |\\  | |/|" << endl;
+    cout << "          | `---' |                                                                                     | `---' |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    //cout << "          |       |-------------------------------------------------------------------------------------|       |" << endl;
+    //cout << "          \\       |                                                                                     |       /" << endl;
+    //cout << "           \\     /                                                                                       \\     /" << endl;
+    //cout << "            `---'                                                                                         `---'" << endl;
+    textColor(7);
+}
+void PrintMessage::printLowerFrame()
+{
+    textColor(6);
+    //cout << "            .-------------------------------------------------------------------------------------------------." << endl;
+    //cout << "           /  .-.                                                                                         .-.  \\" << endl;
+    //cout << "          |  /   \\                                                                                       /   \\  |" << endl;
+    //cout << "          | |\\_.  |                                                                                     |    /| |" << endl;
+    //cout << "          |\\|  | /|                                                                                     |\\  | |/|" << endl;
+    //cout << "          | `---' |                                                                                     | `---' |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    //cout << "          |       |                                                                                     |       |" << endl;
+    cout << "          |       |                                                                                     |       |" << endl;
+    cout << "          |       |-------------------------------------------------------------------------------------|       |" << endl;
+    cout << "          \\       |                                                                                     |       /" << endl;
+    cout << "           \\     /                                                                                       \\     /" << endl;
+    cout << "            `---'                                                                                         `---'" << endl;
+    textColor(7);
 }
 
 void PrintMessage::bossAppears() 
@@ -436,7 +619,9 @@ void PrintMessage::bossAppears()
 
 void PrintMessage::displayEpitaph(string name)
 {
-	cout << "                   _____  _____" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                   _____  _____" << endl;
 	cout << "                  <     `/     |" << endl;
 	cout << "                   >          (" << endl;
 	cout << "                  |   _     _  |" << endl;
@@ -487,9 +672,9 @@ void PrintMessage::printCongratulations()
 {
 	textColor(15);
 	
-	cout << "  .-----------------------------------------------------------------." << endl;
+	cout << "  .-------------------------------------------------------------------." << endl;
 	cout << " /  .-.            축하합니다!                                     .-. \\" << endl;
-	cout << "|  /   \\       고대의 악마를 무찔렀습니다.                       /   \\ |" << endl;
+	cout << "|  /   \\       고대의 악마를 무찔렀습니다.                       /    \\ |" << endl;
 	cout << "| |\\_.  |    먼 옛날 봉인되었던 악마는 봉인 속에서              |    /| |" << endl;
 	cout << "|\\|  | /|    물질계를 파멸시킬 사악한 음모를 꾸미고 있었습니다  |\\  | |/|" << endl;
 	cout << "| `---' |                                                       | `---' |" << endl;

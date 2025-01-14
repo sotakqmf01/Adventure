@@ -8,7 +8,6 @@ using namespace std;
 class Character 
 {
 private:
-
 	static Character* instance;			// 초기화 .cpp에서 해주기
 	string name;
 	int level;
@@ -20,6 +19,7 @@ private:
 	int experience;
 	int gold;
 	vector<Item*> inventory;
+
 private:
 	Character(const string& name);
 
@@ -37,11 +37,11 @@ public:
 	void getDropedItem(Item* item);				// 몬스터 처치 후 드랍된 아이템 획득
 	void showInventory();
 	vector<Item*>& getInventory();
-	void sortInventoryByName();					//아이탬 정렬
+	void sortInventoryByName();					//아이템 정렬
+
 	// get/set 없이 하는 방법이 있나? 일단 만들어보고 다 함수로 만드는 거 생각해보자
 	// 몬스터의 체력, 공격력에 레벨이 필요
 	// 어떤 행동에 대한 처리를 여기서 해버리면 됨(takeDamage, addExperience 등)
-
 	int getLevel() { return level; }
 	string& getName() { return name; }
 
