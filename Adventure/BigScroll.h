@@ -12,6 +12,6 @@ protected:
 
 public:
 	BigScroll();
-	string getName();
-	int getPrice();
+	string getName() override;
+	int getPrice() override;
 };

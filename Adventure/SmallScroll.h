@@ -12,6 +12,6 @@ protected:
 
 public:
 	SmallScroll();
-	string getName();
-	int getPrice();
+	string getName() override;
+	int getPrice() override;
 };

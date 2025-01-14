@@ -12,8 +12,8 @@ protected:
 	int price;
 public:
 	AttackBoost();
-	string getName();
-	int getPrice();
-	void use(Character* character);
+	virtual string getName();
+	virtual int getPrice();
+	virtual void use(Character* character);
 };
 

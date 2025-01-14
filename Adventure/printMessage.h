@@ -19,4 +19,5 @@ public:
 	void printUpperFrame();
 	void printLowerFrame();
 	void printFrame();						// 프레임 중간부분 출력하는 함수
+	void printShopRoof();
 };

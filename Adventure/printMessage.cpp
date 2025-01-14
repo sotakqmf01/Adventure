@@ -283,6 +283,14 @@ void PrintMessage::printFrame()
     }
 }
 
+void PrintMessage::printShopRoof()
+{
+	printFrame();
+	cout << endl;
+	printFrame();
+	cout << "////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl;
+}
+
 void PrintMessage::bossAppears() 
 {
     textColor(0);
