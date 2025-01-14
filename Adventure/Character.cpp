@@ -2,13 +2,15 @@
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 #include "Shop.h"
+#include "printMessage.h"
+#include "conio.h"
 using namespace std;
 
 Character::Character(const string& name)
 	: name(name), level(1), health(200), maxHealth(200), attack(30),
 	remainingExperience(0), maxExperience(100), experience(0), gold(0)
 {
-	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "경험치: " << experience << "골드: " << gold << endl;
+//	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "경험치: " << experience << "골드: " << gold << endl;
 }
 
 Character* Character::getInstance(const string& name)
@@ -22,17 +24,43 @@ Character* Character::getInstance(const string& name)
 
 void Character::displayStatus()
 {
+	PrintMessage printMessage;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " 레벨: " << level << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " 체력: " << health << "/" << maxHealth << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " 골드: " << gold << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " 대미지: " << attack << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " 경험치: " << experience << "/" << maxExperience << endl;
 	showInventory();
 }
 
 void Character::levelUp()
 {
+	PrintMessage printMessage;
 	level++;
 	maxHealth += level * 13;
 	health = maxHealth;
@@ -43,15 +71,52 @@ void Character::levelUp()
 		experience += remainingExperience;
 	}
 	maxExperience += level * 25;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "************************************************" << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "  ##        ##     ##      ##     ## ########  " << endl;
-	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;
-	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;;
-	cout << "  ##        ##     ##      ##     ## ########  " << endl;;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
+	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
+	cout << "  ##        ##     ##      ##     ## ##     ## " << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
+	cout << "  ##        ##     ##      ##     ## ########  " << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "  ##         ##   ##       ##     ## ##        " << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "  ##          ## ##        ##     ## ##      " << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << "  ########     ###          #######  ##    " << endl;
-	cout << "************************************************" << endl << endl;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
+	cout << "************************************************" << endl;
 }
 
 void Character::useRandomItem()
@@ -74,16 +139,25 @@ void Character::useRandomItem()
 
 void Character::showInventory()
 {
+	PrintMessage printMessage;
 
 	if (inventory.size() < 1)
 	{
-		cout << "        인벤토리가 비어 있습니다." << endl;
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
+		cout << "        인벤토리가 비어 있습니다." ;
 	}
 	else
 	{
 		for (size_t i = 0; i < inventory.size(); ++i)
 		{
-			cout << "        " << i + 1 << ". " << inventory[i]->getName() << endl;
+			printMessage.textColor(6);
+			cout << "          |       |                                                                                     |       |";
+			printMessage.textColor(7);
+			printMessage.gotoXY(26, printMessage.getcursorlocationY());
+			cout << "        " << i + 1 << ". " << inventory[i]->getName();
 		}
 	}
 	cout << endl;
@@ -91,6 +165,11 @@ void Character::showInventory()
 
 void Character::enhanceAttack(int attackIncrease)
 {
+	PrintMessage printMessage;
+	//printMessage.textColor(6);
+	//cout << "          |       |                                                                                     |       |";
+	//printMessage.textColor(7);
+	//printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	attack += attackIncrease;
 	cout << " (" << attack - attackIncrease << " -> " << attack << ")" << endl;
 }
@@ -100,21 +179,38 @@ void Character::Heal(int heal)
 	health += heal;
 	if ( health > maxHealth )
 		health = maxHealth;
+	PrintMessage printMessage;
+	//printMessage.textColor(6);
+	//cout << "          |       |                                                                                     |       |";
+	//printMessage.textColor(7);
+	//printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " (" << health - heal << " -> " << health << ")" << endl;
 }
 
 void Character::takeDamage(int damage)
 {
+	PrintMessage printMessage;
+	
 	health -= damage;
 	if ( health <= 0 )
 	{
 		health = 0;
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << "-------------------------------------------------" << endl;
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |";
+		printMessage.textColor(7);
+		printMessage.gotoXY(26, printMessage.getcursorlocationY());
 		cout << ">> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
+		_getch();
 	}
 	else
 	{
+		
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
@@ -143,6 +239,11 @@ void Character::addGold(int _gold)
 
 void Character::getDropedItem(Item* item)
 {
+	PrintMessage printMessage;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	inventory.push_back(item);
 	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
 }

@@ -1,21 +1,24 @@
 ﻿#include "Character.h"
 #include "GameManager.h"
 #include "printMessage.h"
+#include <windows.h>
 using namespace std;
 
 	// 안녕하세요
 
-int main() {
+int main() 
+{
 	GameManager gameManager;
-	PrintMessage printMessage;
+	PrintMessage printMessage;;
 	printMessage.printIntro();
  
 // 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
-
+	printMessage.printUpperFrame();
 	// 2. 전투
-	while (!player->isDead()) {
+	while (!player->isDead()) 
+	{
 		gameManager.battle(player);
 		player->displayStatus();
 
