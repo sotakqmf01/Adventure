@@ -3,6 +3,6 @@
 #include "BigDebuffScroll.h"
 using namespace std;
 
-BigDebuffScroll::BigDebuffScroll() : AttackBoost("대형 디버프 스크롤", -200, 20)
+BigDebuffScroll::BigDebuffScroll() : AttackBoost("대형 디버프 스크롤", -200, -20)
 {
 }
