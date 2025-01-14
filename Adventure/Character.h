@@ -42,7 +42,7 @@ public:
 	string& getName() { return name; }
 
 	int getGold() { return gold; }
-	int setGold(int golds) { return gold; }
+	void setGold(int golds) { gold = golds; }
 	// 전투에 공격력 알아야 함
 	int getAttack() { return attack; }
 };

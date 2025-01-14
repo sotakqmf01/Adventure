@@ -35,9 +35,9 @@ void Shop::showShop()							// 상점에 진열된 아이템을 출력
 void Shop::buyItem(int index, Character* character)						// 아이템 구매
 {
 	vector<Item*>& inven = character->getInventory();
-	Item* item = ShopItems[index];
+	Item* item = ShopItems[index - 1];
 
-	if (index < 0 || index >= ShopItems.size())
+	if (index <= 0 || index > ShopItems.size())
 	{
 		cout << "잘못된 번호입니다." << endl;
 	}
@@ -49,7 +49,7 @@ void Shop::buyItem(int index, Character* character)						// 아이템 구매
 
 		cout << item->getName() << " 을(를) 구매 하였습니다." << " 보유한 금액 : " << character->getGold() << " 원 입니다." << endl;
 
-		ShopItems.erase(ShopItems.begin() + index);
+		ShopItems.erase(ShopItems.begin() + index-1);
 	}
 }
 
