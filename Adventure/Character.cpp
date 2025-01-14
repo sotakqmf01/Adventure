@@ -35,14 +35,15 @@ void Character::displayStatus()
 
 void Character::levelUp()
 {
-	if ( level < 10 )
-	{
+	if (level < 10) {
 		level++;
-
-		maxHealth = maxHealth + ( level * 13 );
-		attack = attack + ( level * 2 );
+		maxHealth = maxHealth + (level * 13);
+		attack = attack + (level * 2);
 		health = maxHealth;
 		cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+		cout << "           LEVEL UP↑ 체력↑ 공격력↑ " << endl;
+		cout << "  최대 체력 : " << maxHealth - (level * 20) << " -> " << maxHealth
+			<< ", 공격력 : " << attack - (level * 5) << " -> " << attack << endl;
 		cout << "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" << endl;
 	}
 }
@@ -81,7 +82,6 @@ void Character::showInventory()
 	}
 }
 
-
 void Character::enhanceAttack(int attackIncrease)
 {
 	attack += attackIncrease;
@@ -102,11 +102,13 @@ void Character::takeDamage(int damage)
 	if ( health <= 0 )
 	{
 		health = 0;
-		
+		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "-------------------------------------------------" << endl;
+		cout << ">> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
 	}
 	else
 	{
-		cout << "(" << name << " " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
 
@@ -136,9 +138,8 @@ void Character::addGold(int _gold)
 void Character::getDropedItem(Item* item)
 {
 	inventory.push_back(item);
-	cout << ">> " << name << " " << item->getName() << " " << endl;
+	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
 }
-
 
 vector<Item*>& Character::getInventory()
 {
@@ -149,6 +150,5 @@ void Character::setInventory(const vector<Item*>& newInventory)
 {
 	inventory = newInventory;
 }
-
 
 Character* Character::instance = nullptr;

@@ -7,9 +7,7 @@
 
 using namespace std;
 
-
 Shop::Shop() : itemlist(new ItemList())			// 상점에 아이템들을 무작위로 넣음
-
 {
 	itemlist->itemlistSet();
 
@@ -21,7 +19,6 @@ Shop::Shop() : itemlist(new ItemList())			// 상점에 아이템들을 무작위
 		ShopItems.push_back(itemlist->items[e]);
 	}
 }
-
 
 void Shop::showShop()							// 상점에 진열된 아이템을 출력
 {
@@ -63,7 +60,6 @@ void Shop::Reroll()								// 혹시 몰라서 만든건데 상점의 아이템�
 		ShopItems.push_back(itemlist->items[e]);
 	}
 }
-
 
 Character* Shop::sellItem(int index, Character* character)				// 아이템을 판매
 {

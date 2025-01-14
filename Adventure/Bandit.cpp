@@ -8,9 +8,7 @@
 #include "HealthPotion.h"
 using namespace std;
 
-extern random_device rd;
-
-// --------------------- ORC ----------------------------
+// --------------------- Bandit ----------------------------
 Bandit::Bandit(int level)
 {
 	vector<string> banditNames = { "º¸¸®½º", "Á¸½º", "Àè", "Çî¸®", "¹ÌÄÌ", "ÇÚ½¼", "¹Ù¸£Æ®", "·Îº¥", "Ä®", "ºô¸®", "Àè½¼" };
@@ -19,7 +17,6 @@ Bandit::Bandit(int level)
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
 	name = "»êÀû " + banditNames[generateRandomNumber(0, vectorsize)];
-
 }
 
 string Bandit::getName()
@@ -46,11 +43,13 @@ void Bandit::takeDamage(int damage)
 {
 	// ÇÇ°Ý ½Ã Ã¼·Â °¨¼Ò
 	health -= damage;
-	if (health <= 0) {
+	if (health <= 0)
+	{
 		health = 0;
 		cout << "* " << name << " Ã³Ä¡! *" << endl;
 	}
-	else {
+	else
+	{
 		cout << "(" << name << " Ã¼·Â : " << health << ")" << endl;
 	}
 }
@@ -64,8 +63,10 @@ Item* Bandit::dropItem()
 {
 	Item* item = nullptr;
 	int dropProbability = generateRandomNumber(1, 100);
-	if (dropProbability <= 30) {
-		switch (generateRandomNumber(0, 1)) {
+	if (dropProbability <= 30)
+	{
+		switch (generateRandomNumber(0, 1))
+		{
 		case 0:
 			item = new HealthPotion();
 			break;

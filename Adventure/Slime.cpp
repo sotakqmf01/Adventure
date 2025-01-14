@@ -9,12 +9,12 @@
 using namespace std;
 
 // --------------------- SLIME ----------------------------
+// 슬라임은 아이템 드롭 부분이 다름
 Slime::Slime(int level) : name("슬라임")
 {
 	difficulty = 0.5;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
-	
 }
 
 string Slime::getName()
@@ -39,11 +39,13 @@ void Slime::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
-	if (health <= 0) {
+	if (health <= 0)
+	{
 		health = 0;
 		cout << "* " << name << " 처치! *" << endl;
 	}
-	else {
+	else
+	{
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
