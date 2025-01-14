@@ -62,20 +62,12 @@ bool Bandit::isDead()
 Item* Bandit::dropItem()
 {
 	Item* item = nullptr;
-	int dropProbability = generateRandomNumber(1, 100);
-	if (dropProbability <= 30)
-	{
-		switch (generateRandomNumber(0, 1))
-		{
-		case 0:
-			item = new HealthPotion();
-			break;
-		case 1:
-			item = new AttackBoost();
-			break;
-		default:
-			cout << "? 아이템 생성에 문제가 생겼습니다\n\n";
-		}
-	}
+	ItemList* itemlist = new ItemList;
+
+	int index = generateRandomNumber(0, (int)itemlist->items.size() - 1);
+	item = itemlist->items[index];
+
+	itemlist->items.erase(itemlist->items.begin() + index);
+	delete itemlist;
 	return item;
 }

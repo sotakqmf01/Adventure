@@ -1,6 +1,7 @@
 #include "HealthPotion.h"
 #include "Character.h"
 #include <iostream>
+#include "Item.h"
 using namespace std;
 
 HealthPotion::HealthPotion() : name("¹°¾à"), price(50), healthRestore(0)

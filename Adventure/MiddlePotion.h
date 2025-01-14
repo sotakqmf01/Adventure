@@ -1,18 +1,16 @@
 #pragma once
-#include "Item.h"
-#include "Character.h"
 #include <iostream>
+#include "HealthPotion.h"
 using namespace std;
 
-class HealthPotion : public Item
+class MiddlePotion : public HealthPotion
 {
 protected:
 	string name;
 	int healthRestore;
 	int price;
 public:
-	HealthPotion();
+	MiddlePotion();
 	string getName();
 	int getPrice();
-	void use(Character* character);
 };

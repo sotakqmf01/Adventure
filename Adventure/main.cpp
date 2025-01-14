@@ -1,16 +1,15 @@
 ﻿#include "Character.h"
 #include "GameManager.h"
 #include "printMessage.h"
-using namespace std;
 
-	// 안녕하세요
+using namespace std;
 
 int main() {
 	GameManager gameManager;
 	PrintMessage printMessage;
 	printMessage.printIntro();
- 
-// 1. 캐릭터 생성 - createCharacter()
+
+	// 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 
@@ -28,6 +27,7 @@ int main() {
 
 		// 3. 상점 들릴꺼니?
 		gameManager.visitShop(player);
+
 	}
 
 	// 캐릭터가 사망하여 게임 종료 시 비석 메시지 출력

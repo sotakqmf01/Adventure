@@ -2,9 +2,7 @@
 #include "Character.h"
 #include <iostream>
 #include "Item.h"
-
 using namespace std;
-
 
 AttackBoost::AttackBoost() : name ("스크롤"), attackIncrease(0), price(50)
 {

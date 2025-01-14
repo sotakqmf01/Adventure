@@ -80,7 +80,14 @@ void Character::useRandomItem()
 			int maxIndex = (int)inventory.size() - 1;
 			int index = generateRandomNumber(0, maxIndex);
 
-			inventory[index]->use(instance);
+			if(inventory[index] != nullptr)
+			{ 
+				inventory[index]->use(instance);
+			}
+			else
+			{
+
+			}
 			// 사용하고나면 벡터에서 삭제
 			inventory.erase(inventory.begin() + index);
 		}
@@ -190,12 +197,6 @@ void Character::getDropedItem(Item* item)
 vector<Item*>& Character::getInventory()
 {
 	return inventory;
-}
-
-void Character::setInventory(const vector<Item*>& newInventory)
-{
-	inventory = newInventory;
-
 }
 
 Character* Character::instance = nullptr;
