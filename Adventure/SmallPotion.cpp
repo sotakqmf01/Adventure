@@ -3,22 +3,15 @@
 #include "SmallPotion.h"
 using namespace std;
 
-class SmallPotion : public HealthPotion
-{
-protected:
-	string name;
-	int healthRestore;
-	int price;
-public:
-	SmallPotion() : name("소형 물약"), price(50), healthRestore(15)
+
+SmallPotion::SmallPotion() : name("소형 물약"), price(50), healthRestore(15)
 	{
 	};
-	string getName()
+string SmallPotion::getName()
 	{
 		return "소형 물약";
 	};
-	int getPrice()
+int SmallPotion:: getPrice()
 	{
 		return 50;
 	};
-};

@@ -3,23 +3,16 @@
 #include "SmallScroll.h"
 using namespace std;
 
-class SmallScroll : public AttackBoost
-{
-protected:
-	string name;
-	int attackIncrease;
-	int price;
-public:
-	SmallScroll() : name("소형 공격력 데미지 스크롤"), attackIncrease(15), price(50)
+
+SmallScroll::SmallScroll() : name("소형 공격력 데미지 스크롤"), attackIncrease(15), price(50)
 	{
 		attackIncrease = 15;
 	};
-	string getName()
+string SmallScroll:: getName()
 	{
 		return "소형 공격력 데미지 스크롤";
 	};
-	int getPrice()
+int SmallScroll:: getPrice()
 	{
 		return 50;
 	};
-};

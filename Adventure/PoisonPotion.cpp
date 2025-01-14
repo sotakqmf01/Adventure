@@ -3,23 +3,16 @@
 #include "PoisonPotion.h"
 using namespace std;
 
-class PoisonPotion : public HealthPotion
-{
-protected:
-	string name;
-	int healthRestore;
-	int price;
-public:
-	PoisonPotion() : name("독 물약"), price(-150), healthRestore(15)
+
+PoisonPotion::PoisonPotion() : name("독 물약"), price(-150), healthRestore(15)
 	{
 		healthRestore = -30;
 	};
-	string getName()
+string PoisonPotion:: getName()
 	{
 		return "독 물약";
 	};
-	int getPrice()
+int PoisonPotion :: getPrice()
 	{
 		return -150;
 	};
-};

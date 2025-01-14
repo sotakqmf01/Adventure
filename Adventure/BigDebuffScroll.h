@@ -3,8 +3,7 @@
 #include "AttackBoost.h"
 using namespace std;
 
-class BigDebuffScroll
-	: public AttackBoost
+class BigDebuffScroll	: public AttackBoost
 {
 protected:
 	string name;

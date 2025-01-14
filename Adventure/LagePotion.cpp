@@ -3,23 +3,16 @@
 #include "LagePotion.h"
 using namespace std;
 
-class LagePotion : public HealthPotion
-{
-protected:
-	string name;
-	int healthRestore;
-	int price;
-public:
-	LagePotion() : name("대형 물약"), price(100), healthRestore(50)
+
+LagePotion::LagePotion() : name("대형 물약"), price(100), healthRestore(50)
 	{
 		healthRestore = 50;
 	};
-	string getName()
+string LagePotion::getName()
 	{
 		return "대형 물약";
 	};
-	int getPrice()
+int LagePotion::getPrice()
 	{
 		return 100;
 	};
-};
