@@ -2,6 +2,7 @@
 #include "Character.h"
 #include "printMessage.h"
 #include <iostream>
+#include "Item.h"
 using namespace std;
 
 HealthPotion::HealthPotion() : name("¹°¾à"), price(50), healthRestore(0)

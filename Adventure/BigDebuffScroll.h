@@ -1,19 +1,18 @@
 #pragma once
-#include "Item.h"
-#include "Character.h"
 #include <iostream>
+#include "AttackBoost.h"
 using namespace std;
 
-class AttackBoost : public Item
+class BigDebuffScroll	: public AttackBoost
 {
 protected:
 	string name;
 	int attackIncrease;
 	int price;
+
 public:
-	AttackBoost();
+	BigDebuffScroll();
 	string getName();
 	int getPrice();
-	void use(Character* character);
 };
 

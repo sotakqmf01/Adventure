@@ -58,14 +58,12 @@ bool Slime::isDead()
 Item* Slime::dropItem()
 {
 	Item* item = nullptr;
-	ItemList* itemlist = new ItemList();
-	itemlist->itemlistSet();
+	ItemList* itemlist = new ItemList;
 
-	int index = generateRandomNumber(0, (int)itemlist->items.size()-1);
+	int index = generateRandomNumber(0, (int)itemlist->items.size() - 1);
 	item = itemlist->items[index];
 
 	itemlist->items.erase(itemlist->items.begin() + index);
-
 	delete itemlist;
 	return item;
 }
