@@ -4,15 +4,12 @@
 
 using namespace std;
 
-	// 안녕하세요
-
 int main() {
 	GameManager gameManager;
 	PrintMessage printMessage;
 	printMessage.printIntro();
 
- 
-// 1. 캐릭터 생성 - createCharacter()
+	// 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 

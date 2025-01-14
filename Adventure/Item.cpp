@@ -12,7 +12,6 @@
 #include "BigScroll.h"
 #include "BigDebuffScroll.h"
 #include "SmallDebuffScroll.h"
-
 using namespace std;
 
 ItemList::ItemList() 

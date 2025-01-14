@@ -5,14 +5,16 @@ using namespace std;
 
 
 LagePotion::LagePotion() : name("대형 물약"), price(100), healthRestore(50)
-	{
-		healthRestore = 50;
-	};
+{
+	healthRestore = 50;
+}
+
 string LagePotion::getName()
-	{
-		return "대형 물약";
-	};
+{
+	return name;
+}
+
 int LagePotion::getPrice()
-	{
-		return 100;
-	};
+{
+	return price;
+}
