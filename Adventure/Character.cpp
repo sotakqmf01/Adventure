@@ -216,6 +216,9 @@ void Character::addExperience(int exp)
 			remainingExperience = experience - maxExperience;
 			levelUp();
 		}
+		// 경험치 물약
+		PrintMessage printMessage;
+		cout << " (" << experience - exp << " -> " << experience << ")" << endl;
 	}
 }
 
@@ -247,5 +250,7 @@ vector<Item*>& Character::getInventory()
 {
 	return inventory;
 }
+
+
 
 Character* Character::instance = nullptr;

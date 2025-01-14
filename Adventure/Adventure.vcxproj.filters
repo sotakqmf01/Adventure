@@ -37,6 +37,30 @@
     <Filter Include="소스 파일\Shop">
       <UniqueIdentifier>{253b5942-49c3-4def-a268-573feb70ae69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Item\Items\AttackBoost">
+      <UniqueIdentifier>{08773724-c16b-4178-9367-756a8686812e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\HealthPotion">
+      <UniqueIdentifier>{0b1af734-2f82-44fd-9b3b-23b4743d857b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\ExperienceBoost">
+      <UniqueIdentifier>{91f3183e-d93f-48c1-98b9-612e93be5dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\AttackBoost\GoodScroll">
+      <UniqueIdentifier>{4cbbd99a-58c6-4c24-ad68-7648b2f62378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\AttackBoost\BadScroll">
+      <UniqueIdentifier>{b04607f2-ebc4-401f-81f5-e59bd6e48c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\HealthPotion\GoodPotion">
+      <UniqueIdentifier>{be0234ca-683b-4be0-9ff2-b10903fbe530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\HealthPotion\BadPotion">
+      <UniqueIdentifier>{12b98de7-fc0e-41d2-bbc3-3171e4b3ddb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Item\Items\ExperienceBoost\ExperienceBook">
+      <UniqueIdentifier>{b2dbcc83-9abc-47da-8474-2d50fb4ce669}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,12 +80,6 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>소스 파일\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackBoost.cpp">
-      <Filter>소스 파일\Item\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthPotion.cpp">
-      <Filter>소스 파일\Item\Items</Filter>
     </ClCompile>
     <ClCompile Include="Orc.cpp">
       <Filter>소스 파일\Monster\Monsters</Filter>
@@ -87,6 +105,51 @@
     <ClCompile Include="printMessage.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
+    <ClCompile Include="AttackBoost.cpp">
+      <Filter>소스 파일\Item\Items\AttackBoost</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion</Filter>
+    </ClCompile>
+    <ClCompile Include="ExperienceBoost.cpp">
+      <Filter>소스 파일\Item\Items\ExperienceBoost</Filter>
+    </ClCompile>
+    <ClCompile Include="BigDebuffScroll.cpp">
+      <Filter>소스 파일\Item\Items\AttackBoost\BadScroll</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallDebuffScroll.cpp">
+      <Filter>소스 파일\Item\Items\AttackBoost\BadScroll</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallExperienceBook.cpp">
+      <Filter>소스 파일\Item\Items\ExperienceBoost\ExperienceBook</Filter>
+    </ClCompile>
+    <ClCompile Include="BigExperienceBook.cpp">
+      <Filter>소스 파일\Item\Items\ExperienceBoost\ExperienceBook</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallScroll.cpp">
+      <Filter>소스 파일\Item\Items\AttackBoost\GoodScroll</Filter>
+    </ClCompile>
+    <ClCompile Include="BigScroll.cpp">
+      <Filter>소스 파일\Item\Items\AttackBoost\GoodScroll</Filter>
+    </ClCompile>
+    <ClCompile Include="BigPotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClCompile>
+    <ClCompile Include="LagePotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClCompile>
+    <ClCompile Include="MiddlePotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallPotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClCompile>
+    <ClCompile Include="BigPoisonPotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallPoisonPotion.cpp">
+      <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -103,12 +166,6 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>소스 파일\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackBoost.h">
-      <Filter>소스 파일\Item\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthPotion.h">
-      <Filter>소스 파일\Item\Items</Filter>
     </ClInclude>
     <ClInclude Include="Orc.h">
       <Filter>소스 파일\Monster\Monsters</Filter>
@@ -133,6 +190,51 @@
     </ClInclude>
     <ClInclude Include="printMessage.h">
       <Filter>소스 파일\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBoost.h">
+      <Filter>소스 파일\Item\Items\AttackBoost</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="ExperienceBoost.h">
+      <Filter>소스 파일\Item\Items\ExperienceBoost</Filter>
+    </ClInclude>
+    <ClInclude Include="BigDebuffScroll.h">
+      <Filter>소스 파일\Item\Items\AttackBoost\BadScroll</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallDebuffScroll.h">
+      <Filter>소스 파일\Item\Items\AttackBoost\BadScroll</Filter>
+    </ClInclude>
+    <ClInclude Include="BigExperienceBook.h">
+      <Filter>소스 파일\Item\Items\ExperienceBoost\ExperienceBook</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallExperienceBook.h">
+      <Filter>소스 파일\Item\Items\ExperienceBoost\ExperienceBook</Filter>
+    </ClInclude>
+    <ClInclude Include="BigScroll.h">
+      <Filter>소스 파일\Item\Items\AttackBoost\GoodScroll</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallScroll.h">
+      <Filter>소스 파일\Item\Items\AttackBoost\GoodScroll</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallPotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddlePotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="LagePotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="BigPotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion\GoodPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallPoisonPotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="BigPoisonPotion.h">
+      <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

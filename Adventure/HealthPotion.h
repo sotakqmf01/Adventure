@@ -11,8 +11,8 @@ protected:
 	int healthRestore;
 	int price;
 public:
-	HealthPotion();
-	virtual string getName();
-	virtual int getPrice();
-	virtual void use(Character* character);
+	HealthPotion(string name, int price, int healthRestore);
+	string getName()override;
+	int getPrice()override;
+	void use(Character* character)override;
 };

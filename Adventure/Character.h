@@ -38,6 +38,7 @@ public:
 	void showInventory();
 	vector<Item*>& getInventory();
 	void sortInventoryByName();					//아이템 정렬
+	
 
 	int getLevel() { return level; }
 	string getName() { return name; }
