@@ -17,7 +17,6 @@ Goblin::Goblin(int level)
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
 	name = "고블린 " + goblinNames[generateRandomNumber(0, vectorsize)];
-
 }
 
 string Goblin::getName()
@@ -44,11 +43,13 @@ void Goblin::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
-	if (health <= 0) {
+	if (health <= 0) 
+	{
 		health = 0;
 		cout << "* " << name << " 처치! *" << endl;
 	}
-	else {
+	else
+	{
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
@@ -62,8 +63,10 @@ Item* Goblin::dropItem()
 {
 	Item* item = nullptr;
 	int dropProbability = generateRandomNumber(1, 100);
-	if (dropProbability <= 30) {
-		switch (generateRandomNumber(0, 1)) {
+	if (dropProbability <= 30)
+	{
+		switch (generateRandomNumber(0, 1))
+		{
 		case 0:
 			item = new HealthPotion();
 			break;

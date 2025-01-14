@@ -19,9 +19,7 @@ public:
 	void use(Character* character);
 };
 
-
 /// 물약 리스트
-
 class SmallPotion : public HealthPotion
 {
 public:

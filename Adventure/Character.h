@@ -7,7 +7,7 @@ using namespace std;
 
 class Character {
 private:
-	static Character* instance;		// ì´ˆê¸°??.cpp?ì„œ ?´ì£¼ê¸?
+	static Character* instance;		// ÃÊ±âÈ­ .cpp¿¡¼­ ÇØÁÖ±â
 	string name;
 	int level;
 	int health;
@@ -24,22 +24,26 @@ public:
 	static Character* getInstance(const string& name);
 	void displayStatus();
 	void levelUp();
-	void useRandomItem();		// inventory???ˆëŠ” indexë²?ì§??„ì´???¬ìš©
-	void enhanceAttack(int attackIncrease);
-	void Heal(int heal);
-	void takeDamage(int damage);	// ?„íˆ¬ ì¤??¼ê²©
-	bool isDead();					// ìºë¦­?°ê? ?¬ë§?ˆë‚˜?
-	void addExperience(int exp);	// ?„íˆ¬ ?¹ë¦¬ ??ê²½í—˜ì¹??ë“
-	void addGold(int _gold);		// ?„íˆ¬ ?¹ë¦¬ ??ê³¨ë“œ ?ë“/?ì  êµ¬ë§¤/?ì  ?ë§¤
-	void getDropedItem(Item* item);
+	void useRandomItem();		
+	void enhanceAttack(int attackIncrease);		// °ø°İ·ÂÀ» »ó½Â½ÃÅ°±â À§ÇÑ ÇÔ¼ö
+	void Heal(int heal);						// ÇöÀç Ã¼·Â È¸º¹
+	void takeDamage(int damage);				// °ø°İÀ» ¹Ş¾ÒÀ» ¶§
+	bool isDead();
+	void addExperience(int exp);				// °æÇèÄ¡ È¹µæ	
+	void addGold(int _gold);					// °ñµå È¹µæ
+	void getDropedItem(Item* item);				// ¸ó½ºÅÍ Ã³Ä¡ ÈÄ µå¶øµÈ ¾ÆÀÌÅÛ È¹µæ
 	void showInventory();
+	vector<Item*>& getInventory();
+	void setInventory(const vector<Item*>& newInventory);
 
-	// get/set ?†ì´ ?˜ëŠ” ë°©ë²•???ˆë‚˜? ?¼ë‹¨ ë§Œë“¤?´ë³´ê³????¨ìˆ˜ë¡?ë§Œë“œ??ê±??ê°?´ë³´??
-	// ëª¬ìŠ¤?°ì˜ ì²´ë ¥, ê³µê²©?¥ì— ?ˆë²¨???„ìš”
-	// ?´ë–¤ ?‰ë™???€??ì²˜ë¦¬ë¥??¬ê¸°???´ë²„ë¦¬ë©´ ??takeDamage, addExperience ??
+	// get/set ¾øÀÌ ÇÏ´Â ¹æ¹ıÀÌ ÀÖ³ª? ÀÏ´Ü ¸¸µé¾îº¸°í ´Ù ÇÔ¼ö·Î ¸¸µå´Â °Å »ı°¢ÇØº¸ÀÚ
+	// ¸ó½ºÅÍÀÇ Ã¼·Â, °ø°İ·Â¿¡ ·¹º§ÀÌ ÇÊ¿ä
+	// ¾î¶² Çàµ¿¿¡ ´ëÇÑ Ã³¸®¸¦ ¿©±â¼­ ÇØ¹ö¸®¸é µÊ(takeDamage, addExperience µî)
 	int getLevel() { return level; }
 	string& getName() { return name; }
 
-	// ?„íˆ¬??ê³µê²©???Œì•„????
+	int getGold() { return gold; }
+	int setGold(int golds) { return gold; }
+	// ÀüÅõ¿¡ °ø°İ·Â ¾Ë¾Æ¾ß ÇÔ
 	int getAttack() { return attack; }
 };

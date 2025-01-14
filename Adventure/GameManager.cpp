@@ -37,7 +37,8 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 4)) {
+	switch (generateRandomNumber(0, 4))
+	{
 	case 0:
 		monster = new Slime(level);
 		break;
@@ -76,13 +77,15 @@ void GameManager::battle(Character* player)
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
 		Sleep(1000);
-		//system("cls");
 	}
 	else
 	{
 		// 보스 몬스터 소환
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
+		system("cls");
+		PrintMessage printMessage;
+		printMessage.bossAppears();
 	}
 
 	cout << "*************************************************" << endl;
@@ -90,7 +93,11 @@ void GameManager::battle(Character* player)
 		<< " 발견 (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
 	cout << "*************************************************" << endl;
 
-	while (!player->isDead() && !monster->isDead()) {
+	while (!player->isDead() && !monster->isDead())
+	{
+		// 플레이어가 공격하기 전에 아이템 사용
+		player->useRandomItem();
+
 		// 플레이어 -> 몬스터 공격
 		cout << " " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
 		monster->takeDamage(player->getAttack());
@@ -101,7 +108,9 @@ void GameManager::battle(Character* player)
 			cout << "-------------------------------------------------" << endl;
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
+			{
 				player->getDropedItem(dropedItem);
+			}
 
 			// 경험치 및 골드 획득
 			int gainGold = randomGold();
@@ -112,27 +121,25 @@ void GameManager::battle(Character* player)
 			totalGold += gainGold;
 			totalKilledMonster++;
 
-			if (dynamic_cast< BossMonster*>(monster) != nullptr)
+			if (dynamic_cast<BossMonster*>(monster) != nullptr)
+			{
 				killBoss = true;
+			}
 
 			delete monster;
 			break;
 		}
-
-		// 30% 확률로 아이템 사용 -> 그냥 useRandomItem에 확률적으로 사용하도록 할까?
-		if (generateRandomNumber(1, 100) <= 30) {
-			player->useRandomItem();
-		}
-
+		
 		// 몬스터 -> 플레이어 공격
 		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
 		player->takeDamage(monster->getAttack());
 
 		// 플레이어가 죽으면 전투 종료
-		if (player->isDead()) {
+		if (player->isDead())
+		{
 			break;
 		}
-		Sleep(500);
+
 		cout << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
 		_getch();
 		turnCounter++;
@@ -145,7 +152,8 @@ void GameManager::visitShop(Character* player)
 	char visitShop;
 	cout << "상점을 방문하시겠습니까? (Y/N) : ";
 	cin >> visitShop;
-	if (visitShop == 'y' || visitShop == 'Y') {
+	if (visitShop == 'y' || visitShop == 'Y')
+	{
 
 	}
 }
@@ -159,7 +167,7 @@ void GameManager::printCongratulations()
 {
 	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl;
 	cout << "  축하합니다. Devil을 처치하고 게임을 클리어 하셨습니다!" << endl;
-	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl;
+	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl << endl;
 }
 
 void GameManager::displayRPGResult()
@@ -169,7 +177,6 @@ void GameManager::displayRPGResult()
 	cin >> lookResult;
 	if (lookResult == 'y' || lookResult == 'Y')
 	{
-		
 		//system("cls");
 		cout << "=============게임 결과=============" << endl;
 		cout << "> 몬스터 처치 수 : " << totalKilledMonster << endl;
