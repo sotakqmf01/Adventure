@@ -170,6 +170,7 @@ void GameManager::visitShop(Character* player)
 			switch (index)
 			{
 			case 1:
+				number = 0;
 				while (number != 9)
 				{
 					shop.showShop();
@@ -192,6 +193,7 @@ void GameManager::visitShop(Character* player)
 				}
 				break;
 			case 2:
+				number = 0;
 				while (number != 9)
 				{
 					player->showInventory();
