@@ -29,24 +29,24 @@ void Character::displayStatus()
 	if (health == 0)  //캐릭터 사망시 출력
 	{
 		printMessage.printFrame();
-		cout << "여기까지인가......" << endl;
+		cout << "      여기까지인가......" << endl;
 	}
 	else
 	{
 		printMessage.printFrame();
-		cout << "-------------------------------------------------" << endl;
+		cout << "      -------------------------------------------------" << endl;
 		printMessage.printFrame();
-		cout << " 레벨: " << level << endl;
+		cout << "       레벨: " << level << endl;
 		printMessage.printFrame();
-		cout << " 체력: " << health << "/" << maxHealth << endl;
+		cout << "       체력: " << health << "/" << maxHealth << endl;
 		printMessage.printFrame();
-		cout << " 골드: " << gold << endl;
+		cout << "       골드: " << gold << endl;
 		printMessage.printFrame();
-		cout << " 대미지: " << attack << endl;
+		cout << "       대미지: " << attack << endl;
 		printMessage.printFrame();
-		cout << " 경험치: " << experience << "/" << maxExperience << endl;
+		cout << "       경험치: " << experience << "/" << maxExperience << endl;
 		printMessage.printFrame();
-		cout << "-------------------------------------------------" << endl;
+		cout << "      -------------------------------------------------" << endl;
 		showInventory();
 	 }  
 }
@@ -68,27 +68,27 @@ void Character::levelUp()
 	
 		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
-		cout << "************************************************" << endl;
+		cout << "      ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "  ##        ##     ##      ##     ## ########  " << endl;
+		cout << "        ##        ##     ##      ##     ## ########  " << endl;
 		printMessage.printFrame();
-		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;
+		cout << "        ##        ##     ##      ##     ## ##     ## " << endl;
 		printMessage.printFrame();
-		cout << "  ##        ##     ##      ##     ## ##     ## " << endl;
+		cout << "        ##        ##     ##      ##     ## ##     ## " << endl;
 		printMessage.printFrame();
-		cout << "  ##        ##     ##      ##     ## ########  " << endl;
+		cout << "        ##        ##     ##      ##     ## ########  " << endl;
 		printMessage.printFrame();
-		cout << "  ##         ##   ##       ##     ## ##        " << endl;
+		cout << "        ##         ##   ##       ##     ## ##        " << endl;
 		printMessage.printFrame();
-		cout << "  ##          ## ##        ##     ## ##      " << endl;
+		cout << "        ##          ## ##        ##     ## ##      " << endl;
 		printMessage.printFrame();
-		cout << "  ########     ###          #######  ##    " << endl;
+		cout << "        ########     ###          #######  ##    " << endl;
 		printMessage.printFrame();
-		cout << "************************************************" << endl;
+		cout << "      ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "  공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
+		cout << "        공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
 		printMessage.printFrame();
-		cout << "  다음 레벨까지 " << maxExperience << "경험치 필요" << endl;					//변경
+		cout << "        다음 레벨까지 " << maxExperience << "경험치 필요" << endl;					//변경
 	}
 }
 
@@ -119,12 +119,12 @@ void Character::showInventory()
 	PrintMessage printMessage;
 
 	printMessage.printFrame();
-	cout << "        - I N V E N T O R Y -" << endl;
+	cout << "              - I N V E N T O R Y -" << endl;
 
 	if (inventory.size() < 1)
 	{
 		printMessage.printFrame();;
-		cout << "      인벤토리가 비어 있습니다." << endl;
+		cout << "            인벤토리가 비어 있습니다." << endl;
 	}
 	else
 	{
@@ -132,13 +132,13 @@ void Character::showInventory()
 		for (size_t i = 0; i < inventory.size(); ++i)
 		{		
 			printMessage.printFrame();
-			cout << i + 1 << ". " << inventory[i]->getName() << endl;
+			cout << "            " << i + 1 << ". " << inventory[i]->getName() << endl;
 		}
 		printMessage.printFrame();
 		cout << endl;
 	}
 	printMessage.printFrame();
-	cout << "-----------------------------" << endl;
+	cout << "          -----------------------------" << endl;
 }
 
 void Character::sortInventoryByName()                 //정렬
@@ -191,9 +191,9 @@ void Character::takeDamage(int damage)
 		health = 0;
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 		printMessage.printFrame();
-		cout << "-------------------------------------------------" << endl;
+		cout << "      -------------------------------------------------" << endl;
 		printMessage.printFrame();
-		cout << ">> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
+		cout << "      >> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
 		_getch();
 	}
 	else
@@ -231,7 +231,7 @@ void Character::getDropedItem(Item* item)
 	inventory.push_back(item);
 
 	printMessage.printFrame();
-	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
+	cout << "      >> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
 	//if (inventory.size() > 9)              //최대 인벤토리10
 	//{
 	//	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었지만" << endl << "인벤토리가 가득 찼습니다!" << endl; 

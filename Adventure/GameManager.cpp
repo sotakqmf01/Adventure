@@ -96,12 +96,14 @@ void GameManager::battle(Character* player)
 	}
 
 	printMessage.printFrame();
-	cout << "*************************************************" << endl;
+	cout << endl;
 	printMessage.printFrame();
-	cout << "          " << monster->getName()
+	cout << "      *************************************************" << endl;
+	printMessage.printFrame();
+	cout << "                " << monster->getName()
 		<< " 발견 (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
 	printMessage.printFrame();;
-	cout << "*************************************************" << endl;
+	cout << "      *************************************************" << endl;
 
 	while (!player->isDead() && !monster->isDead())
 	{
@@ -112,14 +114,14 @@ void GameManager::battle(Character* player)
 
 		// 플레이어 -> 몬스터 공격
 		printMessage.printFrame();
-		cout << " " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
+		cout << "       " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
 		monster->takeDamage(player->getAttack());
 
 		// 몬스터가 죽으면 경험치와 골드 획득, 가끔 아이템도 드롭 + 전투 종료
 		if (monster->isDead()) {
 			// 아이템 드롭(몬스터) 및 아이템 획득(플레이어)
 			printMessage.printFrame();
-			cout << "-------------------------------------------------" << endl;
+			cout << "      -------------------------------------------------" << endl;
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
 			{
@@ -129,7 +131,7 @@ void GameManager::battle(Character* player)
 			// 경험치 및 골드 획득
 			int gainGold = randomGold();
 			printMessage.printFrame();
-			cout << ">> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
+			cout << "      >> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
 			player->addExperience(30);
 			player->addGold(gainGold);
 
@@ -147,7 +149,7 @@ void GameManager::battle(Character* player)
 
 		// 몬스터 -> 플레이어 공격
 		printMessage.printFrame();
-		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
+		cout << "       " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
 		player->takeDamage(monster->getAttack());
 
 		// 플레이어가 죽으면 전투 종료
@@ -157,7 +159,7 @@ void GameManager::battle(Character* player)
 		}
 
 		printMessage.printFrame();
-		cout << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
+		cout << "      " << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
 		_getch();
 
 		turnCounter++;
@@ -170,36 +172,49 @@ void GameManager::visitShop(Character* player)
 
 	printMessage.printFrame();
 	char visitShop;
-	cout << "상점을 방문하시겠습니까? (Y/N) : ";
+	cout << "      상점을 방문하시겠습니까? (Y/N) : ";
 	cin >> visitShop;
 	if (visitShop == 'y' || visitShop == 'Y')
 	{
 		Shop shop;
-		int menu = 1;
+		char menu = 0;
 		int	itemSelect = 1;
 
-		while (menu != 3)
+		while (menu != '3')
 		{
 			printMessage.printShopRoof();
 
 			printMessage.printFrame();
-			cout << "1.아이템 구매   2.아이템 판매   3.나가기" << endl;
-			printMessage.printFrame();
-			cin >> menu;
+			cout << "       1.아이템 구매   2.아이템 판매   3.나가기" << endl;
+			printMessage.cursorView(0);
+			menu = _getch();
+			printMessage.cursorView(1);
 
 			switch (menu)
 			{
-			case 1:
+			case '1':
 				itemSelect = 1;
 				while (itemSelect != 0)
 				{
 					printMessage.printShopRoof();
 
+					printMessage.printFrame();
+					cout << "                     - 판 매 목 록 -" << endl;
 					shop.showShop();
 
 					printMessage.printFrame();
-					cout << "▶ 구매 아이템 선택(리롤:5, 뒤로가기:0) : ";
+					cout << "      ▶ 구매 아이템 선택(리롤:5, 뒤로가기:0) : ";
 					cin >> itemSelect;
+
+					// cin으로 입력을 받을 때 타입이 다르면 입력 실패 상태가 됨
+					// => 입력 실패 상태가 되면 해당 변수는 원래 가지고 있는 값을 그대로 가짐
+					// => 입력 실패 상태가 되면 새로운 입력을 받기 전에 스트림의 상태를 정리해야 함
+					if (cin.fail()) {
+						cin.clear();
+						cin.ignore(INT_MAX, '\n');  // 입력 버퍼 비우기
+						itemSelect = 0;
+					}
+
 					if (itemSelect == 5)
 					{
 						shop.Reroll();
@@ -214,7 +229,7 @@ void GameManager::visitShop(Character* player)
 					}
 				}
 				break;
-			case 2:
+			case '2':
 				itemSelect = 1;
 				while (itemSelect != 0)
 				{
@@ -223,8 +238,14 @@ void GameManager::visitShop(Character* player)
 					player->showInventory();
 
 					printMessage.printFrame();
-					cout << "▶ 판매 아이템 선택(뒤로가기:0) : ";
+					cout << "      ▶ 판매 아이템 선택(뒤로가기:0) : ";
 					cin >> itemSelect;
+
+					if (cin.fail()) {
+						cin.clear();
+						itemSelect = 0;
+					}
+
 					if (itemSelect == 0)
 					{
 						break;
@@ -235,11 +256,11 @@ void GameManager::visitShop(Character* player)
 					}
 				}
 				break;
-			case 3:
+			case '3':
 				break;
 			default:
 				printMessage.printFrame();
-				cout << "※ 잘못된 번호입니다 ※" << endl;
+				cout << "      ※ 잘못된 번호입니다 ※" << endl;
 				break;
 			}
 		}
@@ -257,7 +278,7 @@ void GameManager::displayRPGResult()
 	char lookResult;
 
 	printMessage.printFrame();
-	cout << "게임 결과를 보시겠습니까? (Y/N) : ";
+	cout << "      게임 결과를 보시겠습니까? (Y/N) : ";
 	printMessage.printFrame();
 	cin >> lookResult;
 
@@ -265,13 +286,13 @@ void GameManager::displayRPGResult()
 	{
 		//system("cls");
 		printMessage.printFrame();
-		cout << "=============게임 결과=============" << endl;
+		cout << "      =============게임 결과=============" << endl;
 		printMessage.printFrame();;
-		cout << "> 몬스터 처치 수 : " << totalKilledMonster << endl;
+		cout << "      > 몬스터 처치 수 : " << totalKilledMonster << endl;
 		printMessage.printFrame();
-		cout << "> 획득 골드량 : " << totalGold << endl;
+		cout << "      > 획득 골드량 : " << totalGold << endl;
 		printMessage.printFrame();
-		cout << "==================================" << endl;
+		cout << "      ==================================" << endl;
 		printMessage.printLowerFrame();
 	}
 }

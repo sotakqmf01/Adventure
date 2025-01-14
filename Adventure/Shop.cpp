@@ -32,7 +32,7 @@ void Shop::showShop()
 	if (shopItems.empty())
 	{
 		printMessage.printFrame();
-		cout << "상점에 아이템이 없습니다." << endl;
+		cout << "      상점에 아이템이 없습니다." << endl;
 	}
 	else
 	{
@@ -41,7 +41,7 @@ void Shop::showShop()
 			string name = shopItems[i]->getName();
 
 			printMessage.printFrame();
-			cout << i + 1 << "번  " << name << string(28 - name.length(), ' ') << "Gold : " << shopItems[i]->getPrice() << endl;
+			cout << "      " << i + 1 << "번  " << name << string(28 - name.length(), ' ') << "Gold : " << shopItems[i]->getPrice() << endl;
 		}
 	}
 	printMessage.printFrame();
@@ -62,15 +62,15 @@ void Shop::buyItem(int index, Character* character)
 	else
 	{
 		vector<Item*>& inven = character->getInventory();
-		Item* item = shopItems[index-1];
 
 		if (index <= 0 || index > shopItems.size())
 		{
 			printMessage.printFrame();
-			cout << "---- 잘못된 번호입니다." << endl;
+			cout << "      ---- 잘못된 번호입니다." << endl;
 		}
 		else
 		{
+			Item* item = shopItems[index - 1];
 			string name = item->getName();
 			if (character->getGold() > item->getPrice())		// 보유한 금액이 포션 값보다 클때
 			{
@@ -86,7 +86,7 @@ void Shop::buyItem(int index, Character* character)
 			else
 			{
 				printMessage.printFrame();
-				cout << "---- " << "금액 부족, [필요 골드] : " << item->getPrice() << string(35 - 17, ' ')
+				cout << "      ---- " << "금액 부족, [필요 골드] : " << item->getPrice() << string(35 - 17, ' ')
 					<< "  (보유 골드 : " << character->getGold() << ")" << endl;
 			}
 		}
@@ -107,12 +107,12 @@ void Shop::sellItem(int index, Character* character)
 	if (inven.empty())
 	{
 		printMessage.printFrame();
-		cout << "---- 판매할 수 있는 아이템이 없습니다." << endl;	
+		cout << "      ---- 판매할 수 있는 아이템이 없습니다." << endl;	
 	}
 	else if (index <= 0 || index > inven.size()) 
 	{
 		printMessage.printFrame();
-		cout << "---- 잘못된 번호입니다." << endl;
+		cout << "      ---- 잘못된 번호입니다." << endl;
 	}
 	else
 	{
@@ -123,7 +123,7 @@ void Shop::sellItem(int index, Character* character)
 		character->addGold(gold);
 
 		printMessage.printFrame();
-		cout << "---- " << item->getName() << "을(를) 판매 완료" << string(40 - (name.length() + 10), ' ')
+		cout << "      ---- " << item->getName() << "을(를) 판매 완료" << string(40 - (name.length() + 10), ' ')
 			<< " (보유 골드 : " << character->getGold() << ")" << endl;
 		
 		inven.erase(inven.begin() + index-1);

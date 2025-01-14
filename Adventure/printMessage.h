@@ -20,4 +20,5 @@ public:
 	void printLowerFrame();					// 프레임 하단부분 출력. 게임 종료될 때 한 번만 호출.
 	void printFrame();						// 프레임 중간부분 출력하는 함수. 출력이 있을 때마다 같이 출력해야함.
 	void printShopRoof();
+	void cursorView(char c);				// 커서 깜빡임: c=0이면 안보임, c=1이면 보임
 };

@@ -317,7 +317,17 @@ void PrintMessage::printShopRoof()
 	printFrame();
 	cout << endl;
 	printFrame();
-	cout << "////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl;
+	cout << "      ////////////////////상점\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl;
+}
+
+void PrintMessage::cursorView(char c)
+{
+	HANDLE hConsole;
+	CONSOLE_CURSOR_INFO ConsoleCursor;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	ConsoleCursor.bVisible = c;
+	ConsoleCursor.dwSize = 2;
+	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
 }
 
 void PrintMessage::bossAppears() 
