@@ -1,21 +1,23 @@
 ﻿#include "Character.h"
 #include "GameManager.h"
 #include "printMessage.h"
+#include <windows.h>
 using namespace std;
 
-	// 안녕하세요
 
-int main() {
+int main() 
+{
 	GameManager gameManager;
-	PrintMessage printMessage;
+	PrintMessage printMessage;;
 	printMessage.printIntro();
- 
-// 1. 캐릭터 생성 - createCharacter()
+
+	// 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
-
+	printMessage.printUpperFrame();
 	// 2. 전투
-	while (!player->isDead()) {
+	while (!player->isDead()) 
+	{
 		gameManager.battle(player);
 		player->displayStatus();
 
@@ -28,6 +30,7 @@ int main() {
 
 		// 3. 상점 들릴꺼니?
 		gameManager.visitShop(player);
+
 	}
 
 	// 캐릭터가 사망하여 게임 종료 시 비석 메시지 출력

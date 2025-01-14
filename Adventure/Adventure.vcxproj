@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Bandit.cpp" />
+    <ClCompile Include="BigDebuffScroll.cpp" />
+    <ClCompile Include="BigPotion.cpp" />
+    <ClCompile Include="BigScroll.cpp" />
     <ClCompile Include="BossMonster.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -136,28 +139,43 @@
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LagePotion.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MiddlePotion.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="PoisonPotion.cpp" />
     <ClCompile Include="printMessage.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="SmallDebuffScroll.cpp" />
+    <ClCompile Include="SmallPotion.cpp" />
+    <ClCompile Include="SmallScroll.cpp" />
     <ClCompile Include="Troll.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBoost.h" />
     <ClInclude Include="Bandit.h" />
+    <ClInclude Include="BigDebuffScroll.h" />
+    <ClInclude Include="BigPotion.h" />
+    <ClInclude Include="BigScroll.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenerateRandomNumber.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="LagePotion.h" />
+    <ClInclude Include="MiddlePotion.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="PoisonPotion.h" />
     <ClInclude Include="printMessage.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="SmallDebuffScroll.h" />
+    <ClInclude Include="SmallPotion.h" />
+    <ClInclude Include="SmallScroll.h" />
     <ClInclude Include="Troll.h" />
     <ClInclude Include="BossMonster.h" />
   </ItemGroup>
