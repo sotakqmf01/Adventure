@@ -6,6 +6,7 @@ using namespace std;
 
 Character::Character(const string& name)
 	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxExperience(100), gold(0), remainingExperience(0)
+
 {
 	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
 }
@@ -13,6 +14,7 @@ Character::Character(const string& name)
 Character* Character::getInstance(const string& name)
 {
 	if (instance == nullptr) 
+
 	{
 		instance = new Character(name);
 	}
@@ -35,6 +37,7 @@ void Character::displayStatus()
 		cout << " 경험치: " << experience << "/" << maxExperience << endl;          //변경
 		showInventory();
 	}
+
 }
 
 void Character::levelUp()													
@@ -61,6 +64,7 @@ void Character::levelUp()
 		cout << "*************************************************" << endl;				//
 		cout << "  공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
 		cout << "  다음 레벨까지 " << maxExperience << "경험치 필요" << endl;					//변경
+
 	}
 }
 
@@ -71,6 +75,7 @@ void Character::useRandomItem()
 	{
 		// 30%로아이템 사용
 		if (generateRandomNumber(0, 99) < 30)					//test
+
 		{
 			int maxIndex = (int)inventory.size() - 1;
 			int index = generateRandomNumber(0, maxIndex);
@@ -80,6 +85,7 @@ void Character::useRandomItem()
 			inventory.erase(inventory.begin() + index);
 		}
 	}
+
 }
 
 void Character::showInventory()
@@ -114,14 +120,16 @@ void Character::enhanceAttack(int attackIncrease)
 		attack = 0;				//공격력 음수 방지
 	}
 	cout << " (" << attack - attackIncrease << " -> " << attack << ")" << endl;
+
 }
 
 void Character::Heal(int heal)
 {
-	health += heal;
-	if ( health > maxHealth )
+	health = +heal;
+	if (health > maxHealth)
+	{
 		health = maxHealth;
-	cout << " (" << health - heal << " -> " << health << ")" << endl;
+	}
 }
 
 void Character::takeDamage(int damage)
@@ -137,6 +145,7 @@ void Character::takeDamage(int damage)
 	else
 	{
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
+
 	}
 }
 
@@ -153,7 +162,9 @@ void Character::addExperience(int exp)
 		{
 			remainingExperience = experience - maxExperience;
 			levelUp();
+
 		}
+
 	}
 }
 void Character::addGold(int _gold)
@@ -184,6 +195,7 @@ vector<Item*>& Character::getInventory()
 void Character::setInventory(const vector<Item*>& newInventory)
 {
 	inventory = newInventory;
+
 }
 
 Character* Character::instance = nullptr;
