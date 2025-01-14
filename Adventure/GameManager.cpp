@@ -82,7 +82,7 @@ void GameManager::battle(Character* player)
 	{
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
-		Sleep(1000);
+		Sleep(300);
 	}
 	else
 	{

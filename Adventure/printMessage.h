@@ -16,7 +16,7 @@ public:
 	int getcursorlocationY();				// 프레임 출력 후 같은 줄에 내용 출력을 위해 커서 좌표 따오는 함수
 	void askName();							// 캐릭터 생성과정 1. 이름 입력
 	void afterName(string name);			// 캐릭터 생성과정 2. 초기 스탯 표시
-	void printUpperFrame();
-	void printLowerFrame();
-	void printFrame();						// 프레임 중간부분 출력하는 함수
+	void printUpperFrame();					// 프레임 상단부분 출력. 게임 시작할 때 한 번만 호출.
+	void printLowerFrame();					// 프레임 하단부분 출력. 게임 종료될 때 한 번만 호출.
+	void printFrame();						// 프레임 중간부분 출력하는 함수. 출력이 있을 때마다 같이 출력해야함.
 };
