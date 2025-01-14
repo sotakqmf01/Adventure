@@ -3,6 +3,15 @@
 #include "HealthPotion.h"
 #include "AttackBoost.h"
 #include <iostream>
+#include "BigPotion.h"
+#include "MiddlePotion.h"
+#include "SmallPotion.h"
+#include "LagePotion.h"
+#include "PoisonPotion.h"
+#include "SmallScroll.h"
+#include "BigScroll.h"
+#include "BigDebuffScroll.h"
+#include "SmallDebuffScroll.h"
 
 using namespace std;
 

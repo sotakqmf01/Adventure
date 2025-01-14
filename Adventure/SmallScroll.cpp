@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AttackBoost.h"
+#include "SmallScroll.h"
 using namespace std;
 
 class SmallScroll : public AttackBoost

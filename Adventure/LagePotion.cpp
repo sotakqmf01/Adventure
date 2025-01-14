@@ -1,5 +1,6 @@
 #include <iostream>
 #include "HealthPotion.h"
+#include "LagePotion.h"
 using namespace std;
 
 class LagePotion : public HealthPotion

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AttackBoost.h"
+#include "SmallDebuffScroll.h"
 using namespace std;
 
 class SmallDebuffScroll : public AttackBoost
