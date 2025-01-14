@@ -8,69 +8,13 @@
 #include "Orc.h"
 #include "Goblin.h"
 #include "Troll.h"
+#include "Bandit.h"
 #include "BossMonster.h"
 #include "Item.h"
 #include "GenerateRandomNumber.h"
+#include "printMessage.h"
+#include <conio.h>		// _getch() 로 입력대기 받기 위해서 필요함
 
-void GameManager::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
-{
-	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hCon, color);
-}
-
-void GameManager::printIntro()
-{
-	textColor(12);
-	cout << "_________";
-	textColor(7);
-	cout << " ______     __    ______     ";
-	textColor(9);	
-	cout << "_______  ______            _______  _       _________          _______  _______ " << endl;
-	textColor(12);
-	cout << "\\__   __/";
-	textColor(7);
-	cout << "(  __  \\   /__\\  (  __  \\   "; 
-	textColor(9); 
-	cout << "(  ___  )(  __  \\ |\\     /|(  ____ \\( (    /|\\__   __/|\\     /|(  ____ )(  ____ \\" << endl;
-	textColor(12);
-	cout << "   ) (   ";
-	textColor(7); 
-	cout << "| (  \\  ) ( \\/ ) | (  \\  )  ";
-	textColor(9); 
-	cout << "| (   ) || (  \\  )| )   ( || (    \\/|  \\  ( |   ) (   | )   ( || (    )|| (    \\/" << endl;
-	textColor(12);
-	cout << "   | |   ";
-	textColor(7); 
-	cout << "| |   ) |  \\  /  | |   ) |  "; 
-	textColor(9); 
-	cout << "| (___) || |   ) || |   | || (__    |   \\ | |   | |   | |   | || (____)|| (__    " << endl;
-	textColor(12);
-	cout << "   | |   "; 
-	textColor(7); 
-	cout << "| |   | |  /  \\/\\| |   | |  ";
-	textColor(9); 
-	cout << "|  ___  || |   | |( (   ) )|  __)   | (\\ \\) |   | |   | |   | ||     __)|  __)   " << endl;
-	textColor(12);
-	cout << "   | |   "; 
-	textColor(7); 
-	cout << "| |   ) | / /\\  /| |   ) |  "; 
-	textColor(9); 
-	cout << "| (   ) || |   ) | \\ \\_/ / | (      | | \\   |   | |   | |   | || (\\ (   | (      " << endl;
-	textColor(12);
-	cout << "   | |   "; 
-	textColor(7); 
-	cout << "| (__/  )(  \\/  \\| (__/  )  "; 
-	textColor(9); 
-	cout << "| )   ( || (__/  )  \\   /  | (____/\\| )  \\  |   | |   | (___) || ) \\ \\__| (____/\\" << endl;
-	textColor(12);
-	cout << "   )_(   "; 
-	textColor(7); 
-	cout << "(______/  \\___/\\/(______/   "; 
-	textColor(9); 
-	cout << "|/     \\|(______/    \\_/   (_______/|/    )_)   )_(   (_______)|/   \\__/(_______/" << endl;
-	textColor(7);
-	Sleep(3000);
-}
 
 string GameManager::createCharacter()
 {
@@ -93,7 +37,8 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 3)) {
+	switch (generateRandomNumber(0, 4))
+	{
 	case 0:
 		monster = new Slime(level);
 		break;
@@ -105,6 +50,9 @@ Monster* GameManager::generateMonster(int level)
 		break;
 	case 3:
 		monster = new Troll(level);
+		break;
+	case 4:
+		monster = new Bandit(level);
 		break;
 	default:
 		break;
@@ -123,19 +71,21 @@ Monster* GameManager::generateBossMonster(int level)
 void GameManager::battle(Character* player)
 {
 	Monster* monster = nullptr;
-
+	turnCounter = 1;
 	if (player->getLevel() < 10)
 	{
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
 		Sleep(1000);
-		//system("cls");
 	}
 	else
 	{
 		// 보스 몬스터 소환
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
+		system("cls");
+		PrintMessage printMessage;
+		printMessage.bossAppears();
 	}
 
 	cout << "*************************************************" << endl;
@@ -143,7 +93,11 @@ void GameManager::battle(Character* player)
 		<< " 발견 (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
 	cout << "*************************************************" << endl;
 
-	while (!player->isDead() && !monster->isDead()) {
+	while (!player->isDead() && !monster->isDead())
+	{
+		// 플레이어가 공격하기 전에 아이템 사용
+		player->useRandomItem();
+
 		// 플레이어 -> 몬스터 공격
 		cout << " " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
 		monster->takeDamage(player->getAttack());
@@ -154,7 +108,9 @@ void GameManager::battle(Character* player)
 			cout << "-------------------------------------------------" << endl;
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
+			{
 				player->getDropedItem(dropedItem);
+			}
 
 			// 경험치 및 골드 획득
 			int gainGold = randomGold();
@@ -165,35 +121,38 @@ void GameManager::battle(Character* player)
 			totalGold += gainGold;
 			totalKilledMonster++;
 
-			if (dynamic_cast< BossMonster*>(monster) != nullptr)
+			if (dynamic_cast<BossMonster*>(monster) != nullptr)
+			{
 				killBoss = true;
+			}
 
 			delete monster;
 			break;
 		}
-
-		// 30% 확률로 아이템 사용 -> 그냥 useRandomItem에 확률적으로 사용하도록 할까?
-		
-			player->useRandomItem();
-		
-
 		// 몬스터 -> 플레이어 공격
 		cout << " " << monster->getName() << "가(이) " << player->getName() << "을(를) 공격!  ";
 		player->takeDamage(monster->getAttack());
 
 		// 플레이어가 죽으면 전투 종료
-		if (player->isDead()) {
+		if (player->isDead())
+		{
 			break;
 		}
+
+		cout << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
+		_getch();
+		turnCounter++;
 	}
 }
 
 void GameManager::visitShop(Character* player)
 {
+	turnCounter = 0;
 	char visitShop;
 	cout << "상점을 방문하시겠습니까? (Y/N) : ";
 	cin >> visitShop;
-	if (visitShop == 'y' || visitShop == 'Y') {
+	if (visitShop == 'y' || visitShop == 'Y')
+	{
 
 	}
 }
@@ -207,7 +166,7 @@ void GameManager::printCongratulations()
 {
 	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl;
 	cout << "  축하합니다. Devil을 처치하고 게임을 클리어 하셨습니다!" << endl;
-	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl;
+	cout << "☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★" << endl << endl;
 }
 
 void GameManager::displayRPGResult()

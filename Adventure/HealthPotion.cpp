@@ -1,15 +1,21 @@
 #include "HealthPotion.h"
 #include "Character.h"
 #include <iostream>
+using namespace std;
 
-HealthPotion::HealthPotion() : name("힐 포션"), healthRestore(50)
+HealthPotion::HealthPotion() : name("물약"), price(50), healthRestore(0)
 {
-}
+};
 
 string HealthPotion::getName()
 {
 	return name;
-}
+};
+
+int HealthPotion::getPrice()
+{
+	return price;
+};
 
 void HealthPotion::use(Character* character)
 {
@@ -18,4 +24,5 @@ void HealthPotion::use(Character* character)
 
 	// 아이템이 사용되고 나면 객체 메모리 해제
 	delete this;
-}
+};
+

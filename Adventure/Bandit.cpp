@@ -1,5 +1,5 @@
 #pragma once
-#include "Goblin.h"
+#include "Bandit.h"
 #include <time.h>
 #include <iostream>
 #include "GenerateRandomNumber.h"
@@ -8,42 +8,42 @@
 #include "HealthPotion.h"
 using namespace std;
 
-// --------------------- Goblin ----------------------------
-Goblin::Goblin(int level)
+// --------------------- Bandit ----------------------------
+Bandit::Bandit(int level)
 {
-	vector<string> goblinNames = { "나스고르", "고르로크", "마크기트", "나스코르", "가르코르", "아흐로드", "케르륵", "께륵께륵", "케케륵", "무카기트", "가바나트" };
-	int vectorsize = goblinNames.size() - 1;
-	difficulty = 0.8;
+	vector<string> banditNames = { "보리스", "존스", "잭", "헨리", "미켈", "핸슨", "바르트", "로벤", "칼", "빌리", "잭슨" };
+	int vectorsize = banditNames.size() - 1;
+	difficulty = 1.0;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
-	name = "고블린 " + goblinNames[generateRandomNumber(0, vectorsize)];
+	name = "산적 " + banditNames[generateRandomNumber(0, vectorsize)];
 }
 
-string Goblin::getName()
+string Bandit::getName()
 {
 	return name;
 }
 
-int Goblin::getHealth() const
+int Bandit::getHealth() const
 {
 	return health;
 }
 
-int Goblin::getAttack() const
+int Bandit::getAttack() const
 {
 	return attack;
 }
 
-float Goblin::getDifficulty() const
+float Bandit::getDifficulty() const
 {
 	return difficulty;
 }
 
-void Goblin::takeDamage(int damage)
+void Bandit::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
-	if (health <= 0) 
+	if (health <= 0)
 	{
 		health = 0;
 		cout << "* " << name << " 처치! *" << endl;
@@ -54,12 +54,12 @@ void Goblin::takeDamage(int damage)
 	}
 }
 
-bool Goblin::isDead()
+bool Bandit::isDead()
 {
 	return health <= 0 ? true : false;
 }
 
-Item* Goblin::dropItem()
+Item* Bandit::dropItem()
 {
 	Item* item = nullptr;
 	int dropProbability = generateRandomNumber(1, 100);

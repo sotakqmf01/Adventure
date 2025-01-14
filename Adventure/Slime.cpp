@@ -9,12 +9,12 @@
 using namespace std;
 
 // --------------------- SLIME ----------------------------
+// 슬라임은 아이템 드롭 부분이 다름
 Slime::Slime(int level) : name("슬라임")
 {
 	difficulty = 0.5;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
-	
 }
 
 string Slime::getName()
@@ -39,11 +39,13 @@ void Slime::takeDamage(int damage)
 {
 	// 피격 시 체력 감소
 	health -= damage;
-	if (health <= 0) {
+	if (health <= 0)
+	{
 		health = 0;
 		cout << "* " << name << " 처치! *" << endl;
 	}
-	else {
+	else
+	{
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
@@ -56,18 +58,14 @@ bool Slime::isDead()
 Item* Slime::dropItem()
 {
 	Item* item = nullptr;
-	int dropProbability = generateRandomNumber(1, 100);
-	if (dropProbability <= 30) {
-		switch (generateRandomNumber(0, 1)) {
-		case 0:
-			item = new HealthPotion();
-			break;
-		case 1:
-			item = new AttackBoost();
-			break;
-		default:
-			cout << "? 아이템 생성에 문제가 생겼습니다\n\n";
-		}
-	}
+	ItemList* itemlist = new ItemList();
+	itemlist->itemlistSet();
+
+	int index = generateRandomNumber(0, (int)itemlist->items.size()-1);
+	item = itemlist->items[index];
+
+	itemlist->items.erase(itemlist->items.begin() + index);
+
+	delete itemlist;
 	return item;
 }

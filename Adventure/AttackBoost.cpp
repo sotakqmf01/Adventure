@@ -1,8 +1,12 @@
-#include "AttackBoost.h"
+ï»¿#include "AttackBoost.h"
 #include "Character.h"
 #include <iostream>
+#include "Item.h"
 
-AttackBoost::AttackBoost() : name("¾àÀïÀÌ"), attackIncrease(10)
+using namespace std;
+
+
+AttackBoost::AttackBoost() : name ("ìŠ¤í¬ë¡¤"), attackIncrease(0), price(50)
 {
 }
 
@@ -11,11 +15,15 @@ string AttackBoost::getName()
 	return name;
 }
 
+int AttackBoost::getPrice()
+{
+	return price;
+}
+
 void AttackBoost::use(Character* character)
 {
-	cout << " ¡Ù " << character->getName() << "°¡(ÀÌ) " << name << "À»(¸¦) »ç¿ëÇß½À´Ï´Ù";
+	cout << " â˜† " << character->getName() << "ê°€(ì´) " << name << "ì„(ë¥¼) ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤";
 	character->enhanceAttack(attackIncrease);
-
-	// ¾ÆÀÌÅÛÀÌ »ç¿ëµÇ°í ³ª¸é °´Ã¼ ¸Ş¸ğ¸® ÇØÁ¦
+	// ì•„ì´í…œì´ ì‚¬ìš©ë˜ê³  ë‚˜ë©´ ê°ì²´ ë©”ëª¨ë¦¬ í•´ì œ
 	delete this;
 }
