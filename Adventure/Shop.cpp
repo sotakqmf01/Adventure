@@ -26,14 +26,8 @@ void Shop::showShop()							// 상점에 진열된 아이템을 출력
 {
 	for (int i = 0; i < shopItems.size(); i++)
 	{
-		if (shopItems.empty())
-		{
-			cout << "아이템 없음" << endl;
-		}
-		else
-		{
 			cout << i + 1 << "번         " << shopItems[i]->getName() << "     금액은 : " << shopItems[i]->getPrice() << " 원" << endl;
-		}
+		
 	}
 }
 
@@ -72,7 +66,7 @@ void Shop::buyItem(int index, Character* character)						// 아이템 구매
 	}	
 }
 
-void Shop::Reroll()								// 혹시 몰라서 만든건데 상점의 아이템을 삭제하고 다시 아이템을 넣어서 출력
+void Shop::Reroll()								// 상점의 아이템을 삭제하고 다시 아이템을 넣어서 출력
 {
 	shopItems.clear();
 	makeShopList();

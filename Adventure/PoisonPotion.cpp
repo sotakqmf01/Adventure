@@ -3,9 +3,8 @@
 #include "PoisonPotion.h"
 using namespace std;
 
-PoisonPotion::PoisonPotion() : name("독 물약"), price(-150), healthRestore(15)
+PoisonPotion::PoisonPotion() : name("독 물약"), price(-150), healthRestore(-30)
 {
-	healthRestore = -30;
 }
 
 string PoisonPotion:: getName()

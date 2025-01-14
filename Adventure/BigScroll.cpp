@@ -5,7 +5,6 @@ using namespace std;
 
 BigScroll::BigScroll() : name("대형 공격력 데미지 스크롤"), attackIncrease(30), price(100)
 {
-	attackIncrease = 30;
 }
 
 string BigScroll:: getName()
