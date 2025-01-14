@@ -3,17 +3,6 @@
 #include "MiddlePotion.h"
 using namespace std;
 
-MiddlePotion::MiddlePotion() : name("중형 물약"), price(75), healthRestore(30)
+MiddlePotion::MiddlePotion() : HealthPotion("중형 힐 포션", 50, 30)
 {
-	healthRestore = 30;
-}
-
-string MiddlePotion:: getName()
-{
-	return name;
-}
-
-int MiddlePotion:: getPrice()
-{
-	return price;
 }

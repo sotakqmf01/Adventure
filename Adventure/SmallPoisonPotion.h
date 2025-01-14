@@ -3,8 +3,8 @@
 #include "HealthPotion.h"
 using namespace std;
 
-class LagePotion : public HealthPotion
+class SmallPoisonPotion : public HealthPotion
 {
 public:
-	LagePotion();
+	SmallPoisonPotion();
 };

@@ -10,11 +10,10 @@
 #include "MiddlePotion.h"
 #include "SmallPotion.h"
 #include "LagePotion.h"
-#include "PoisonPotion.h"
 #include "SmallScroll.h"
 #include "BigScroll.h"
-#include "BigDebuffScroll.h"
-#include "SmallDebuffScroll.h"
+#include "BigExperienceBook.h"
+#include "SmallExperienceBook.h"
 #include "printMessage.h"
 using namespace std;
 
@@ -137,7 +136,7 @@ void Shop::makeShopList()
 	Item* item;
 	for (int i = 0; i < 4; i++)
 	{
-		int randomNumber = generateRandomNumber(1, 6);
+		int randomNumber = generateRandomNumber(1, 8);
 		switch (randomNumber)
 		{
 		case 1:
@@ -157,6 +156,12 @@ void Shop::makeShopList()
 			break;
 		case 6:
 			item = new BigScroll;
+			break;
+		case 7:
+			item = new BigExperienceBook;
+			break;
+		case 8:
+			item = new SmallExperienceBook;
 			break;
 		default:
 			break;
