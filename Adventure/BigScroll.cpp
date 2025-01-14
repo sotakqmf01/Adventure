@@ -3,16 +3,6 @@
 #include "BigScroll.h"
 using namespace std;
 
-BigScroll::BigScroll() : name("대형 공격력 데미지 스크롤"), attackIncrease(30), price(100)
+BigScroll::BigScroll() : AttackBoost("대형 데미지 업 스크롤", 150, 20)
 {
-}
-
-string BigScroll:: getName()
-{
-	return name;
-}
-
-int BigScroll:: getPrice()
-{
-	return price;
 }

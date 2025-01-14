@@ -5,7 +5,8 @@
 #include "printMessage.h"
 using namespace std;
 
-AttackBoost::AttackBoost() : name ("스크롤"), attackIncrease(0), price(50)
+AttackBoost::AttackBoost(string name, int price, int attackIncrease)
+	: name(name), price(price), attackIncrease(attackIncrease)
 {
 }
 

@@ -58,21 +58,5 @@ bool BossMonster::isDead()
 
 Item* BossMonster::dropItem()
 {
-	Item* item = nullptr;
-	int dropProbability = generateRandomNumber(1, 100);
-	if (dropProbability <= 30)
-	{
-		switch (generateRandomNumber(0, 1))
-		{
-		case 0:
-			item = new HealthPotion();
-			break;
-		case 1:
-			item = new AttackBoost();
-			break;
-		default:
-			cout << "? 아이템 생성에 문제가 생겼습니다\n\n";
-		}
-	}
-	return item;
+	return nullptr;
 }

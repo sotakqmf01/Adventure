@@ -5,14 +5,7 @@ using namespace std;
 
 class SmallDebuffScroll : public AttackBoost
 {
-protected:
-	string name;
-	int attackIncrease;
-	int price;
-
 public:
 	SmallDebuffScroll();
-	string getName();
-	int getPrice();
 };
 

@@ -3,16 +3,6 @@
 #include "BigPotion.h"
 using namespace std;
 
-BigPotion::BigPotion() : name("초대형 물약"), price(150), healthRestore(100)
+BigPotion::BigPotion() : HealthPotion("초대형 힐 포션", 100, 100)
 {
-}
-
-string BigPotion::getName()
-{
-	return name;
-}
-
-int BigPotion:: getPrice()
-{
-	return price;
 }

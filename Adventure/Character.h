@@ -38,6 +38,7 @@ public:
 	void showInventory();
 	vector<Item*>& getInventory();
 	void sortInventoryByName();					//아이템 정렬
+	
 
 	// get/set 없이 하는 방법이 있나? 일단 만들어보고 다 함수로 만드는 거 생각해보자
 	// 몬스터의 체력, 공격력에 레벨이 필요

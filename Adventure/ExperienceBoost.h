@@ -4,14 +4,14 @@
 #include <iostream>
 using namespace std;
 
-class AttackBoost : public Item
+class ExperienceBoost : public Item
 {
 protected:
 	string name;
-	int attackIncrease;
+	int experiencePoints;
 	int price;
 public:
-	AttackBoost(string name, int price, int attackIncrease);
+	ExperienceBoost(string name, int price, int experiencePoints);
 	string getName()override;
 	int getPrice()override;
 	void use(Character* character)override;
