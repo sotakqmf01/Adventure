@@ -398,6 +398,10 @@ void PrintMessage::bossAppears()
     cout << endl;
     printFrame();
     cout << endl;
+    printFrame();
+    cout << endl;
+    printFrame();
+    cout << endl;
 
     
    printFrame(); textColor(0);  gotoXY(22, getcursorlocationY());   cout << "           .                                                      ." << endl;
