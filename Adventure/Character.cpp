@@ -14,10 +14,11 @@ Character::Character(const string& name)
 {
 	if (name == "창민")
 	{
-		level = 5;
-		health = 500;
-		maxHealth = 500;
-		attack = 1000;
+		level = 1;
+		health = 9999;
+		maxHealth = 9999;
+		attack = 9999;
+		gold = 0;
 	}
 }
 
@@ -34,7 +35,7 @@ void Character::displayStatus()
 {
   	PrintMessage printMessage;
 
-	if (health == 0)  //캐릭터 사망시 출력
+	if (health <= 0)  //캐릭터 사망시 출력
 	{
 		printMessage.printFrame();
 		cout << endl;
@@ -86,7 +87,7 @@ void Character::levelUp()
 		attack += addattack;        
 		experience = 0;													
 		experience += remainingExperience;
-		maxExperience += level * 1;
+		maxExperience += level * 3;
 		
 		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
@@ -191,24 +192,36 @@ void Character::enhanceAttack(int attackIncrease)
 
 void Character::Heal(int heal)
 {
-	health += heal;
-	if (health > maxHealth)
+	int prevHealth = health;
+	
+	if (heal >= 0)
 	{
-		health = maxHealth;
-	}
+		health += heal;
 
-	cout << " (체력 : " << health - heal << " -> " << health << ")" << endl;  
+		if (health > maxHealth)
+		{
+			health = maxHealth;
+		}
+
+		cout << " (체력 : " << prevHealth << " -> " << health << ")" << endl;
+	}
+	else
+	{
+		takeDamage(-heal);
+	}
 }
 
 void Character::takeDamage(int damage)
 {
 	PrintMessage printMessage;
 	
+	int prevHealth = health;
+
 	health -= damage;
 	if ( health <= 0 )
 	{
 		health = 0;
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 		printMessage.printFrame();
 		cout << endl;
 		printMessage.printFrame();
@@ -221,7 +234,7 @@ void Character::takeDamage(int damage)
 	}
 	else
 	{
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 	}
 }
 

@@ -16,24 +16,44 @@
 #include "Shop.h"
 #include <conio.h>		// _getch() 로 입력대기 받기 위해서 필요함
 
-
 string GameManager::createCharacter()
 {
 	string name;
 	PrintMessage printMessage;
-	printMessage.askName();
-	//cout << "============================================" << endl;
-	//cout << "            환영합니다. 모험가님!\n";
-	//cout << "============================================" << endl;
-	//cout << " 캐릭터명을 입력하세요 : ";
-	getline(cin, name);			// 이름이 공백이면 다시 입력하도록하는 부분 나중에 추가?
-	cout << endl;
-	/*system("cls");*/
+
+	while (1)
+	{
+		printMessage.askName();
+		getline(cin, name);
+		cout << endl;
+
+		if (name.find_first_of(" \n\~\!\@\#\$\%\^\&\*\(\)\_\=\-\/\,\.\?\;\:\'\"\[\]\{\}\<\>", 0) != string::npos) {
+			printMessage.gotoXY(44, 4);
+			cout << "이름에는 특수문자가 들어갈 수 없습니다.";
+			Sleep(1500);
+		}
+		else if (name.length() > 12) {
+			printMessage.gotoXY(42, 4);
+			cout << "이름이 너무 길어요! (이름은 최대 한글 6자리)";
+			Sleep(1500);
+		}
+		else if (name.length() <= 1) {
+			printMessage.gotoXY(42, 4);
+			cout << "이름이 너무 짧아요! (이름은 최소 한글 1자리)";
+			Sleep(1500);
+		}
+		else if (name == "nullptr") {
+			printMessage.gotoXY(50, 4);
+			cout << "해컨가?...";
+			Sleep(1500);
+		}
+		else
+		{
+			break;
+		}
+	}
 	Character* player = Character::getInstance(name);
 	printMessage.afterName(name);
-	
-	//cout << "        ** 캐릭터 [" << name << "] 생성 완료! **" << endl;
-	//player->displayStatus();
 	
 	return name;
 }
@@ -106,7 +126,7 @@ void GameManager::battle(Character* player)
 	PrintMessage printMessage;
 	turnCounter = 1;
 
-	if (player->getLevel() < 2)
+	if (player->getLevel() < 10)
 	{
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
@@ -117,7 +137,6 @@ void GameManager::battle(Character* player)
 		// 보스 몬스터 소환
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
-		
 		
 		printMessage.bossAppears();
 	}
@@ -140,6 +159,12 @@ void GameManager::battle(Character* player)
 		// 플레이어가 공격하기 전에 아이템 사용
 		player->useRandomItem();
 
+		// 독 물약 먹고 플레이어가 죽을 수도 있음
+		if (player->isDead())
+		{
+			break;
+		}
+
 		// 플레이어 -> 몬스터 공격
 		printMessage.printFrame();
 		cout << "       " << player->getName() << "가(이) " << monster->getName() << "을(를) 공격!  ";
@@ -150,12 +175,11 @@ void GameManager::battle(Character* player)
 			// 아이템 드롭(몬스터) 및 아이템 획득(플레이어)
 			printMessage.printFrame();
 
-//			cout << "      -------------------------------------------------" << endl;
+			//			cout << "      -------------------------------------------------" << endl;
 			printMessage.textColor(6);
 			//cout << "      =====================================================" << endl;
 			cout << "      ===================="; printMessage.textColor(96); cout << " R E S U L T "; printMessage.textColor(6); cout << "====================" << endl;
 			printMessage.textColor(7);
-
 
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
@@ -163,21 +187,26 @@ void GameManager::battle(Character* player)
 				player->getDropedItem(dropedItem);
 			}
 
-			// 경험치 및 골드 획득
-			int gainGold = randomGold();
-			printMessage.printFrame();
-			cout << "      >> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
-			player->addExperience(30, nullptr);
-			player->addGold(gainGold);
-			printMessage.printFrame();
-			cout << endl;
-
-			totalGold += gainGold;
-			totalKilledMonster++;
-
+			// 잡은 몬스터가 보스이면
 			if (dynamic_cast<BossMonster*>(monster) != nullptr)
 			{
 				killBoss = true;
+			}
+
+			// 일반 몬스터를 잡았을 때만 출력
+			if (killBoss == false)
+			{
+				// 경험치 및 골드 획득
+				int gainGold = randomGold();
+				printMessage.printFrame();
+				cout << "      >> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
+				player->addExperience(30, nullptr);
+				player->addGold(gainGold);
+				printMessage.printFrame();
+				cout << endl;
+
+				totalGold += gainGold;
+				totalKilledMonster++;
 			}
 
 			countKilledMonster(monster->getName());
@@ -243,7 +272,9 @@ void GameManager::visitShop(Character* player)
 					shop.showShop();
 
 					printMessage.printFrame();
-					cout << "      ▶ 구매 아이템 선택(리롤:5, 뒤로가기:0) : ";
+					cout << "      ▶ 아이템 번호 입력 시 구매(리롤:5, 뒤로가기:0)" << endl;
+					printMessage.printFrame();
+					cout << "      ▶ 선택 (리롤 " << shop.getRerollCount() << "회) : ";
 					cin >> itemSelect;
 
 					// cin으로 입력을 받을 때 타입이 다르면 입력 실패 상태가 됨
@@ -278,7 +309,7 @@ void GameManager::visitShop(Character* player)
 					player->showInventory();
 
 					printMessage.printFrame();
-					cout << "      ▶ 판매 아이템 선택(뒤로가기:0) : ";
+					cout << "      ▶ 아이템 번호 입력 시 판매(뒤로가기:0) : ";
 					cin >> itemSelect;
 
 					if (cin.fail()) {

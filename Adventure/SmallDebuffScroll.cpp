@@ -1,10 +1,10 @@
-#include <iostream>
+﻿#include <iostream>
 #include "AttackBoost.h"
 #include "SmallDebuffScroll.h"
 using namespace std;
 
 
-SmallDebuffScroll::SmallDebuffScroll() : AttackBoost("¼ÒÇü µð¹öÇÁ ½ºÅ©·Ñ", -100, -10)
+SmallDebuffScroll::SmallDebuffScroll() : AttackBoost("소형 디버프 스크롤", -65, -10)
 
 {
 }
