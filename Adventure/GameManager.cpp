@@ -27,7 +27,7 @@ string GameManager::createCharacter()
 		getline(cin, name);
 		cout << endl;
 
-		if (name.find_first_of(" \n\~\!\@\#\$\%\^\&\*\(\)\_\=\-\/\,\.\?\;\:\'\"\[\]\{\}\<\>", 0) != string::npos) {
+		if (name.find_first_of(" \n~!@#$%^&*()_=-/,.\?;:\'\"[]{}<>", 0) != string::npos) {
 			printMessage.gotoXY(44, 4);
 			cout << "이름에는 특수문자가 들어갈 수 없습니다.";
 			Sleep(1500);
@@ -92,7 +92,34 @@ Monster* GameManager::generateBossMonster(int level)
 
 	return monster;
 }
-
+void GameManager::countKilledMonster(string getname)
+{
+	string name = getname.substr(0, 4);
+	if (name == "오크")
+	{
+		totalKilledOrc++;
+	}
+	else if (name == "고블")
+	{
+		totalKilledGoblin++;
+	}
+	else if (name == "슬라")
+	{
+		totalKilledSlime++;
+	}
+	else if (name == "산적")
+	{
+		totalKilledBandit++;
+	}
+	else if (name == "트롤")
+	{
+		totalKilledTroll++;
+	}
+	else 
+	{
+		totalKilledBoss++;
+	}	 
+}
 void GameManager::battle(Character* player)
 {
 	Monster* monster = nullptr;
@@ -182,6 +209,7 @@ void GameManager::battle(Character* player)
 				totalKilledMonster++;
 			}
 
+			countKilledMonster(monster->getName());
 			delete monster;
 			break;
 		}
@@ -325,23 +353,42 @@ void GameManager::displayRPGResult()
 	PrintMessage printMessage;
 	char lookResult;
 
+
+	printMessage.printFrame();
+	cout << endl;
 	printMessage.printFrame();
 	cout << "      게임 결과를 보시겠습니까? (Y/N) : ";
 	cin >> lookResult;
 
 	if (lookResult == 'y' || lookResult == 'Y')
 	{
-		printMessage.textColor(6);
-		cout << "          |       |                                                                                     |       |" << endl;
+		//printMessage.textColor(6);
+		//cout << "          |       |                                                                                     |       |" << endl;
+		//printMessage.printFrame(); 
+		//cout << "      =============게임 결과=============" << endl;
+		//printMessage.printFrame();
+		//cout << "      > 몬스터 처치 수 : " << totalKilledMonster << endl;
+		//printMessage.printFrame();
+		//cout << "      > 획득 골드량 : " << totalGold << endl;
+		//printMessage.printFrame();
+		//cout << "      ===================================" << endl;
 		printMessage.printFrame();
-		cout << "      =============게임 결과=============" << endl;
-		printMessage.printFrame();;
-		cout << "      > 몬스터 처치 수 : " << totalKilledMonster << endl;
-		printMessage.printFrame();
-		cout << "      > 획득 골드량 : " << totalGold << endl;
-		printMessage.printFrame();
-		cout << "      ===================================" << endl;
-	}
+		cout << endl;
+		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
+		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
+		printMessage.printFrame(); cout << "         | |                모 험 결 산                 | |" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printFrame(); cout << "         | |  물리친 몬스터  총         마리            | |" << endl;
+		printMessage.printFrame(); cout << "         | |  슬라임 :     고블린 :       오크 :        | |" << endl;
+		printMessage.printFrame(); cout << "         | |  산적 :       트롤 :         악마 :        | |" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printFrame(); cout << "         | |  획득 골드량    총         골드            | |" << endl;
+		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
+		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printLowerFrame();
+		printMessage.gotoXY(46, 20); cout << totalKilledSlime;
 
-	printMessage.printLowerFrame();
+		printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
+	}
 }

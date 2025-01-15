@@ -15,6 +15,12 @@ public:
 	int totalUsedPowerPotion = 0;
 	int turnCounter = 0;			// 턴 알리미
 	bool killBoss = false;			// 보스 몬스터 잡으면 true
+	int totalKilledBandit = 0;
+	int totalKilledGoblin = 0;
+	int totalKilledOrc = 0;
+	int totalKilledSlime = 0;
+	int totalKilledTroll = 0;
+	int totalKilledBoss = 0;
 
 public:
 	string createCharacter();
@@ -24,5 +30,6 @@ public:
 	void visitShop(Character* player);
 	int randomGold();
 	void displayRPGResult();
+	void countKilledMonster(string getname);
 };
 
