@@ -9,7 +9,7 @@ using namespace std;
 
 Character::Character(const string& name)
 
-	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(50), gold(200), remainingExperience(0)
+	: name(name), level(1), health(50), maxHealth(50), attack(30), experience(0), maxExperience(50), gold(200), remainingExperience(0)
 
 {
 	if (name == "창민")
