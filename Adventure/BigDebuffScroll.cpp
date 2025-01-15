@@ -3,6 +3,8 @@
 #include "BigDebuffScroll.h"
 using namespace std;
 
-BigDebuffScroll::BigDebuffScroll() : AttackBoost("ด๋วü ต๐น๖วม ฝบลฉทั", -200, -20)
+
+BigDebuffScroll::BigDebuffScroll() : AttackBoost("ยดรซรรผ ยตรฐยนรถรร ยฝยบร…ยฉยทร‘", -200, -20)
+
 {
 }

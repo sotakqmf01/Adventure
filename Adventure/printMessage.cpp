@@ -104,14 +104,14 @@ void PrintMessage::askName()
 void PrintMessage::afterName(string name)
 {
     Character* player = Character::getInstance(name);
-
+    cursorView(0);
     for (int i = 10; i <= 16; i++)
     {
         gotoXY(53, i);
         cout << "                       ";
         Sleep(100);
     }
-    
+    cursorView(1);
     gotoXY(53, 10);
     textColor(7);
     cout << "반갑습니다.";
@@ -149,6 +149,7 @@ void PrintMessage::afterName(string name)
 }
 void PrintMessage::printIntro()
 {   
+    cursorView(0);
     gotoXY(2, 8);
 	textColor(12);
 	cout << "_________";
@@ -215,6 +216,7 @@ void PrintMessage::printIntro()
     cout << "캐릭터 작성을 시작합니다."; 
     gotoXY(53, 21);
     cout << "(Press any key)";
+    cursorView(1);
     _getch();
 }
 
@@ -700,118 +702,203 @@ void PrintMessage::bossAppears()
 
 void PrintMessage::displayEpitaph(string name)
 {
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                   _____  _____" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  <     `/     |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                   >          (" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |   _     _  |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |  |_) | |_) |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |  | \\ | |   |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |            |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "   ______.______%_|            |__________  _____" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << " _/                                       \\|     |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "|               "; 
 	textColor(15);
 	cout << "      " << name;
 	textColor(7);
 	cout << "              <" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "|_____.-._________              ____/|___________|" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
-    cout << "                  | * fi/ll/in |" << endl;
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
+    cout << "                  | * 15/03/XX |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  | + 17/01/25 |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |            |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |            |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |   _        <" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                  |__/         |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     cout << "                   / `--.      |" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
     textColor(2);
 	cout << "                 %";
 	textColor(7);
 	cout << "|            |"; 
 	textColor(2);
 	cout << "%" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
-	cout << "             |/.%%";
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
+    textColor(2);
+    cout << "             |/.%%";
 	textColor(7);
-	cout << "|          -< "; 
+	cout << "|           -<"; 
 	textColor(2); 
 	cout << "@%%%" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
-	cout << "             `\\%`@";
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
+    textColor(2);
+    cout << "             `\\%`@";
 	textColor(7);
 	cout << "|     v      |";
 	textColor(2); 
 	cout << "@@%@%%    " << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
+    textColor(2);
 	cout << "           .%%%@@@";
 	textColor(7); 
-	cout << "|%    |    "; 
+    cout << "|"; 
+    textColor(2); 
+    cout << "%";
+    textColor(7);
+    cout << "    |    ";
 	textColor(2); 
 	cout << "% @@@%%@%%%%" << endl;
+    textColor(6);
     cout << "          |       |                                                                                     |       |";
-    gotoXY(26, getcursorlocationY());
-	cout << "      _.%%%%%%@@@@@@%%_/%\\_%@@%%@@@@@@@%%%%%%" << endl;
+    textColor(7);
+    gotoXY(32, getcursorlocationY());
+    textColor(2);
+    cout << "      _.%%%%%%@@@@@@%%"; 
+    textColor(7);
+    cout << "_/";
+    textColor(2);
+    cout << "%"; 
+    textColor(7);
+    cout << "\\_";
+    textColor(2);
+    cout << "%@@%%@@@@@@@%%%%%%" << endl;
 	textColor(7);
+    textColor(6);
+    cout << "          |       |                                                                                     |       |";
+    textColor(7);
+    cout << endl;
 }
 
-void PrintMessage::printCongratulations()
-{
-	textColor(15);
-	
-	cout << "  .-------------------------------------------------------------------." << endl;
-	cout << " /  .-.            축하합니다!                                     .-. \\" << endl;
-	cout << "|  /   \\       고대의 악마를 무찔렀습니다.                       /    \\ |" << endl;
-	cout << "| |\\_.  |    먼 옛날 봉인되었던 악마는 봉인 속에서              |    /| |" << endl;
-	cout << "|\\|  | /|    물질계를 파멸시킬 사악한 음모를 꾸미고 있었습니다  |\\  | |/|" << endl;
-	cout << "| `---' |                                                       | `---' |" << endl;
-	cout << "|       |   그러나 당신의 영웅적인 활약으로                     |       |" << endl;
-	cout << "|       |   악마의 사악한 계획은 무너지고 물질계의 평화가       |       |" << endl;
-	cout << "|       |   다시 한 번 지켜졌습니다.                            |       |" << endl;
-	cout << "|       |   이에 우리는 당신에게 무한한 감사와 축복을 전합니다  |       |" << endl;
-	cout << "|       |-------------------------------------------------------|       |" << endl;
-	cout << "\\       |                                                       |       /" << endl;
-	cout << " \\     /                                                         \\     /" << endl;
-	cout << "  `---'                                                           `---'" << endl;
-	
-	textColor(7);
-	Sleep(3000);
-}
+//void PrintMessage::printCongratulations()
+//{  
+//        SetConsoleOutputCP(CP_UTF8);
+//        SetConsoleCP(CP_UTF8);
+//        
+//        textColor(15);
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⣿⣿⣿⣿⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣶⡾⠿⠟⠛⠉⠁⠀⠀⠀⠉⠙⠻⢿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⣾⠿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣢⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⣀⣠⣤⠶⠟⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠴⠿⢭⣯⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⡇" << endl;
+//        cout << "⠀⢀⣤⢾⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⠇⡇" << endl;
+//        cout << "⢠⡟⠁⠉⠉⠙⠲⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀축하합니다! 고대의 악마를⠀⠀⠀⠀⠀⠀⠀⠘⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡾⢋⡵⠃⢠⠇" << endl;
+//        cout << "⣾⠀⢠⠞⢛⠷⣦⡀⠉⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀무찔렀습니다.⠀⠀⠀⠈⣷⡄⠀⠀⠀⠀⠀⣀⣴⠾⠋⢁⡴⠋⠀⣠⡟⠀" << endl;
+//        cout << "⢿⡀⠘⣖⣈⡷⢸⡧⠀⠀⠘⢿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣷⡀⠀⣠⣴⠟⠋⠀⢀⡴⠋⠀⣠⡾⠋⠀⠀" << endl;
+//        cout << "⠘⢷⣄⠈⠉⢀⣾⣧⣴⠶⠚⠉⢹⣦⠀⠀⣀⣀⡤⠀먼 옛날 봉인되었던 악마는⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣩⣵⠟⠋⠀⠀⢀⡴⠋⠀⢠⣾⠏⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠈⠉⠛⠛⠋⠉⠁⠀⠀⠀⠀⠈⢻⣯⠝⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⣾⠟⠁⠀⠀⢀⣴⠏⠀⠀⢠⡾⠁⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢹⣦⠖⠂⠀⠀물질계를 파멸시킬 기회만 노리고⠀⠀⠀⢀⠀⣼⡏⠀⠀⠀⣠⡟⠁⠀⠀⠀⣾⠃⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡆⠀⠀⠀있었습니다.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⣴⡟⠀⢿⡇⠀⠀⣼⠏⢀⣀⣤⣤⣴⣿⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⢀⡜⢿⣇⠀⠸⡇⢀⣼⠃⠀⠀⠈⠳⣶⡴⠁⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣷⠀⠀그러나 당신의 영웅적인 활약으로⠀⠹⣄⣉⣓⣦⣝⣾⠃⠀⢀⣀⣤⠾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀악마의 사악한 계획은 무너지고⠀ ⠀⣩⠟⡋⣽⢿⡦⢭⣭⠭⠗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⠀⠀물질계의 평화는 다시 한번⠀⠀⠀⠀⠘⠁⠈⢹⡟⠀⢹⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀지켜졌습니다.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⠇⠤⢚⡅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⣸⣿⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡇⠀⠀⠀이에 당신에게 무한한 감사를⠀ ⠀⠀⠹⣿⠀⠀⠀⠸⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀드리는 바입니다.⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀ ⠀⢻⠀⠀⠀⠀⢙⡤⠤⠈⠙⠳⢤⡀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠴⠒⠋⠁⠀⠀⠀⠀⠀⠈⢿⡆⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀     감사합니다!⠀⠀⠀⠀⠀ ⣀⣠⡴⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⢷⣶⠖⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⠶⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠇⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⠿⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣶⠾⠛⠁⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⣀⣠⣤⣶⡿⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⠶⠚⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣧⠀⠀⢠⣼⣿⣯⣟⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡴⠖⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡀⠀⡟⢡⢥⡈⠹⣧⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡶⠞⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣷⡄⢻⣌⣠⡟⠀⣿⠂⠀⢀⣀⣤⣴⠶⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢙⢿⣦⣌⣁⣀⣼⢯⣴⠶⢛⠋⠉⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+//        textColor(7);
+//        Sleep(3000);
+//
+//      
+//}

@@ -12,8 +12,8 @@ protected:
 	int price;
 public:
 	ExperienceBoost(string name, int price, int experiencePoints);
-	string getName()override;
-	int getPrice()override;
-	void use(Character* character)override;
+	string getName() override;
+	int getPrice() override;
+	void use(Character* character) override;
 };
 
