@@ -14,10 +14,11 @@
 #include "BigScroll.h"
 #include "BigExperienceBook.h"
 #include "SmallExperienceBook.h"
+//#include "BigPoisonPotion.h"
 #include "printMessage.h"
 using namespace std;
 
-Shop::Shop()
+Shop::Shop() : rerollCount(1)	// 리롤 1회
 {
 	// 상점에 아이템들을 무작위로 4개 넣음
 	makeShopList();
@@ -71,14 +72,17 @@ void Shop::buyItem(int index, Character* character)
 		{
 			Item* item = shopItems[index - 1];
 			string itemName = item->getName();
+			int itemPrice = item->getPrice();
+			itemPrice = itemPrice < 0 ? -itemPrice : itemPrice;
+
 			if(inven.size() >= 20)
 			{
 				printMessage.printFrame();
 				cout << "      ---- 인벤토리가 가득 차 아이템을 구매하실 수 없습니다." << endl;
 			}
-			else if (character->getGold() > item->getPrice())		// 보유한 금액이 포션 값보다 클때
+			else if (character->getGold() > itemPrice)		// 보유한 금액이 포션 값보다 클때
 			{
-				character->setGold(character->getGold() - item->getPrice());
+				character->setGold(character->getGold() - itemPrice);
 				inven.push_back(item);
 
 				printMessage.printFrame();
@@ -90,7 +94,7 @@ void Shop::buyItem(int index, Character* character)
 			else
 			{
 				printMessage.printFrame();
-				cout << "      ---- 골드 부족, [필요 골드] : " << item->getPrice() << string(35 - 17, ' ')
+				cout << "      ---- 골드 부족, [필요 골드] : " << itemPrice << string(35 - 17, ' ')
 					<< "  (보유 골드 : " << character->getGold() << ")" << endl;
 			}
 		}
@@ -99,8 +103,20 @@ void Shop::buyItem(int index, Character* character)
 
 void Shop::Reroll()
 {
-	shopItems.clear();
-	makeShopList();
+	if (rerollCount > 0)
+	{
+		shopItems.clear();
+		makeShopList();
+
+		rerollCount--;
+	}
+	else
+	{
+		PrintMessage printMessage;
+
+		printMessage.printFrame();
+		cout << "                ☆ 리롤 횟수가 없습니다 ☆" << endl;
+	}
 }
 
 void Shop::sellItem(int index, Character* character)				
