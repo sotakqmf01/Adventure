@@ -8,11 +8,17 @@
 using namespace std;
 
 Character::Character(const string& name)
-
-	: name(name), level(1), health(50), maxHealth(50), attack(15), experience(0), maxExperience(100), gold(200), remainingExperience(0)
-
+	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(200), remainingExperience(0)
 {
-//	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
+	if (name == "창민")
+	{
+		level = 1;
+		health = 9999;
+		maxHealth = 9999;
+		attack = 9999;
+		gold = 0;
+	}
+
 }
 
 Character* Character::getInstance(const string& name)

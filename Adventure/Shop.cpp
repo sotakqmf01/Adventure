@@ -17,7 +17,7 @@
 #include "printMessage.h"
 using namespace std;
 
-Shop::Shop()
+Shop::Shop() : rerollCount(1)
 {
 	// 상점에 아이템들을 무작위로 4개 넣음
 	makeShopList();
@@ -99,8 +99,20 @@ void Shop::buyItem(int index, Character* character)
 
 void Shop::Reroll()
 {
-	shopItems.clear();
-	makeShopList();
+	if (rerollCount > 0)
+	{
+		shopItems.clear();
+		makeShopList();
+
+		rerollCount--;
+	}
+	else
+	{
+		PrintMessage printMessage;
+
+		printMessage.printFrame();
+		cout << "                ☆ 리롤 횟수가 없습니다 ☆" << endl;
+	}
 }
 
 void Shop::sellItem(int index, Character* character)				
