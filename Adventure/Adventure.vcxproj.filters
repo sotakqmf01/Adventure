@@ -150,6 +150,9 @@
     <ClCompile Include="SmallPoisonPotion.cpp">
       <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
     </ClCompile>
+    <ClCompile Include="printCongraulations.cpp">
+      <Filter>소스 파일\Headers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="BigPoisonPotion.h">
       <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
+    </ClInclude>
+    <ClInclude Include="printCongratulations.h">
+      <Filter>소스 파일\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -43,6 +43,7 @@ float Bandit::getDifficulty() const
 void Bandit::takeDamage(int damage)
 {
 	PrintMessage printMessage;
+	int prevHealth = health;
 
 	// 피격 시 체력 감소
 	health -= damage;
@@ -55,7 +56,7 @@ void Bandit::takeDamage(int damage)
 	}
 	else
 	{
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 	}
 }
 

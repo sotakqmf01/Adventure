@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include "AttackBoost.h"
 #include "BigDebuffScroll.h"
 using namespace std;
