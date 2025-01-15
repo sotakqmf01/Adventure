@@ -147,6 +147,7 @@
     <ClCompile Include="MiddlePotion.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="printCongraulations.cpp" />
     <ClCompile Include="SmallExperienceBook.cpp" />
     <ClCompile Include="SmallPoisonPotion.cpp" />
     <ClCompile Include="printMessage.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="MiddlePotion.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="printCongratulations.h" />
     <ClInclude Include="SmallExperienceBook.h" />
     <ClInclude Include="SmallPoisonPotion.h" />
     <ClInclude Include="printMessage.h" />

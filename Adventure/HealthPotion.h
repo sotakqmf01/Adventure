@@ -12,7 +12,7 @@ protected:
 	int price;
 public:
 	HealthPotion(string name, int price, int healthRestore);
-	string getName()override;
-	int getPrice()override;
-	void use(Character* character)override;
+	string getName() override;
+	int getPrice() override;
+	void use(Character* character) override;
 };
