@@ -77,11 +77,13 @@ void Character::levelUp()
 	{	
 		PrintMessage printMessage;
 		int addhealth;				//증가한 체력
+		int addattack;              //증가한 공격력 변수
 		level++;						
-		addhealth = level * 13;
+		addhealth = level * 15;
 		maxHealth += addhealth;		//level * 13 -> addhealth
 		health = maxHealth;
-		attack += level * 2;
+		addattack = level * 5;     //공격력 증가
+		attack += addattack;        
 		experience = 0;													
 		experience += remainingExperience;
 		maxExperience += level * 1;
@@ -251,6 +253,10 @@ void Character::addExperience(int exp, Item* item)
 void Character::addGold(int _gold)
 {
 	gold += _gold;
+	if (gold <= 0) 
+	{
+		gold = 0;             //골드 음수 방지
+	}
 }
 
 void Character::getDropedItem(Item* item)

@@ -3,6 +3,8 @@
 #include "SmallDebuffScroll.h"
 using namespace std;
 
-SmallDebuffScroll::SmallDebuffScroll() : AttackBoost("ผาวü ต๐น๖วม ฝบลฉทั", -100, -5)
+
+SmallDebuffScroll::SmallDebuffScroll() : AttackBoost("ยผร’รรผ ยตรฐยนรถรร ยฝยบร…ยฉยทร‘", -100, -10)
+
 {
 }
