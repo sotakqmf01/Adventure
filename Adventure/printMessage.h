@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <windows.h>
+#include "Character.h"
+
 using namespace std;
 
 class PrintMessage
