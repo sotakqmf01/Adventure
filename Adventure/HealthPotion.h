@@ -11,8 +11,8 @@ protected:
 	int healthRestore;
 	int price;
 public:
-	HealthPotion();
-	string getName();
-	int getPrice();
-	void use(Character* character);
+	HealthPotion(string name, int price, int healthRestore);
+	string getName()override;
+	int getPrice()override;
+	void use(Character* character)override;
 };
