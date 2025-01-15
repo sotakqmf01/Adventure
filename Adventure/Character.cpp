@@ -9,7 +9,7 @@ using namespace std;
 
 Character::Character(const string& name)
 	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
-{
+{        //벨런스 조정 gold(0) -> gold(80)
 //	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
 }
 
@@ -70,7 +70,7 @@ void Character::levelUp()
 		attack += addattack;        
 		experience = 0;													
 		experience += remainingExperience;
-		maxExperience += level * 3;
+		maxExperience += level * 3;  //벨런스 조정 5 -> 3
 
 		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
@@ -93,7 +93,7 @@ void Character::levelUp()
 		printMessage.printFrame();
 		cout << "      ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "              공격력 " << level * 2 << " 증가, 체력 " << addhealth << " 증가" << endl;		//
+		cout << "              공격력 " << addattack << " 증가, 체력 " << addhealth << " 증가" << endl;		//
 		printMessage.printFrame();
 		cout << "              다음 레벨까지 " << maxExperience << " 경험치 필요" << endl;					//변경
 	}
