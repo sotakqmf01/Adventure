@@ -12,8 +12,8 @@ protected:
 	int price;
 public:
 	AttackBoost(string name, int price, int attackIncrease);
-	string getName()override;
-	int getPrice()override;
-	void use(Character* character)override;
+	string getName() override;
+	int getPrice() override;
+	void use(Character* character) override;
 };
 
