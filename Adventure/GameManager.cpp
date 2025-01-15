@@ -110,8 +110,6 @@ void GameManager::battle(Character* player)
 
 	while (!player->isDead() && !monster->isDead())
 	{
-		
-
 		// 플레이어가 공격하기 전에 아이템 사용
 		player->useRandomItem();
 
@@ -124,10 +122,12 @@ void GameManager::battle(Character* player)
 		if (monster->isDead()) {
 			// 아이템 드롭(몬스터) 및 아이템 획득(플레이어)
 			printMessage.printFrame();
+
 //			cout << "      -------------------------------------------------" << endl;
 			printMessage.textColor(6);
 			cout << "      =====================================================" << endl;
 			printMessage.textColor(7);
+
 
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
@@ -139,7 +139,7 @@ void GameManager::battle(Character* player)
 			int gainGold = randomGold();
 			printMessage.printFrame();
 			cout << "      >> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
-			player->addExperience(30);
+			player->addExperience(30, nullptr);
 			player->addGold(gainGold);
 
 			totalGold += gainGold;
@@ -166,7 +166,7 @@ void GameManager::battle(Character* player)
 		}
 
 		printMessage.printFrame();
-		cout << "      " << turnCounter << " 턴 종료. 아무 키나 눌러 다음 턴 진행." << endl;
+		cout << "         [" << turnCounter << "] 턴 종료.  <아무 키나 눌러 다음 턴 진행>" << endl;
 		_getch();
 
 		turnCounter++;
@@ -286,12 +286,12 @@ void GameManager::displayRPGResult()
 
 	printMessage.printFrame();
 	cout << "      게임 결과를 보시겠습니까? (Y/N) : ";
-	printMessage.printFrame();
 	cin >> lookResult;
 
 	if (lookResult == 'y' || lookResult == 'Y')
 	{
-		//system("cls");
+		printMessage.textColor(6);
+		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
 		cout << "      =============게임 결과=============" << endl;
 		printMessage.printFrame();;
@@ -299,7 +299,8 @@ void GameManager::displayRPGResult()
 		printMessage.printFrame();
 		cout << "      > 획득 골드량 : " << totalGold << endl;
 		printMessage.printFrame();
-		cout << "      ==================================" << endl;
-		printMessage.printLowerFrame();
+		cout << "      ===================================" << endl;
 	}
+
+	printMessage.printLowerFrame();
 }

@@ -8,7 +8,9 @@
 using namespace std;
 
 Character::Character(const string& name)
+
 	: name(name), level(1), health(50), maxHealth(50), attack(15), experience(0), maxExperience(100), gold(200), remainingExperience(0)
+
 {
 //	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
 }
@@ -37,13 +39,13 @@ void Character::displayStatus()
 		printMessage.textColor(1);
 		cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
 		printMessage.printFrame();
-		cout << "       레벨: " << level << endl;
+		cout << "       레벨:   " << level << endl;
 		printMessage.printFrame();
-		cout << "       체력: " << health << "/" << maxHealth << endl;
+		cout << "       체력:   " << health << "/" << maxHealth << endl;
 		printMessage.printFrame();
-		cout << "       골드: " << gold << endl;
+		cout << "       골드:   " << gold << endl;
 		printMessage.printFrame();
-		cout << "       대미지: " << attack << endl;
+		cout << "       데미지: " << attack << endl;
 		printMessage.printFrame();
 		cout << "       경험치: " << experience << "/" << maxExperience << endl;
 		printMessage.printFrame();
@@ -69,6 +71,7 @@ void Character::levelUp()
 		experience = 0;													
 		experience += remainingExperience;
 		maxExperience += level * 1;
+
 		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
@@ -90,9 +93,9 @@ void Character::levelUp()
 		printMessage.printFrame();
 		cout << "      ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "        공격력 " << level * 2 << "증가, 체력 " << addhealth << "증가" << endl;		//
+		cout << "              공격력 " << level * 2 << " 증가, 체력 " << addhealth << " 증가" << endl;		//
 		printMessage.printFrame();
-		cout << "        다음 레벨까지 " << maxExperience << "경험치 필요" << endl;					//변경
+		cout << "              다음 레벨까지 " << maxExperience << " 경험치 필요" << endl;					//변경
 	}
 }
 
@@ -155,18 +158,13 @@ void Character::sortInventoryByName()                 //정렬
 
 void Character::enhanceAttack(int attackIncrease)
 {
-	PrintMessage printMessage;
-	//printMessage.textColor(6);
-	//cout << "          |       |                                                                                     |       |";
-	//printMessage.textColor(7);
-	//printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	attack += attackIncrease;
 	if (attack <= 0)
 	{
 		attack = 0;				//공격력 음수 방지
 	}
-	cout << " (" << attack - attackIncrease << " -> " << attack << ")" << endl;
 
+	cout << " (공격력 : " << attack - attackIncrease << " -> " << attack << ")" << endl;
 }
 
 void Character::Heal(int heal)
@@ -175,14 +173,9 @@ void Character::Heal(int heal)
 	if (health > maxHealth)
 	{
 		health = maxHealth;
-	PrintMessage printMessage;
-	//printMessage.textColor(6);
-	//cout << "          |       |                                                                                     |       |";
-	//printMessage.textColor(7);
-	//printMessage.gotoXY(26, printMessage.getcursorlocationY());
-	cout << " (" << health - heal << " -> " << health << ")" << endl;
-  }  
+	}
 
+	cout << " (체력 : " << health - heal << " -> " << health << ")" << endl;  
 }
 
 void Character::takeDamage(int damage)
@@ -211,18 +204,23 @@ bool Character::isDead()
 	return health <= 0;
 }
 
-void Character::addExperience(int exp)
+void Character::addExperience(int exp, Item* item)
 {
 	if (level < 10) {
+		PrintMessage printMessage;
+
 		experience += exp;
-		if (experience >= maxExperience)					//100 -> maxexperience
+
+		if (item != nullptr)
+		{
+			cout << " (경험치 : " << experience - exp << " -> " << experience << ")" << endl;
+		}
+
+		if (experience >= maxExperience)
 		{
 			remainingExperience = experience - maxExperience;
 			levelUp();
 		}
-		// 경험치 물약
-		PrintMessage printMessage;
-		cout << " (" << experience - exp << " -> " << experience << ")" << endl;
 	}
 }
 
@@ -235,26 +233,25 @@ void Character::getDropedItem(Item* item)
 {
 	PrintMessage printMessage;
 
-	inventory.push_back(item);
+	if (inventory.size() >= 20)              
+	{
+		printMessage.printFrame();
+		cout << "      >> 인벤토리가 가득 차 [★ " << item->getName() << "]을(를) 얻지 못하였습니다" << endl; 
+	
+		delete item;
+	}
+	else
+	{
+		inventory.push_back(item);
 
-	printMessage.printFrame();
-	cout << "      >> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
-	//if (inventory.size() > 9)              //최대 인벤토리10
-	//{
-	//	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었지만" << endl << "인벤토리가 가득 찼습니다!" << endl; 
-	//}
-	//else
-	//{
-	//	inventory.push_back(item);
-	//	cout << ">> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
-	//}
+		printMessage.printFrame();
+		cout << "      >> " << name << "가(이) [★ " << item->getName() << "]을(를) 얻었습니다!" << endl;
+	}
 }
 
 vector<Item*>& Character::getInventory()
 {
 	return inventory;
 }
-
-
 
 Character* Character::instance = nullptr;

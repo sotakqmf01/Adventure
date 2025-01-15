@@ -32,7 +32,7 @@ public:
 	void Heal(int heal);						// 현재 체력 회복
 	void takeDamage(int damage);				// 공격을 받았을 때
 	bool isDead();
-	void addExperience(int exp);				// 경험치 획득
+	void addExperience(int exp, Item* item);	// 경험치 획득
 	void addGold(int _gold);					// 골드 획득
 	void getDropedItem(Item* item);				// 몬스터 처치 후 드랍된 아이템 획득
 	void showInventory();
