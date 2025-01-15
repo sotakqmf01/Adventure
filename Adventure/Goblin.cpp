@@ -43,9 +43,11 @@ float Goblin::getDifficulty() const
 void Goblin::takeDamage(int damage)
 {
 	PrintMessage printMessage;
+	int prevHealth = health;
+
 	// 피격 시 체력 감소
 	health -= damage;
-	if (health <= 0) 
+	if (health <= 0)
 	{
 		health = 0;
 		cout << "* " << name << " 처치! *" << endl;
@@ -54,7 +56,7 @@ void Goblin::takeDamage(int damage)
 	}
 	else
 	{
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 	}
 }
 

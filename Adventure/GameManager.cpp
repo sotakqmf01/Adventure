@@ -24,10 +24,10 @@ string GameManager::createCharacter()
 	while (1)
 	{
 		printMessage.askName();
-		getline(cin, name);			// 이름이 공백이면 다시 입력하도록하는 부분 나중에 추가?
+		getline(cin, name);
 		cout << endl;
 
-		if (name.find_first_of(" \n\~\!\@\#\$\%\^\&\*\(\)\_\=\-\/\,\.\?\;\:\'\"\[\]\{\}", 0) != string::npos) {
+		if (name.find_first_of(" \n\~\!\@\#\$\%\^\&\*\(\)\_\=\-\/\,\.\?\;\:\'\"\[\]\{\}\<\>", 0) != string::npos) {
 			printMessage.gotoXY(44, 4);
 			cout << "이름에는 특수문자가 들어갈 수 없습니다.";
 			Sleep(1500);
@@ -40,6 +40,11 @@ string GameManager::createCharacter()
 		else if (name.length() <= 1) {
 			printMessage.gotoXY(42, 4);
 			cout << "이름이 너무 짧아요! (이름은 최소 한글 1자리)";
+			Sleep(1500);
+		}
+		else if (name == "nullptr") {
+			printMessage.gotoXY(50, 4);
+			cout << "해컨가?...";
 			Sleep(1500);
 		}
 		else
@@ -94,7 +99,7 @@ void GameManager::battle(Character* player)
 	PrintMessage printMessage;
 	turnCounter = 1;
 
-	if (player->getLevel() < 5)
+	if (player->getLevel() < 10)
 	{
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
@@ -105,7 +110,6 @@ void GameManager::battle(Character* player)
 		// 보스 몬스터 소환
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
-		
 		
 		printMessage.bossAppears();
 	}
@@ -127,6 +131,12 @@ void GameManager::battle(Character* player)
 	{
 		// 플레이어가 공격하기 전에 아이템 사용
 		player->useRandomItem();
+
+		// 독 물약 먹고 플레이어가 죽을 수도 있음
+		if (player->isDead())
+		{
+			break;
+		}
 
 		// 플레이어 -> 몬스터 공격
 		printMessage.printFrame();

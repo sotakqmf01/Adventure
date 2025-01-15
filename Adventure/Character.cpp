@@ -8,8 +8,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-<<<<<<< HEAD
-	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(200), remainingExperience(0)
+	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
 {
 	if (name == "창민")
 	{
@@ -19,20 +18,6 @@ Character::Character(const string& name)
 		attack = 9999;
 		gold = 0;
 	}
-
-=======
-
-	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(50), gold(200), remainingExperience(0)
-
-{
-	if (name == "창민")
-	{
-		level = 5;
-		health = 500;
-		maxHealth = 500;
-		attack = 1000;
-	}
->>>>>>> 82e13408e4f9cdbed7c7fe4f727501997f188267
 }
 
 Character* Character::getInstance(const string& name)
@@ -48,7 +33,7 @@ void Character::displayStatus()
 {
   	PrintMessage printMessage;
 
-	if (health == 0)  //캐릭터 사망시 출력
+	if (health <= 0)  //캐릭터 사망시 출력
 	{
 		printMessage.printFrame();
 		cout << endl;
@@ -100,7 +85,7 @@ void Character::levelUp()
 		attack += addattack;        
 		experience = 0;													
 		experience += remainingExperience;
-		maxExperience += level * 1;
+		maxExperience += level * 3;
 		
 		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
@@ -205,24 +190,36 @@ void Character::enhanceAttack(int attackIncrease)
 
 void Character::Heal(int heal)
 {
-	health += heal;
-	if (health > maxHealth)
+	int prevHealth = health;
+	
+	if (heal >= 0)
 	{
-		health = maxHealth;
-	}
+		health += heal;
 
-	cout << " (체력 : " << health - heal << " -> " << health << ")" << endl;  
+		if (health > maxHealth)
+		{
+			health = maxHealth;
+		}
+
+		cout << " (체력 : " << prevHealth << " -> " << health << ")" << endl;
+	}
+	else
+	{
+		takeDamage(-heal);
+	}
 }
 
 void Character::takeDamage(int damage)
 {
 	PrintMessage printMessage;
 	
+	int prevHealth = health;
+
 	health -= damage;
 	if ( health <= 0 )
 	{
 		health = 0;
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 		printMessage.printFrame();
 		cout << endl;
 		printMessage.printFrame();
@@ -235,7 +232,7 @@ void Character::takeDamage(int damage)
 	}
 	else
 	{
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 	}
 }
 

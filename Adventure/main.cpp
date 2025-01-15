@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <fstream>
+#include <conio.h>
 using namespace std;
 
 int main() 
@@ -40,6 +41,9 @@ int main()
 		// 보스를 잡았으면 게임 사이클 탈출
 		if (gameManager.killBoss == true)
 		{
+			printMessage.printFrame();
+			cout << "" << endl;
+			_getch();
 			break;
 		}
 

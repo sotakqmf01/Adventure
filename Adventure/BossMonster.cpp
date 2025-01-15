@@ -12,7 +12,7 @@ using namespace std;
 // --------------------- Devil ----------------------------
 BossMonster::BossMonster(int level) : name("고대의 악마")
 {
-	difficulty = 1.8;
+	difficulty = 2.0;
 	health = level * getDifficulty() * generateRandomNumber(50, 60);
 	attack = level * getDifficulty() * generateRandomNumber(5, 10);
 }
@@ -40,6 +40,8 @@ float BossMonster::getDifficulty() const
 void BossMonster::takeDamage(int damage)
 {
 	PrintMessage printMessage;
+	int prevHealth = health;
+
 	// 피격 시 체력 감소
 	health -= damage;
 	if (health <= 0)
@@ -51,7 +53,7 @@ void BossMonster::takeDamage(int damage)
 	}
 	else
 	{
-		cout << "(" << name << " 체력 : " << health << ")" << endl;
+		cout << "(" << name << " 체력 : " << prevHealth << " → " << health << ")" << endl;
 	}
 }
 
