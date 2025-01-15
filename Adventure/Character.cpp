@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 #include "Shop.h"
@@ -9,6 +9,7 @@ using namespace std;
 
 Character::Character(const string& name)
 	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
+
 {
 	if (name == "창민")
 	{
@@ -18,6 +19,7 @@ Character::Character(const string& name)
 		attack = 9999;
 		gold = 0;
 	}
+
 }
 
 Character* Character::getInstance(const string& name)
@@ -86,7 +88,6 @@ void Character::levelUp()
 		experience = 0;													
 		experience += remainingExperience;
 		maxExperience += level * 3;
-		
 		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
@@ -108,7 +109,7 @@ void Character::levelUp()
 		printMessage.printFrame();
 		cout << "         ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "                 공격력 " << level * 2 << " 증가, 체력 " << addhealth << " 증가" << endl;		//
+		cout << "              공격력 " << addattack << " 증가, 체력 " << addhealth << " 증가" << endl;		//
 		printMessage.printFrame();
 		cout << "                 다음 레벨까지 " << maxExperience << " 경험치 필요" << endl;					//변경
 	}

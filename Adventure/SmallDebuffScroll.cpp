@@ -8,3 +8,4 @@ SmallDebuffScroll::SmallDebuffScroll() : AttackBoost("소형 디버프 스크롤
 
 {
 }
+
