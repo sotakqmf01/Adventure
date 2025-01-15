@@ -14,7 +14,7 @@ Character::Character(const string& name)
 {
 	if (name == "창민")
 	{
-		level = 1;
+		level = 5;
 		health = 9999;
 		maxHealth = 9999;
 		attack = 9999;
@@ -245,12 +245,13 @@ bool Character::isDead()
 
 void Character::addExperience(int exp, Item* item)
 {
-	if (level < 10) {
+	if (level < 10) 
+	{
 		PrintMessage printMessage;
 
 		experience += exp;
 
-		if (item != nullptr)
+		if (item != nullptr) // 레벨 10 이전에 경험치 책 사용
 		{
 			cout << " (경험치 : " << experience - exp << " -> " << experience << ")" << endl;
 		}
@@ -259,6 +260,13 @@ void Character::addExperience(int exp, Item* item)
 		{
 			remainingExperience = experience - maxExperience;
 			levelUp();
+		}
+	}
+	else // 레벨 10일때 경험치 책 사용했을 경우
+	{
+		if (item != nullptr)
+		{
+			cout << "  효과가 없었습니다." << endl;
 		}
 	}
 }
