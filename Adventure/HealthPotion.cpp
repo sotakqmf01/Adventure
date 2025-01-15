@@ -1,6 +1,8 @@
 #include "HealthPotion.h"
 #include "Character.h"
+#include "printMessage.h"
 #include <iostream>
+#include "Item.h"
 using namespace std;
 
 HealthPotion::HealthPotion() : name("물약"), price(50), healthRestore(0)
@@ -19,6 +21,11 @@ int HealthPotion::getPrice()
 
 void HealthPotion::use(Character* character)
 {
+	PrintMessage printMessage;
+	printMessage.textColor(6);
+	cout << "          |       |                                                                                     |       |";
+	printMessage.textColor(7);
+	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " ☆ " << character->getName() << "가(이) " << name << "을(를) 사용했습니다";
 	character->Heal(healthRestore);
 
