@@ -3,17 +3,6 @@
 #include "LagePotion.h"
 using namespace std;
 
-LagePotion::LagePotion() : name("대형 물약"), price(100), healthRestore(50)
+LagePotion::LagePotion() : HealthPotion("대형 힐 포션", 75, 75)
 {
-	healthRestore = 50;
-}
-
-string LagePotion::getName()
-{
-	return name;
-}
-
-int LagePotion::getPrice()
-{
-	return price;
 }

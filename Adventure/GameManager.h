@@ -23,7 +23,6 @@ public:
 	void battle(Character* player);
 	void visitShop(Character* player);
 	int randomGold();
-	void printCongratulations();
 	void displayRPGResult();
 };
 
