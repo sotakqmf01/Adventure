@@ -98,12 +98,15 @@ void GameManager::battle(Character* player)
 	printMessage.printFrame();
 	cout << endl;
 	printMessage.printFrame();
-	cout << "      *************************************************" << endl;
+	printMessage.textColor(4);
+	cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
+	
 	printMessage.printFrame();
 	cout << "                " << monster->getName()
 		<< " 발견 (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
-	printMessage.printFrame();;
-	cout << "      *************************************************" << endl;
+	printMessage.printFrame();
+	printMessage.textColor(4);
+	cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
 
 	while (!player->isDead() && !monster->isDead())
 	{
@@ -119,8 +122,13 @@ void GameManager::battle(Character* player)
 		if (monster->isDead()) {
 			// 아이템 드롭(몬스터) 및 아이템 획득(플레이어)
 			printMessage.printFrame();
-			cout << "      -------------------------------------------------" << endl;
-			
+
+//			cout << "      -------------------------------------------------" << endl;
+			printMessage.textColor(6);
+			cout << "      =====================================================" << endl;
+			printMessage.textColor(7);
+
+
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
 			{
