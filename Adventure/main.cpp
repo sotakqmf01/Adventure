@@ -4,7 +4,6 @@
 #include <windows.h>
 using namespace std;
 
-
 int main() 
 {
 	GameManager gameManager;
@@ -40,7 +39,6 @@ int main()
 	// 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
 	if (gameManager.killBoss == true)
 		printMessage.printCongratulations();
-		//gameManager.printCongratulations();
 
 	// 4. 게임 종료 시 결과 출력
 	gameManager.displayRPGResult();

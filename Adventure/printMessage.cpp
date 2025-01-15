@@ -1,5 +1,6 @@
 ﻿#include "printMessage.h"
 #include "Character.h"
+#include "GenerateRandomNumber.h"
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -21,6 +22,7 @@ int PrintMessage::getcursorlocationY() {
     int cursorY = csbi.dwCursorPosition.Y;
     return cursorY;
 }
+
 
 void PrintMessage::textColor(unsigned short color)	// 컬러 텍스트 함수 0(검은색)~15(밝은 하얀색)까지 입력
 {
@@ -120,16 +122,22 @@ void PrintMessage::afterName(string name)
     cout << "당신의 능력치입니다.";
     Sleep(1000);
     gotoXY(53, 15);
-    cout << "레벨: 1";
+    cout << "레벨: ";
+    gotoXY(61, 15);
+    cout << player->getLevel();
     Sleep(800);
     gotoXY(53, 16);
     cout << "체력: 200/200";
     Sleep(800);
     gotoXY(53, 17);
-    cout << "골드: 0";
+    cout << "골드: ";
+    gotoXY(61, 17);
+    cout << player->getGold();
     Sleep(800);
     gotoXY(53, 18);
-    cout << "대미지: 30";
+    cout << "대미지: ";
+    gotoXY(63, 18);
+    cout << player->getAttack();
     Sleep(800);
     gotoXY(53, 19);
     cout << "경험치: 0/100";
@@ -227,7 +235,30 @@ void PrintMessage::printUpperFrame()
     //cout << "          \\       |                                                                                     |       /" << endl;
     //cout << "           \\     /                                                                                       \\     /" << endl;
     //cout << "            `---'                                                                                         `---'" << endl;
+    
+    textColor(15);
+    gotoXY(30, 1);
+    cout << "   _     ___  _";
+    gotoXY(47, 1);
+    cout << "    _  ____  _     ____  _      ____  _    ";
+    gotoXY(30, 2);
+    cout << "  / \\__/|\\  \\//";
+    gotoXY(47, 2);
+    cout << "   / |/  _ \\/ \\ /\\/  __\\/ \\  /|/  _ \\/ \\   ";
+    gotoXY(30, 3);
+    cout << "  | |\\/|| \\  / ";
+    gotoXY(47, 3);
+    cout << "   | || / \\|| | |||  \\/|| |\\ ||| / \\|| |   ";
+    gotoXY(30, 4);
+    cout << "  | |  || / /  ";
+    gotoXY(47, 4);
+    cout << "/\\_| || \\_/|| \\_/||    /| | \\||| |-||| |_/\\";
+    gotoXY(30, 5);
+    cout << "  \\_/  \\|/_/   ";
+    gotoXY(47, 5);
+    cout << "\\____/\\____/\\____/\\_/\\_\\\\_/  \\|\\_/ \\|\\____/";
     textColor(7);
+    gotoXY(0, 6);
 }
 void PrintMessage::printLowerFrame()
 {
@@ -247,6 +278,56 @@ void PrintMessage::printLowerFrame()
     cout << "           \\     /                                                                                       \\     /" << endl;
     cout << "            `---'                                                                                         `---'" << endl;
     textColor(7);
+}
+void PrintMessage::printFrame()
+{
+    int randomframe = generateRandomNumber(0, 3);
+
+    switch (randomframe)
+    {
+    case 0:
+        textColor(6);
+        cout << "          |       |                                                                                     |       |";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    case 1:
+        textColor(6);
+        cout << "          >       |                                                                                     <       |";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    case 2:
+        textColor(6);
+        cout << "          |       S                                                                                     |       |";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    case 3:
+        textColor(6);
+        cout << "          >       |                                                                                     |       <";
+        textColor(7);
+        gotoXY(26, getcursorlocationY());
+        break;
+    }
+}
+
+void PrintMessage::printShopRoof()
+{
+	printFrame();
+	cout << endl;
+	printFrame();
+	cout << "      ////////////////////상점\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl;
+}
+
+void PrintMessage::cursorView(char c)
+{
+	HANDLE hConsole;
+	CONSOLE_CURSOR_INFO ConsoleCursor;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	ConsoleCursor.bVisible = c;
+	ConsoleCursor.dwSize = 2;
+	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
 }
 
 void PrintMessage::bossAppears() 
@@ -622,48 +703,92 @@ void PrintMessage::displayEpitaph(string name)
     cout << "          |       |                                                                                     |       |";
     gotoXY(26, getcursorlocationY());
     cout << "                   _____  _____" << endl;
-	cout << "                  <     `/     |" << endl;
-	cout << "                   >          (" << endl;
-	cout << "                  |   _     _  |" << endl;
-	cout << "                  |  |_) | |_) |" << endl;
-	cout << "                  |  | \\ | |   |" << endl;
-	cout << "                  |            |" << endl;
-	cout << "   ______.______%_|            |__________  _____" << endl;
-	cout << " _/                                       \\|     |" << endl;
-	cout << "|               "; 
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  <     `/     |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                   >          (" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |   _     _  |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |  |_) | |_) |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |  | \\ | |   |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |            |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "   ______.______%_|            |__________  _____" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << " _/                                       \\|     |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "|               "; 
 	textColor(15);
 	cout << "      " << name;
 	textColor(7);
 	cout << "              <" << endl;
-	cout << "|_____.-._________              ____/|___________|" << endl;
-	cout << "                  | * fi/ll/in |" << endl;
-	cout << "                  | + 17/01/25 |" << endl;
-	cout << "                  |            |" << endl;
-	cout << "                  |            |" << endl;
-	cout << "                  |   _        <" << endl;
-	cout << "                  |__/         |" << endl;
-	cout << "                   / `--.      |" << endl;
-	textColor(2);
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "|_____.-._________              ____/|___________|" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  | * fi/ll/in |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  | + 17/01/25 |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |            |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |            |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |   _        <" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                  |__/         |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    cout << "                   / `--.      |" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
+    textColor(2);
 	cout << "                 %";
 	textColor(7);
 	cout << "|            |"; 
 	textColor(2);
 	cout << "%" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
 	cout << "             |/.%%";
 	textColor(7);
 	cout << "|          -< "; 
 	textColor(2); 
 	cout << "@%%%" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
 	cout << "             `\\%`@";
 	textColor(7);
 	cout << "|     v      |";
 	textColor(2); 
 	cout << "@@%@%%    " << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
 	cout << "           .%%%@@@";
 	textColor(7); 
 	cout << "|%    |    "; 
 	textColor(2); 
 	cout << "% @@@%%@%%%%" << endl;
+    cout << "          |       |                                                                                     |       |";
+    gotoXY(26, getcursorlocationY());
 	cout << "      _.%%%%%%@@@@@@%%_/%\\_%@@%%@@@@@@@%%%%%%" << endl;
 	textColor(7);
 }

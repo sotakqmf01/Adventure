@@ -3,17 +3,6 @@
 #include "SmallScroll.h"
 using namespace std;
 
-SmallScroll::SmallScroll() : name("소형 공격력 데미지 스크롤"), attackIncrease(15), price(50)
+SmallScroll::SmallScroll() : AttackBoost("소형 데미지 업 스크롤", 75, 10)
 {
-	attackIncrease = 15;
-}
-
-string SmallScroll:: getName()
-{
-	return name;
-}
-
-int SmallScroll:: getPrice()
-{
-	return price;
 }

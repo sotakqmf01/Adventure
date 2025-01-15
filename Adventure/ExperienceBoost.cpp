@@ -1,27 +1,27 @@
-#include "HealthPotion.h"
+#include "ExperienceBoost.h"
 #include "Character.h"
 #include "printMessage.h"
 #include <iostream>
 #include "Item.h"
-
 using namespace std;
 
-HealthPotion::HealthPotion(string name, int price, int healthRestore)
-	: name(name), price(price), healthRestore(healthRestore)
+ExperienceBoost::ExperienceBoost(string name, int price, int experiencePoints)
+	: name(name), price(price), experiencePoints(experiencePoints)
 {
+
 }
 
-string HealthPotion::getName()
+string ExperienceBoost::getName()
 {
 	return name;
 }
 
-int HealthPotion::getPrice()
+int ExperienceBoost::getPrice()
 {
 	return price;
 }
 
-void HealthPotion::use(Character* character)
+void ExperienceBoost::use(Character* character)
 {
 	PrintMessage printMessage;
 	printMessage.textColor(6);
@@ -29,7 +29,7 @@ void HealthPotion::use(Character* character)
 	printMessage.textColor(7);
 	printMessage.gotoXY(26, printMessage.getcursorlocationY());
 	cout << " ☆ " << character->getName() << "가(이) " << name << "을(를) 사용했습니다";
-	character->Heal(healthRestore);
+	character->addExperience(experiencePoints);
 
 	// 아이템이 사용되고 나면 객체 메모리 해제
 	delete this;

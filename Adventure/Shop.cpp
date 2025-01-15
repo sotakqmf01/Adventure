@@ -10,93 +10,123 @@
 #include "MiddlePotion.h"
 #include "SmallPotion.h"
 #include "LagePotion.h"
-#include "PoisonPotion.h"
 #include "SmallScroll.h"
 #include "BigScroll.h"
-#include "BigDebuffScroll.h"
-#include "SmallDebuffScroll.h"
+#include "BigExperienceBook.h"
+#include "SmallExperienceBook.h"
+#include "printMessage.h"
 using namespace std;
 
-Shop::Shop()			// 상점에 아이템들을 무작위로 넣음
+Shop::Shop()
 {
+	// 상점에 아이템들을 무작위로 4개 넣음
 	makeShopList();
 }
 
-void Shop::showShop()							// 상점에 진열된 아이템을 출력
+// 상점에 진열된 아이템을 출력
+void Shop::showShop()
 {
-	for (int i = 0; i < shopItems.size(); i++)
-	{
-		if (shopItems.empty())
-		{
-			cout << "아이템 없음" << endl;
-		}
-		else
-		{
-			cout << i + 1 << "번         " << shopItems[i]->getName() << "     금액은 : " << shopItems[i]->getPrice() << " 원" << endl;
-		}
-	}
-}
+	PrintMessage printMessage;
 
-void Shop::buyItem(int index, Character* character)						// 아이템 구매
-{
 	if (shopItems.empty())
 	{
-		cout << "구매할 수 있는 아이템 없음" << endl;
+		printMessage.printFrame();
+		cout << "      상점에 아이템이 없습니다." << endl;
+	}
+	else
+	{
+		for (int i = 0; i < shopItems.size(); i++)
+		{
+			string name = shopItems[i]->getName();
+
+			printMessage.printFrame();
+			cout << "      " << i + 1 << "번  " << name << string(28 - name.length(), ' ') << "Gold : " << shopItems[i]->getPrice() << endl;
+		}
+	}
+	printMessage.printFrame();
+	cout << endl;
+}
+
+void Shop::buyItem(int index, Character* character)
+{
+	PrintMessage printMessage;
+
+	if (shopItems.empty())
+	{
+		// 어짜피 showShop에서 상점에 아이템이 없다는 것을 보여줌
+		// => shopItems.empty()일 때 아무것도 하지않고 넘어가면 됨
+		//printMessage.printFrame();
+		//cout << "---- 구매할 수 있는 아이템이 없습니다." << endl;
 	}
 	else
 	{
 		vector<Item*>& inven = character->getInventory();
-		Item* item = shopItems[index-1];
 
 		if (index <= 0 || index > shopItems.size())
 		{
-			cout << "잘못된 번호입니다." << endl;
-	
+			printMessage.printFrame();
+			cout << "      ---- 잘못된 번호입니다." << endl;
 		}
 		else
 		{
+			Item* item = shopItems[index - 1];
+			string name = item->getName();
 			if (character->getGold() > item->getPrice())		// 보유한 금액이 포션 값보다 클때
 			{
 				character->setGold(character->getGold() - item->getPrice());
 				inven.push_back(item);
 
-				cout << item->getName() << " 을(를) 구매 하였습니다." << " 보유한 금액 : " << character->getGold() << " 원 입니다." << endl;
+				printMessage.printFrame();
+				cout << "---- " << item->getName() << "을(를) 구매 완료" << string(40 - (name.length()+10), ' ') 
+					<< " (보유 골드 : " << character->getGold() << ")" << endl;
 
 				shopItems.erase(shopItems.begin() + index - 1);
 			}
 			else
 			{
-				cout << item->getName() << " 을(를) 구매 할 수 없습니다." << " 보유한 금액 : " << character->getGold() << " 원 입니다." << endl;
+				printMessage.printFrame();
+				cout << "      ---- " << "금액 부족, [필요 골드] : " << item->getPrice() << string(35 - 17, ' ')
+					<< "  (보유 골드 : " << character->getGold() << ")" << endl;
 			}
 		}
 	}	
 }
 
-void Shop::Reroll()								// 혹시 몰라서 만든건데 상점의 아이템을 삭제하고 다시 아이템을 넣어서 출력
+void Shop::Reroll()
 {
 	shopItems.clear();
 	makeShopList();
 }
 
-void Shop::sellItem(int index, Character* character)				// 아이템을 판매
+void Shop::sellItem(int index, Character* character)				
 {
 	vector<Item*>& inven = character->getInventory();
-	
+	PrintMessage printMessage;
+
 	if (inven.empty())
 	{
-		cout << "     판매할 수 있는 아이템이 없습니다." << endl;	
+		printMessage.printFrame();
+		cout << "      ---- 판매할 수 있는 아이템이 없습니다." << endl;	
 	}
 	else if (index <= 0 || index > inven.size()) 
 	{
-		cout << "잘못된 번호입니다." << endl;
+		printMessage.printFrame();
+		cout << "      ---- 잘못된 번호입니다." << endl;
 	}
 	else
 	{
 		Item* item = inven[index - 1];
+		string name = item->getName();
 		int gold = item->getPrice();
+
 		character->addGold(gold);
-		cout << "         " << item->getName() << " 을(를) 판매 하였습니다." << " 보유한 금액 : " << character->getGold() << " 원 입니다." << endl;
+
+		printMessage.printFrame();
+		cout << "      ---- " << item->getName() << "을(를) 판매 완료" << string(40 - (name.length() + 10), ' ')
+			<< " (보유 골드 : " << character->getGold() << ")" << endl;
+		
 		inven.erase(inven.begin() + index-1);
+		
 		delete item;
 	}
 }
@@ -106,7 +136,7 @@ void Shop::makeShopList()
 	Item* item;
 	for (int i = 0; i < 4; i++)
 	{
-		int randomNumber = generateRandomNumber(1, 6);
+		int randomNumber = generateRandomNumber(1, 8);
 		switch (randomNumber)
 		{
 		case 1:
@@ -126,6 +156,12 @@ void Shop::makeShopList()
 			break;
 		case 6:
 			item = new BigScroll;
+			break;
+		case 7:
+			item = new BigExperienceBook;
+			break;
+		case 8:
+			item = new SmallExperienceBook;
 			break;
 		default:
 			break;

@@ -37,14 +37,14 @@ public:
 	void showInventory();
 	vector<Item*>& getInventory();
 	void sortInventoryByName();					//아이템 정렬
+	
 
-	// get/set 없이 하는 방법이 있나? 일단 만들어보고 다 함수로 만드는 거 생각해보자
-	// 몬스터의 체력, 공격력에 레벨이 필요
-	// 어떤 행동에 대한 처리를 여기서 해버리면 됨(takeDamage, addExperience 등)
 	int getLevel() { return level; }
 	string& getName() { return name; }
+	string getName() { return name; }
+
 	int getGold() { return gold; }
 	void setGold(int golds) { gold = golds; }
-	// 전투에 공격력 알아야 함
+	
 	int getAttack() { return attack; }
 };
