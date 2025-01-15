@@ -9,10 +9,16 @@ using namespace std;
 
 Character::Character(const string& name)
 
-	: name(name), level(1), health(50), maxHealth(50), attack(15), experience(0), maxExperience(100), gold(200), remainingExperience(0)
+	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(50), gold(200), remainingExperience(0)
 
 {
-//	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
+	if (name == "창민")
+	{
+		level = 5;
+		health = 500;
+		maxHealth = 500;
+		attack = 1000;
+	}
 }
 
 Character* Character::getInstance(const string& name)
@@ -31,13 +37,21 @@ void Character::displayStatus()
 	if (health == 0)  //캐릭터 사망시 출력
 	{
 		printMessage.printFrame();
-		cout << "      여기까지인가......" << endl;
+		cout << endl;
+		printMessage.printFrame();
+		cout << endl;
+		printMessage.printFrame();
+		cout << "			   여기까지인가......" << endl;
+		printMessage.printFrame();
+		cout << endl;
+		printMessage.printFrame();
+		cout << endl;
 	}
 	else
 	{
 		printMessage.printFrame();
 		printMessage.textColor(1);
-		cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
+		cout << "      _,.-'~'-.,__,.-'~'-."; printMessage.textColor(144); cout << " S T A T U S "; printMessage.textColor(1); cout << ".-'~'-.,__,.-'~'-.,_" << endl;
 		printMessage.printFrame();
 		cout << "       레벨:   " << level << endl;
 		printMessage.printFrame();
@@ -50,7 +64,7 @@ void Character::displayStatus()
 		cout << "       경험치: " << experience << "/" << maxExperience << endl;
 		printMessage.printFrame();
 		printMessage.textColor(1);
-		cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
+		cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.," << endl;
 		printMessage.textColor(7);
 		Sleep(500);
 		showInventory();
@@ -71,31 +85,31 @@ void Character::levelUp()
 		experience = 0;													
 		experience += remainingExperience;
 		maxExperience += level * 1;
-
+		
 		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
-		cout << "      ************************************************" << endl;
+		cout << "         ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "        ##        ##     ##      ##     ## ########  " << endl;
+		cout << "           ##        ##     ##      ##     ## ########  " << endl;
 		printMessage.printFrame();
-		cout << "        ##        ##     ##      ##     ## ##     ## " << endl;
+		cout << "           ##        ##     ##      ##     ## ##     ## " << endl;
 		printMessage.printFrame();
-		cout << "        ##        ##     ##      ##     ## ##     ## " << endl;
+		cout << "           ##        ##     ##      ##     ## ##     ## " << endl;
 		printMessage.printFrame();
-		cout << "        ##        ##     ##      ##     ## ########  " << endl;
+		cout << "           ##        ##     ##      ##     ## ########  " << endl;
 		printMessage.printFrame();
-		cout << "        ##         ##   ##       ##     ## ##        " << endl;
+		cout << "           ##         ##   ##       ##     ## ##        " << endl;
 		printMessage.printFrame();
-		cout << "        ##          ## ##        ##     ## ##      " << endl;
+		cout << "           ##          ## ##        ##     ## ##      " << endl;
 		printMessage.printFrame();
-		cout << "        ########     ###          #######  ##    " << endl;
+		cout << "           ########     ###          #######  ##    " << endl;
 		printMessage.printFrame();
-		cout << "      ************************************************" << endl;
+		cout << "         ************************************************" << endl;
 		printMessage.printFrame();
-		cout << "              공격력 " << level * 2 << " 증가, 체력 " << addhealth << " 증가" << endl;		//
+		cout << "                 공격력 " << level * 2 << " 증가, 체력 " << addhealth << " 증가" << endl;		//
 		printMessage.printFrame();
-		cout << "              다음 레벨까지 " << maxExperience << " 경험치 필요" << endl;					//변경
+		cout << "                 다음 레벨까지 " << maxExperience << " 경험치 필요" << endl;					//변경
 	}
 }
 
@@ -126,8 +140,12 @@ void Character::showInventory()
 	PrintMessage printMessage;
 
 	printMessage.printFrame();
-	cout << "                   - I N V E N T O R Y -" << endl;
-
+	cout << endl;
+	printMessage.printFrame();
+	printMessage.textColor(7);
+	cout << "      ##=##=##=##=##=##=##=#"; printMessage.textColor(112); cout << "INVENTORY"; printMessage.textColor(7);cout << "=##=##=##=##=##=##=##=" << endl;
+	
+	printMessage.textColor(7);
 	if (inventory.size() < 1)
 	{
 		printMessage.printFrame();;
@@ -145,7 +163,9 @@ void Character::showInventory()
 		cout << endl;
 	}
 	printMessage.printFrame();
-	cout << "          -----------------------------" << endl;
+	printMessage.textColor(7);
+	cout << "      ##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##=##" << endl;
+	printMessage.textColor(7);
 }
 
 void Character::sortInventoryByName()                 //정렬
@@ -188,7 +208,11 @@ void Character::takeDamage(int damage)
 		health = 0;
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 		printMessage.printFrame();
-		cout << "      -------------------------------------------------" << endl;
+		cout << endl;
+		printMessage.printFrame();
+		printMessage.textColor(1);
+		cout << "      _,.-'~'-.,__,.-'~'-."; printMessage.textColor(144); cout << " S T A T U S "; printMessage.textColor(1); cout << ".-'~'-.,__,.-'~'-.,_" << endl;
+		printMessage.textColor(7);
 		printMessage.printFrame();
 		cout << "      >> ㅠㅠ " << name << "가(이) 사망했습니다. GAME OVER" << endl;
 		_getch();
