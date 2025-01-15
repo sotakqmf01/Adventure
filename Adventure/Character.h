@@ -41,7 +41,6 @@ public:
 
 	int getLevel() { return level; }
 	string& getName() { return name; }
-	string getName() { return name; }
 
 	int getGold() { return gold; }
 	void setGold(int golds) { gold = golds; }
