@@ -94,7 +94,7 @@ void GameManager::battle(Character* player)
 	PrintMessage printMessage;
 	turnCounter = 1;
 
-	if (player->getLevel() < 10)
+	if (player->getLevel() < 5)
 	{
 		// 일반 몬스터 소환
 		monster = generateMonster(player->getLevel());
@@ -105,7 +105,7 @@ void GameManager::battle(Character* player)
 		// 보스 몬스터 소환
 		monster = generateBossMonster(player->getLevel());
 		Sleep(1000);
-		system("cls");
+		
 		
 		printMessage.bossAppears();
 	}
@@ -114,14 +114,14 @@ void GameManager::battle(Character* player)
 	cout << endl;
 	printMessage.printFrame();
 	printMessage.textColor(4);
-	cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
+	cout << "       _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-." << endl;
 	
 	printMessage.printFrame();
 	cout << "                " << monster->getName()
 		<< " 발견 (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
 	printMessage.printFrame();
 	printMessage.textColor(4);
-	cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
+	cout << "       _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-." << endl;
 
 	while (!player->isDead() && !monster->isDead())
 	{
@@ -140,7 +140,8 @@ void GameManager::battle(Character* player)
 
 			//			cout << "      -------------------------------------------------" << endl;
 			printMessage.textColor(6);
-			cout << "      =====================================================" << endl;
+			//cout << "      =====================================================" << endl;
+			cout << "      ===================="; printMessage.textColor(96); cout << " R E S U L T "; printMessage.textColor(6); cout << "====================" << endl;
 			printMessage.textColor(7);
 
 			Item* dropedItem = monster->dropItem();
@@ -164,6 +165,8 @@ void GameManager::battle(Character* player)
 				cout << "      >> " << player->getName() << "가(이) 30EXP와 " << gainGold << " 골드를 획득" << endl;
 				player->addExperience(30, nullptr);
 				player->addGold(gainGold);
+				printMessage.printFrame();
+				cout << endl;
 
 				totalGold += gainGold;
 				totalKilledMonster++;
@@ -196,6 +199,8 @@ void GameManager::visitShop(Character* player)
 {
 	PrintMessage printMessage;
 
+	printMessage.printFrame();
+	cout << endl;
 	printMessage.printFrame();
 	char visitShop;
 	cout << "      상점을 방문하시겠습니까? (Y/N) : ";

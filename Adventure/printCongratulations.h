@@ -7,4 +7,5 @@ public:
 	void gotoXY(int x, int y);
 	int getcursorlocationY();
 	void textColor(unsigned short color);
+	void printFrame();
 };
