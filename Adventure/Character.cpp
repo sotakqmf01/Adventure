@@ -9,8 +9,8 @@ using namespace std;
 
 Character::Character(const string& name)
 	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
-{        //벨런스 조정 gold(0) -> gold(80)
-//	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
+{
+
 }
 
 Character* Character::getInstance(const string& name)
@@ -198,7 +198,10 @@ void Character::takeDamage(int damage)
 		cout << "(" << name << " 체력 : " << health << ")" << endl;
 	}
 }
-
+bool Character::isLoseweapon()  // 플레이어 공격력 0 감지
+{
+	return attack <= 0;
+}
 bool Character::isDead()
 {
 	return health <= 0;

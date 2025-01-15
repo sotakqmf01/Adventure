@@ -35,6 +35,9 @@ int main()
 		// 보스를 잡았다는 것을 확인할 수 있도록
 		if (gameManager.killBoss == true)
 			break;
+		// 플레이어 공격력이 0이면
+		if (player->isLoseweapon())
+			break;
 
 		// 3. 상점 들릴꺼니?
 		Sleep(500);
@@ -47,11 +50,14 @@ int main()
 		printMessage.displayEpitaph(name);
 
 	// 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
-	if (gameManager.killBoss == true)
+	if (gameManager.killBoss == true){}
 
 		//SetConsoleOutputCP(CP_UTF8);
 		//printMessage.printCongratulations();
 		//SetConsoleOutputCP(OriginCP);
+	// 플레이어 공격력이 0이면 그림 출력
+	if (player->isLoseweapon())
+		printMessage.printLoseweapon();
 
 	// 4. 게임 종료 시 결과 출력
 	gameManager.displayRPGResult();

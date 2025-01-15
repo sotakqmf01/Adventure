@@ -164,6 +164,11 @@ void GameManager::battle(Character* player)
 		{
 			break;
 		}
+		// 플레이어 공격력이 0이면 전투 종료
+		if (player->isLoseweapon())
+		{
+			break;
+		}
 
 		printMessage.printFrame();
 		cout << "         [" << turnCounter << "] 턴 종료.  <아무 키나 눌러 다음 턴 진행>" << endl;
