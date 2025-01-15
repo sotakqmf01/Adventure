@@ -8,7 +8,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name), level(1), health(2000), maxHealth(2000), attack(300), experience(0), maxExperience(100), gold(200), remainingExperience(0)
+	: name(name), level(1), health(50), maxHealth(50), attack(15), experience(0), maxExperience(100), gold(200), remainingExperience(0)
 {
 //	cout << name << " 생성 :" << " 레벨, " << level << "체력: " << health << "/" << maxHealth << "경험치: " << experience << "/" << maxExperience << "골드: " << gold << endl;
 }
@@ -34,7 +34,8 @@ void Character::displayStatus()
 	else
 	{
 		printMessage.printFrame();
-		cout << "      -------------------------------------------------" << endl;
+		printMessage.textColor(1);
+		cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
 		printMessage.printFrame();
 		cout << "       레벨: " << level << endl;
 		printMessage.printFrame();
@@ -46,7 +47,10 @@ void Character::displayStatus()
 		printMessage.printFrame();
 		cout << "       경험치: " << experience << "/" << maxExperience << endl;
 		printMessage.printFrame();
-		cout << "      -------------------------------------------------" << endl;
+		printMessage.textColor(1);
+		cout << "      _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,_" << endl;
+		printMessage.textColor(7);
+		Sleep(500);
 		showInventory();
 	 }  
 }
@@ -65,7 +69,7 @@ void Character::levelUp()
 		experience = 0;													
 		experience += remainingExperience;
 		maxExperience += level * 1;
-	
+		printMessage.textColor(6);
 		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
 		cout << "      ************************************************" << endl;
@@ -119,7 +123,7 @@ void Character::showInventory()
 	PrintMessage printMessage;
 
 	printMessage.printFrame();
-	cout << "              - I N V E N T O R Y -" << endl;
+	cout << "                   - I N V E N T O R Y -" << endl;
 
 	if (inventory.size() < 1)
 	{

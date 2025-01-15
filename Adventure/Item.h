@@ -19,7 +19,7 @@ class ItemList
 {
 public:
 	vector<Item*> items;
-	ItemList();                 // 아이템 목록
-	void additem(Item* item);	// 아이템 추가;			
-	~ItemList();				// 소멸자 
+	ItemList();                 // ?�이??목록
+	void additem(Item* item);	// ?�이??추�?;			
+	~ItemList();				// ?�멸??
 };

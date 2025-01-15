@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "AttackBoost.h"
 #include "HealthPotion.h"
+#include "printMessage.h"
 using namespace std;
 
 // --------------------- ORC ----------------------------
@@ -42,12 +43,15 @@ float Orc::getDifficulty() const
 
 void Orc::takeDamage(int damage)
 {
+	PrintMessage printMessage;
 	// 피격 시 체력 감소
 	health -= damage;
 	if (health <= 0)
 	{
 		health = 0;
 		cout << "* " << name << " 처치! *" << endl;
+		printMessage.printFrame();
+		cout << endl;
 	}
 	else
 	{
