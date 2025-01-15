@@ -66,7 +66,7 @@ void Character::levelUp()
 		attack += addattack;        
 		experience = 0;													
 		experience += remainingExperience;
-		maxExperience += level * 5;
+		maxExperience += level * 3;
 	
 		cout << "          |       |                                                                                     |       |" << endl;
 		printMessage.printFrame();
