@@ -391,20 +391,9 @@ void GameManager::displayRPGResult()
 		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
 		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
 		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
-		printMessage.printLowerFrame();
-		//printMessage.gotoXY(46, 20); cout << totalKilledSlime;
-
-		printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
-		_getch();
-		//printMessage.textColor(6);
-		//cout << "          |       |                                                                                     |       |" << endl;
-		//printMessage.printFrame(); 
-		//cout << "      =============게임 결과=============" << endl;
-		//printMessage.printFrame();
-		//cout << "      > 몬스터 처치 수 : " << totalKilledMonster << endl;
-		//printMessage.printFrame();
-		//cout << "      > 획득 골드량 : " << totalGold << endl;
-		//printMessage.printFrame();
-		//cout << "      ===================================" << endl;
 	}
+	printMessage.printLowerFrame();
+
+	printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
+	_getch();
 }
