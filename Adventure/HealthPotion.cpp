@@ -26,8 +26,7 @@ void HealthPotion::use(Character* character)
 	PrintMessage printMessage;
 	
 	printMessage.printFrame();
-	printMessage.textColor(13);
-	cout << "       ☆ " << character->getName() << "가(이) " << name << "을(를) 사용했습니다";
+	cout << "       ☆ " << character->getName() << "가(이) "; printMessage.textColor(13); cout << name; printMessage.textColor(7); cout << "을(를) 사용했습니다";
 	
 	character->Heal(healthRestore);
 
