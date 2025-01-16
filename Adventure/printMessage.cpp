@@ -414,7 +414,7 @@ void PrintMessage::cursorView(char c)
 
 void PrintMessage::bossAppears() 
 {
-    PlaySound(TEXT("boss1.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
+    PlaySound(TEXT("boss.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
     cursorView(0);
     printFrame();
     cout << endl; Sleep(500);
