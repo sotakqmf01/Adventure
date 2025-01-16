@@ -327,8 +327,9 @@ void GameManager::visitShop(Character* player)
 
 						if (cin.fail()) {
 							cin.clear();
-							itemSelect = -1;
 							cin.ignore(INT_MAX, '\n');
+							itemSelect = -1;
+							
 						}
 
 						if (itemSelect == 0)
