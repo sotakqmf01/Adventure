@@ -239,17 +239,24 @@ void GameManager::visitShop(Character* player)
 
 	printMessage.printFrame();
 	cout << endl;
+
+	char visitShop;
+	char menu = 0;
 	while (1)
 	{
+		if (menu == '3')
+		{
+			break;
+		}
+
 		printMessage.printFrame();
-		char visitShop;
 		cout << "      상점을 방문하시겠습니까? (Y/N) : ";
 		cin >> visitShop;
 		cin.ignore(10000, '\n');
+
 		if (visitShop == 'y' || visitShop == 'Y')
 		{
-			Shop shop;
-			char menu = 0;
+			Shop shop;	
 			int	itemSelect = 1;
 
 			while (menu != '3')
@@ -288,7 +295,7 @@ void GameManager::visitShop(Character* player)
 						if (cin.fail()) {
 							cin.clear();
 							cin.ignore(INT_MAX, '\n');  // 입력 버퍼 비우기
-							itemSelect = 0;
+							itemSelect = -1;
 						}
 
 						if (itemSelect == 5)
@@ -320,7 +327,7 @@ void GameManager::visitShop(Character* player)
 
 						if (cin.fail()) {
 							cin.clear();
-							itemSelect = 0;
+							itemSelect = -1;
 						}
 
 						if (itemSelect == 0)

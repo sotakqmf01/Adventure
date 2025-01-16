@@ -8,7 +8,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-	: name(name), level(1), health(20), maxHealth(20), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
+	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
 {
 	if (name == "창민")
 	{
@@ -18,7 +18,6 @@ Character::Character(const string& name)
 		attack = 9999;
 		gold = 0;
 	}
-
 }
 
 Character* Character::getInstance(const string& name)

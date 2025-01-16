@@ -24,7 +24,6 @@ int main()
 	//PlaySound(TEXT("intro2.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
 	//printMessage.printIntro();
 	
-
 	// 1. 캐릭터 생성 - createCharacter()
 
 	string name = gameManager.createCharacter();
