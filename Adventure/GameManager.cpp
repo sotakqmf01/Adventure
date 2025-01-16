@@ -239,10 +239,11 @@ void GameManager::visitShop(Character* player)
 
 	printMessage.printFrame();
 	cout << endl;
+
+	char visitShop;
+	char menu = 0;
 	while (1)
 	{
-		char visitShop;
-		char menu = 0;
 		if (menu == '3')
 		{
 			break;
@@ -294,7 +295,7 @@ void GameManager::visitShop(Character* player)
 						if (cin.fail()) {
 							cin.clear();
 							cin.ignore(INT_MAX, '\n');  // 입력 버퍼 비우기
-							itemSelect = 0;
+							itemSelect = -1;
 						}
 
 						if (itemSelect == 5)
@@ -326,7 +327,7 @@ void GameManager::visitShop(Character* player)
 
 						if (cin.fail()) {
 							cin.clear();
-							itemSelect = 0;
+							itemSelect = -1;
 						}
 
 						if (itemSelect == 0)
