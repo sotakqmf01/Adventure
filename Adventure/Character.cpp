@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 #include "Shop.h"
@@ -288,7 +288,7 @@ void Character::getDropedItem(Item* item)
 {
 	PrintMessage printMessage;
 
-	if (inventory.size() >= 20)              
+	if (inventory.size() >= 20)
 	{
 		printMessage.printFrame();
 		cout << "      >> 인벤토리가 가득 차 [★ " << item->getName() << "]을(를) 얻지 못하였습니다" << endl; 
