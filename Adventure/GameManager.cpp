@@ -241,15 +241,21 @@ void GameManager::visitShop(Character* player)
 	cout << endl;
 	while (1)
 	{
-		printMessage.printFrame();
 		char visitShop;
+		char menu = 0;
+		if (menu == '3')
+		{
+			break;
+		}
+
+		printMessage.printFrame();
 		cout << "      상점을 방문하시겠습니까? (Y/N) : ";
 		cin >> visitShop;
 		cin.ignore(10000, '\n');
+
 		if (visitShop == 'y' || visitShop == 'Y')
 		{
-			Shop shop;
-			char menu = 0;
+			Shop shop;	
 			int	itemSelect = 1;
 
 			while (menu != '3')
