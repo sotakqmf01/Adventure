@@ -65,6 +65,7 @@ void PrintCongratulations::printFrame()
 
 void PrintCongratulations::printCongratulations()
 {
+    PlaySound(TEXT("ending1.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
     UINT OriginCP = GetConsoleOutputCP();
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
