@@ -20,9 +20,9 @@ int main()
 	
 	PlaySound(TEXT("opening.wav"), 0, SND_FILENAME | SND_ASYNC ); //루프 재생
 	printMessage.printOpening();
-
-	PlaySound(TEXT("intro2.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
-	printMessage.printIntro();
+	
+	//PlaySound(TEXT("intro2.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
+	//printMessage.printIntro();
 	
 
 	// 1. 캐릭터 생성 - createCharacter()
