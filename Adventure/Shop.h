@@ -20,6 +20,7 @@ public:
 	void Reroll();			// 상점 리롤
 	void sellItem(int index, Character* character); // 아이템 판매	
 	void makeShopList();	//shopItems 4개의 값 넗기
+	void visitShop(Character* player, string& menu);
 
 	int getRerollCount() { return rerollCount; }
 };

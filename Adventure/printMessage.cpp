@@ -209,8 +209,8 @@ void PrintMessage::afterName(string name)
         cout << player->getGold();
         Sleep(800);
         gotoXY(53, 18);
-        cout << "대미지: ";
-        gotoXY(63, 18);
+        cout << "데미지: ";
+        gotoXY(61, 18);
         cout << player->getAttack();
         Sleep(800);
         gotoXY(53, 19);

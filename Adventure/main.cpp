@@ -25,7 +25,6 @@ int main()
 	//printMessage.printIntro();
 	
 	// 1. 캐릭터 생성 - createCharacter()
-
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 	printMessage.printUpperFrame();

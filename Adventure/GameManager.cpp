@@ -240,123 +240,35 @@ void GameManager::visitShop(Character* player)
 	printMessage.printFrame();
 	cout << endl;
 
-	char visitShop;
-	char menu = 0;
+	string visitShop = "";		// 상점 방문 여부를 입력 받는 string
+	string menu = "";			// 상점에 들어가서 뭘 할지 입력 받는 string
+
 	while (1)
 	{
-		if (menu == '3')
+		if (menu == "3")
 		{
 			break;
 		}
 
 		printMessage.printFrame();
 		cout << "      상점을 방문하시겠습니까? (Y/N) : ";
-		cin >> visitShop;
-		cin.ignore(10000, '\n');
+		getline(cin, visitShop);		// 상점 방문 여부 입력
 
-		if (visitShop == 'y' || visitShop == 'Y')
+		if (visitShop == "y" || visitShop == "Y")
 		{
+			// 방문
 			Shop shop;	
-			int	itemSelect = 1;
 
-			while (menu != '3')
-			{
-				printMessage.printShopRoof();
-
-				printMessage.printFrame();
-				cout << "      ▶ 1.아이템 구매   2.아이템 판매   3.나가기" << endl;
-				printMessage.printFrame();
-				cout << "      ▶ 선택 : ";
-				cin >> menu;
-				cin.ignore(10000, '\n');
-
-				switch (menu)
-				{
-				case '1':
-					itemSelect = 1;
-					while (itemSelect != 0)
-					{
-						printMessage.printShopRoof();
-
-						printMessage.printFrame();
-						cout << "                     - 판 매 목 록 -" << endl;
-						shop.showShop();
-
-						printMessage.printFrame();
-						cout << "      ▶ 아이템 번호 입력 시 구매(리롤:5, 뒤로가기:0)   [보유 골드 : " << player->getGold() << "]" << endl;
-						printMessage.printFrame();
-						cout << "      ▶ 선택 (리롤 " << shop.getRerollCount() << "회) : ";
-						cin >> itemSelect;
-						cin.ignore(10000, '\n');
-
-						// cin으로 입력을 받을 때 타입이 다르면 입력 실패 상태가 됨
-						// => 입력 실패 상태가 되면 해당 변수는 원래 가지고 있는 값을 그대로 가짐
-						// => 입력 실패 상태가 되면 새로운 입력을 받기 전에 스트림의 상태를 정리해야 함
-						if (cin.fail()) {
-							cin.clear();
-							cin.ignore(INT_MAX, '\n');  // 입력 버퍼 비우기
-							itemSelect = -1;
-						}
-
-						if (itemSelect == 5)
-						{
-							shop.Reroll();
-						}
-						else if (itemSelect == 0)
-						{
-							break;
-						}
-						else
-						{
-							shop.buyItem(itemSelect, player);
-						}
-					}
-					break;
-				case '2':
-					itemSelect = 1;
-					while (itemSelect != 0)
-					{
-						printMessage.printShopRoof();
-
-						player->showInventory();
-
-						printMessage.printFrame();
-						cout << "      ▶ 아이템 번호 입력 시 판매(뒤로가기:0) : ";
-						cin >> itemSelect;
-						cin.ignore(10000, '\n');
-
-						if (cin.fail()) {
-							cin.clear();
-							cin.ignore(INT_MAX, '\n');
-							itemSelect = -1;
-							
-						}
-
-						if (itemSelect == 0)
-						{
-							break;
-						}
-						else
-						{
-							shop.sellItem(itemSelect, player);
-						}
-					}
-					break;
-				case '3':
-					break;
-				default:
-					printMessage.printFrame();
-					cout << "      ※ 잘못된 번호입니다 ※" << endl;
-					break;
-				}
-			}
+			shop.visitShop(player, menu);
 		}
-		else if (visitShop == 'n' || visitShop == 'N')
+		else if (visitShop == "n" || visitShop == "N")
 		{
+			// 방문하지 않음
 			break;
 		}
 		else
 		{
+			// 예외 처리
 			printMessage.printFrame();
 			cout << "      ※ 잘못된 입력입니다 ※" << endl;
 		}
