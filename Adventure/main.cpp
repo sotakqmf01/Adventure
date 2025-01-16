@@ -14,9 +14,9 @@ int main()
 	UINT OriginCP = GetConsoleOutputCP();	// 클리어 메세지 출력용 변수 저장
 	GameManager gameManager;
 	PrintMessage printMessage;
-	printMessage.printIntro();
 	PrintCongratulations printCongratulations;
-	//printCongratulations.printCongratulations();
+
+	printMessage.printIntro();
 
 	// 1. 캐릭터 생성 - createCharacter()
 	string name = gameManager.createCharacter();
@@ -59,16 +59,11 @@ int main()
 	// 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
 	if (gameManager.killBoss == true)
 	{
-		printMessage.printFrame();
-		cout << "					클리어 연출이 너무 바로 나와요 중간에 뭔가 필요합니다						" << endl;
-		printMessage.printFrame();
-		cout << "					클리어 연출이 너무 바로 나와요 중간에 뭔가 필요합니다						" << endl;
-		printMessage.printFrame();
-		cout << "					클리어 연출이 너무 바로 나와요 중간에 뭔가 필요합니다						" << endl;
 		SetConsoleOutputCP(CP_UTF8);
 		printCongratulations.printCongratulations();
 		SetConsoleOutputCP(OriginCP);
 	}
+
 	// 4. 게임 종료 시 결과 출력
 	gameManager.displayRPGResult();
 

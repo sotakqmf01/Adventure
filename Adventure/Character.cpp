@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Character.h"
 #include "GenerateRandomNumber.h"
 #include "Shop.h"
@@ -8,10 +8,7 @@
 using namespace std;
 
 Character::Character(const string& name)
-
 	: name(name), level(1), health(200), maxHealth(200), attack(30), experience(0), maxExperience(100), gold(80), remainingExperience(0)
-
-
 {
 	if (name == "창민")
 	{
@@ -248,8 +245,6 @@ void Character::addExperience(int exp, Item* item)
 {
 	if (level < 10) 
 	{
-		PrintMessage printMessage;
-
 		experience += exp;
 
 		if (item != nullptr) // 레벨 10 이전에 경험치 책 사용
