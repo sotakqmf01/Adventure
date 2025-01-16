@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <cstdlib>
 #include <windows.h>
 #include "GameManager.h"
@@ -6,23 +6,59 @@
 #include "Monster.h"
 #include "Slime.h"
 #include "Orc.h"
+#include "Goblin.h"
+#include "Troll.h"
+#include "Bandit.h"
+#include "BossMonster.h"
 #include "Item.h"
 #include "GenerateRandomNumber.h"
+#include "printMessage.h"
+#include "Shop.h"
+#include <conio.h>		// _getch() ë¡œ ì…ë ¥ëŒ€ê¸° ë°›ê¸° ìœ„í•´ì„œ í•„ìš”í•¨
 
 string GameManager::createCharacter()
 {
 	string name;
-	cout << "============================================" << endl;
-	cout << "            È¯¿µÇÕ´Ï´Ù. ¸ğÇè°¡´Ô!\n";
-	cout << "============================================" << endl;
-	cout << " Ä³¸¯ÅÍ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä : ";
-	getline(cin, name);			// ÀÌ¸§ÀÌ °ø¹éÀÌ¸é ´Ù½Ã ÀÔ·ÂÇÏµµ·ÏÇÏ´Â ºÎºĞ ³ªÁß¿¡ Ãß°¡?
-	cout << endl;
+	PrintMessage printMessage;
 
+	while (1)
+	{
+		printMessage.askName();
+		getline(cin, name);
+		cout << endl;
+
+		if (name.find_first_of(" \n~!@#$%^&*()_=-/,.\?;:\'\"[]{}<>", 0) != string::npos) 
+		{
+			printMessage.gotoXY(44, 4);
+			cout << "ì´ë¦„ì—ëŠ” íŠ¹ìˆ˜ë¬¸ìê°€ ë“¤ì–´ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.";
+			Sleep(1500);
+		}
+		else if (name.length() > 12) 
+		{
+			printMessage.gotoXY(42, 4);
+			cout << "ì´ë¦„ì´ ë„ˆë¬´ ê¸¸ì–´ìš”! (ì´ë¦„ì€ ìµœëŒ€ í•œê¸€ 6ìë¦¬)";
+			Sleep(1500);
+		}
+		else if (name.length() <= 1) 
+		{
+			printMessage.gotoXY(42, 4);
+			cout << "ì´ë¦„ì´ ë„ˆë¬´ ì§§ì•„ìš”! (ì´ë¦„ì€ ìµœì†Œ í•œê¸€ 1ìë¦¬)";
+			Sleep(1500);
+		}
+		else if (name == "nullptr") 
+		{
+			printMessage.gotoXY(50, 4);
+			cout << "í•´ì»¨ê°€?...";
+			Sleep(1500);
+		}
+		else
+		{
+			break;
+		}
+	}
 	Character* player = Character::getInstance(name);
-	cout << "        ** Ä³¸¯ÅÍ [" << name << "] »ı¼º ¿Ï·á! **" << endl;
-	player->displayStatus();
-
+	printMessage.afterName(name);
+	
 	return name;
 }
 
@@ -30,12 +66,22 @@ Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 1)) {
+	switch (generateRandomNumber(0, 4))
+	{
 	case 0:
 		monster = new Slime(level);
 		break;
 	case 1:
 		monster = new Orc(level);
+		break;
+	case 2:
+		monster = new Goblin(level);
+		break;
+	case 3:
+		monster = new Troll(level);
+		break;
+	case 4:
+		monster = new Bandit(level);
 		break;
 	default:
 		break;
@@ -44,70 +90,236 @@ Monster* GameManager::generateMonster(int level)
 	return monster;
 }
 
+Monster* GameManager::generateBossMonster(int level)
+{
+	Monster* monster = new BossMonster(level);
+
+	return monster;
+}
+void GameManager::countKilledMonster(string getname)
+{
+	string name = getname.substr(0, 4);
+	if (name == "ì˜¤í¬")
+	{
+		totalKilledOrc++;
+	}
+	else if (name == "ê³ ë¸”")
+	{
+		totalKilledGoblin++;
+	}
+	else if (name == "ìŠ¬ë¼")
+	{
+		totalKilledSlime++;
+	}
+	else if (name == "ì‚°ì ")
+	{
+		totalKilledBandit++;
+	}
+	else if (name == "íŠ¸ë¡¤")
+	{
+		totalKilledTroll++;
+	}
+	else 
+	{
+		totalKilledBoss++;
+	}	 
+}
 void GameManager::battle(Character* player)
 {
-	Monster* monster = generateMonster(player->getLevel());
-	Sleep(2000);
-	//system("cls");
+	Monster* monster = nullptr;
+	PrintMessage printMessage;
+	turnCounter = 1;
 
-	cout << "*************************************************" << endl;
-	cout << "          " << monster->getName()
-		<< " ¹ß°ß (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
-	cout << "*************************************************" << endl;
+	if (player->getLevel() < 10)
+	{
+		// ì¼ë°˜ ëª¬ìŠ¤í„° ì†Œí™˜
+		monster = generateMonster(player->getLevel());
+		Sleep(300);
+	}
+	else
+	{
+		// ë³´ìŠ¤ ëª¬ìŠ¤í„° ì†Œí™˜
+		monster = generateBossMonster(player->getLevel());
+		Sleep(1000);
+		
+		printMessage.bossAppears();
+	}
 
-	while (!player->isDead() && !monster->isDead()) {
-		// ÇÃ·¹ÀÌ¾î -> ¸ó½ºÅÍ °ø°İ
-		cout << " " << player->getName() << "°¡(ÀÌ) " << monster->getName() << "À»(¸¦) °ø°İ!  ";
+	printMessage.printFrame();
+	cout << endl;
+	printMessage.printFrame();
+	printMessage.textColor(4);
+	cout << "       _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-." << endl;
+	
+	printMessage.printFrame();
+	cout << "                " << monster->getName()
+		<< " ë°œê²¬ (HP:" << monster->getHealth() << ", DAMAGE:" << monster->getAttack() << ")" << endl;
+	printMessage.printFrame();
+	printMessage.textColor(4);
+	cout << "       _,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-.,__,.-'~'-." << endl;
+
+	while (!player->isDead() && !monster->isDead())
+	{
+		// í”Œë ˆì´ì–´ê°€ ê³µê²©í•˜ê¸° ì „ì— ì•„ì´í…œ ì‚¬ìš©
+		player->useRandomItem();
+
+		// ë… ë¬¼ì•½ ë¨¹ê³  í”Œë ˆì´ì–´ê°€ ì£½ì„ ìˆ˜ë„ ìˆìŒ
+		if (player->isDead())
+		{
+			break;
+		}
+
+		// í”Œë ˆì´ì–´ -> ëª¬ìŠ¤í„° ê³µê²©
+		printMessage.printFrame();
+		cout << "       " << player->getName() << "ê°€(ì´) " << monster->getName() << "ì„(ë¥¼) ê³µê²©!  ";
 		monster->takeDamage(player->getAttack());
 
-		// ¸ó½ºÅÍ°¡ Á×À¸¸é °æÇèÄ¡¿Í °ñµå È¹µæ, °¡²û ¾ÆÀÌÅÛµµ µå·Ó + ÀüÅõ Á¾·á
-		if (monster->isDead()) {
-			// ¾ÆÀÌÅÛ µå·Ó(¸ó½ºÅÍ) ¹× ¾ÆÀÌÅÛ È¹µæ(ÇÃ·¹ÀÌ¾î)
-			cout << "-------------------------------------------------" << endl;
+		// ëª¬ìŠ¤í„°ê°€ ì£½ìœ¼ë©´ ê²½í—˜ì¹˜ì™€ ê³¨ë“œ íšë“, ê°€ë” ì•„ì´í…œë„ ë“œë¡­ + ì „íˆ¬ ì¢…ë£Œ
+		if (monster->isDead()) 
+		{
+			// ì•„ì´í…œ ë“œë¡­(ëª¬ìŠ¤í„°) ë° ì•„ì´í…œ íšë“(í”Œë ˆì´ì–´)
+			printMessage.printFrame();
+
+			//			cout << "      -------------------------------------------------" << endl;
+			printMessage.textColor(6);
+			//cout << "      =====================================================" << endl;
+			cout << "      ===================="; printMessage.textColor(96); cout << " R E S U L T "; printMessage.textColor(6); cout << "====================" << endl;
+			printMessage.textColor(7);
+
 			Item* dropedItem = monster->dropItem();
 			if (dropedItem != nullptr)
+			{
 				player->getDropedItem(dropedItem);
+			}
 
-			// °æÇèÄ¡ ¹× °ñµå È¹µæ
-			int gainGold = randomGold();
-			cout << ">> " << player->getName() << "°¡(ÀÌ) 50EXP¿Í " << gainGold << " °ñµå¸¦ È¹µæ" << endl;
-			player->addExperience(50);
-			player->addGold(gainGold);
+			// ì¡ì€ ëª¬ìŠ¤í„°ê°€ ë³´ìŠ¤ì´ë©´
+			if (dynamic_cast<BossMonster*>(monster) != nullptr)
+			{
+				killBoss = true;
+			}
 
-			totalGold += gainGold;
-			totalKilledMonster++;
+			// ì¼ë°˜ ëª¬ìŠ¤í„°ë¥¼ ì¡ì•˜ì„ ë•Œë§Œ ì¶œë ¥
+			if (killBoss == false)
+			{
+				// ê²½í—˜ì¹˜ ë° ê³¨ë“œ íšë“
+				int gainGold = randomGold();
+				printMessage.printFrame();
+				cout << "      >> " << player->getName() << "ê°€(ì´) 30EXPì™€ " << gainGold << " ê³¨ë“œë¥¼ íšë“" << endl;
+				player->addExperience(30, nullptr);
+				player->addGold(gainGold);
+				printMessage.printFrame();
+				cout << endl;
 
+				totalGold += gainGold;
+				totalKilledMonster++;
+			}
+
+			countKilledMonster(monster->getName());
 			delete monster;
 			break;
 		}
 
-		// 30% È®·ü·Î ¾ÆÀÌÅÛ »ç¿ë -> ±×³É useRandomItem¿¡ È®·üÀûÀ¸·Î »ç¿ëÇÏµµ·Ï ÇÒ±î?
-		if (generateRandomNumber(1, 100) <= 30) {
-			player->useRandomItem();
-		}
-
-		// ¸ó½ºÅÍ -> ÇÃ·¹ÀÌ¾î °ø°İ
-		cout << " " << monster->getName() << "°¡(ÀÌ) " << player->getName() << "À»(¸¦) °ø°İ!  ";
+		// ëª¬ìŠ¤í„° -> í”Œë ˆì´ì–´ ê³µê²©
+		printMessage.printFrame();
+		cout << "       " << monster->getName() << "ê°€(ì´) " << player->getName() << "ì„(ë¥¼) ê³µê²©!  ";
 		player->takeDamage(monster->getAttack());
 
-		// ÇÃ·¹ÀÌ¾î°¡ Á×À¸¸é ÀüÅõ Á¾·á
-		if (player->isDead()) {
+		// í”Œë ˆì´ì–´ê°€ ì£½ìœ¼ë©´ ì „íˆ¬ ì¢…ë£Œ
+		if (player->isDead())
+		{
 			break;
 		}
+
+		printMessage.printFrame();
+		cout << "         [" << turnCounter << "] í„´ ì¢…ë£Œ.  <ì•„ë¬´ í‚¤ë‚˜ ëˆŒëŸ¬ ë‹¤ìŒ í„´ ì§„í–‰>" << endl;
+		_getch();
+
+		turnCounter++;
 	}
 }
 
 void GameManager::visitShop(Character* player)
 {
-	char visitShop;
-	cout << "»óÁ¡À» ¹æ¹®ÇÏ½Ã°Ú½À´Ï±î? (Y/N) : ";
-	cin >> visitShop;
-	if (visitShop == 'y' || visitShop == 'Y') {
+	PrintMessage printMessage;
 
+	printMessage.printFrame();
+	cout << endl;
+
+	string visitShop = "";		// ìƒì  ë°©ë¬¸ ì—¬ë¶€ë¥¼ ì…ë ¥ ë°›ëŠ” string
+	string menu = "";			// ìƒì ì— ë“¤ì–´ê°€ì„œ ë­˜ í• ì§€ ì…ë ¥ ë°›ëŠ” string
+
+	while (1)
+	{
+		if (menu == "3")
+		{
+			break;
+		}
+
+		printMessage.printFrame();
+		cout << "      ìƒì ì„ ë°©ë¬¸í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
+		getline(cin, visitShop);		// ìƒì  ë°©ë¬¸ ì—¬ë¶€ ì…ë ¥
+
+		if (visitShop == "y" || visitShop == "Y")
+		{
+			// ë°©ë¬¸
+			Shop shop;	
+
+			shop.visitShop(player, menu);
+		}
+		else if (visitShop == "n" || visitShop == "N")
+		{
+			// ë°©ë¬¸í•˜ì§€ ì•ŠìŒ
+			break;
+		}
+		else
+		{
+			// ì˜ˆì™¸ ì²˜ë¦¬
+			printMessage.printFrame();
+			cout << "      â€» ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤ â€»" << endl;
+		}
 	}
 }
 
 int GameManager::randomGold()
 {
 	return generateRandomNumber(10, 20);
+}
+
+void GameManager::displayRPGResult()
+{
+	PrintMessage printMessage;
+	char lookResult;
+
+
+	printMessage.printFrame();
+	cout << endl;
+	printMessage.printFrame();
+	cout << "             ê²Œì„ ê²°ê³¼ë¥¼ ë³´ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
+	cin >> lookResult;
+
+	if (lookResult == 'y' || lookResult == 'Y')
+	{
+		printMessage.printFrame();
+		cout << endl;
+		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
+		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
+		printMessage.printFrame(); cout << "         | |                ëª¨ í—˜ ê²° ì‚°                 | |" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printFrame(); cout << "         | |   - ìŠ¬ë¼ì„ :             " << totalKilledSlime << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledSlime).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - ê³ ë¸”ë¦° :             " << totalKilledGoblin << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledGoblin).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - ì˜¤í¬ :               " << totalKilledOrc << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledOrc).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - ì‚°ì  :               " << totalKilledBandit << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledBandit).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - íŠ¸ë¡¤ :               " << totalKilledTroll << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledTroll).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - ì•…ë§ˆ :               " << totalKilledBoss << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledBoss).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printFrame(); cout << "         | |  ë¬¼ë¦¬ì¹œ ëª¬ìŠ¤í„° : ì´      " << totalKilledMonster << "  ë§ˆë¦¬" << string(12 - to_string(totalKilledMonster).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |  íšë“ ê³¨ë“œëŸ‰  :  ì´      " << totalGold << "  ê³¨ë“œ" << string(12 - to_string(totalGold).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
+		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+	}
+	printMessage.printLowerFrame();
+
+	printMessage.gotoXY(0, 29); // ì¢Œì¸¡ ë§¨ì•„ë˜ë¡œ ì»¤ì„œ ì´ë™í•´ì•¼í•¨. ë””ë²„ê·¸ ì¢…ë£Œ ë©”ì„¸ì§€ê°€ í™”ë©´ ì•ˆì¡ì•„ë¨¹ë„ë¡.
+	_getch();
 }

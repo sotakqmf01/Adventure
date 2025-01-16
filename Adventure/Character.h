@@ -1,18 +1,21 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <vector>
 #include "Item.h"
 
 using namespace std;
 
-class Character {
+class Character
+{
 private:
-	static Character* instance;		// ÃÊ±âÈ­ .cpp¿¡¼­ ÇØÁÖ±â
+	static Character* instance;			// ì´ˆê¸°í™” .cppì—ì„œ í•´ì£¼ê¸°
 	string name;
 	int level;
-	int health;
+	int health;  
 	int maxHealth;
 	int attack;
+	int remainingExperience;			// ë‚¨ì€ ê²½í—˜ì¹˜
+	int maxExperience;					// ìµœëŒ€ ê²½í—˜ì¹˜
 	int experience;
 	int gold;
 	vector<Item*> inventory;
@@ -24,21 +27,24 @@ public:
 	static Character* getInstance(const string& name);
 	void displayStatus();
 	void levelUp();
-	void useRandomItem();		// inventory¿¡ ÀÖ´Â index¹ø Â° ¾ÆÀÌÅÛ »ç¿ë
-	void enhanceAttack(int attackIncrease);
-	void Heal(int heal);
-	void takeDamage(int damage);	// ÀüÅõ Áß ÇÇ°İ
-	bool isDead();					// Ä³¸¯ÅÍ°¡ »ç¸ÁÇß³ª?
-	void addExperience(int exp);	// ÀüÅõ ½Â¸® ½Ã °æÇèÄ¡ È¹µæ
-	void addGold(int _gold);		// ÀüÅõ ½Â¸® ½Ã °ñµå È¹µæ/»óÁ¡ ±¸¸Å/»óÁ¡ ÆÇ¸Å
-	void getDropedItem(Item* item);
+	void useRandomItem();
+	void enhanceAttack(int attackIncrease);		// ê³µê²©ë ¥ì„ ìƒìŠ¹ì‹œí‚¤ê¸° ìœ„í•œ í•¨ìˆ˜
+	void Heal(int heal);						// í˜„ì¬ ì²´ë ¥ íšŒë³µ
+	void takeDamage(int damage);				// ê³µê²©ì„ ë°›ì•˜ì„ ë•Œ
+	bool isDead();
+	void addExperience(int exp, Item* item);	// ê²½í—˜ì¹˜ íšë“
+	void addGold(int _gold);					// ê³¨ë“œ íšë“
+	void getDropedItem(Item* item);				// ëª¬ìŠ¤í„° ì²˜ì¹˜ í›„ ë“œëëœ ì•„ì´í…œ íšë“
+	void showInventory();
+	vector<Item*>& getInventory();
+	void sortInventoryByName();					//ì•„ì´í…œ ì •ë ¬
+	
 
-	// get/set ¾øÀÌ ÇÏ´Â ¹æ¹ıÀÌ ÀÖ³ª? ÀÏ´Ü ¸¸µé¾îº¸°í ´Ù ÇÔ¼ö·Î ¸¸µå´Â °Å »ı°¢ÇØº¸ÀÚ
-	// ¸ó½ºÅÍÀÇ Ã¼·Â, °ø°İ·Â¿¡ ·¹º§ÀÌ ÇÊ¿ä
-	// ¾î¶² Çàµ¿¿¡ ´ëÇÑ Ã³¸®¸¦ ¿©±â¼­ ÇØ¹ö¸®¸é µÊ(takeDamage, addExperience µî)
-	int getLevel() { return level; }
-	string& getName() { return name; }
+	int getLevel()		{ return level; }
+	string& getName()	{ return name; }
 
-	// ÀüÅõ¿¡ °ø°İ·Â ¾Ë¾Æ¾ß ÇÔ
-	int getAttack() { return attack; }
+	int getGold()		{ return gold; }
+	void setGold(int golds) { gold = golds; }
+	
+	int getAttack()		{ return attack; }
 };

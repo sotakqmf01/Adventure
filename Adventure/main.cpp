@@ -1,44 +1,79 @@
-#include <iostream>
-#include <cstdlib>
-#include <windows.h>		// Ä³¸¯ÅÍ »ı¼º ½Ã ¾à°£ ½Ã°£ °É¸®´Â °ÍÃ³·³ º¸ÀÌ±â À§ÇØ Sleep(1500) »ç¿ëÇÏ±â À§ÇØ 
+ï»¿#pragma comment(lib,"winmm.lib")
 #include "Character.h"
 #include "GameManager.h"
+#include "printMessage.h"
+#include "printCongratulations.h"
+#include <windows.h>
+#include <cstdlib>
+#include <fstream>
+#include <conio.h>
+#include <mmsystem.h>
 using namespace std;
 
-// dev.gameManager test commit
-
-int main() {
+int main() 
+{	
+	system("echo off | clip");				// í´ë¦½ë³´ë“œ ë¹„ìš°ê¸° ì½”ë“œ. cin ì—ì„œ ìš°í´ë¦­ ë°©ì§€
+	UINT OriginCP = GetConsoleOutputCP();	// í´ë¦¬ì–´ ë©”ì„¸ì§€ ì¶œë ¥ìš© ë³€ìˆ˜ ì €ì¥
 	GameManager gameManager;
-
-	// 1. Ä³¸¯ÅÍ »ı¼º - createCharacter()
+	PrintMessage printMessage;
+	PrintCongratulations printCongratulations;
+	
+	PlaySound(TEXT("opening.wav"), 0, SND_FILENAME | SND_ASYNC ); //ë£¨í”„ ì¬ìƒ
+	printMessage.printOpening();
+	
+	//PlaySound(TEXT("intro2.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //ë£¨í”„ ì¬ìƒ
+	//printMessage.printIntro();
+	
+	// 1. ìºë¦­í„° ìƒì„± - createCharacter()
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
-
-	// 2. ÀüÅõ
-	while (!player->isDead()) {
+	printMessage.printUpperFrame();
+	
+	// 2. ê²Œì„ ì‚¬ì´í´
+	while (!player->isDead())
+	{
 		gameManager.battle(player);
-		player->displayStatus();
-	}
-	//
-	// pull request test ¸ÓÁö Å×½ºÆ®
-	// 
-	// 3. »óÁ¡ µé¸±²¨´Ï?
-	//gameManager.vishtShop(player);
-	// 1234566778
-	// 4. Ä³¸¯ÅÍ »ç¸Á ½Ã °ÔÀÓ Á¾·á
-	// °ÔÀÓ Á¾·á ½Ã °á°ú Ãâ·Â
-	if (player->isDead()) {
-		char lookResult;
-		cout << "°ÔÀÓ °á°ú¸¦ º¸½Ã°Ú½À´Ï±î? (Y/N) : ";
-		cin >> lookResult;
-		if (lookResult == 'y' || lookResult == 'Y') {
-			system("cls");
-			cout << "=============°ÔÀÓ °á°ú=============" << endl;
-			cout << "> ¸ó½ºÅÍ Ã³Ä¡ ¼ö : " << gameManager.totalKilledMonster << endl;
-			cout << "> È¹µæ °ñµå·® : " << gameManager.totalGold << endl;
-			cout << "==================================" << endl;
+		Sleep(800);
+		if (gameManager.killBoss == false)
+		{
+			player->displayStatus();
 		}
+
+		if (player->isDead())
+		{
+			break;
+		}
+
+		// ë³´ìŠ¤ë¥¼ ì¡ì•˜ìœ¼ë©´ ê²Œì„ ì‚¬ì´í´ íƒˆì¶œ
+		if (gameManager.killBoss == true)
+		{
+			printMessage.printFrame();
+			cout << "" << endl;
+			_getch();
+			break;
+		}
+
+		// 3. ìƒì  ë“¤ë¦´êº¼ë‹ˆ?
+		Sleep(500);
+		gameManager.visitShop(player);
 	}
+
+	// ìºë¦­í„°ê°€ ì‚¬ë§í•˜ì—¬ ê²Œì„ ì¢…ë£Œ ì‹œ ë¹„ì„ ë©”ì‹œì§€ ì¶œë ¥
+	if (player->isDead())
+	{
+		printMessage.displayEpitaph(name);
+	}
+
+	// ë³´ìŠ¤ë¥¼ ì¡ê³  ê²Œì„ì„ í´ë¦¬ì–´ í–ˆì„ ë•Œ ì¶•í•˜ ë©”ì‹œì§€ ì¶œë ¥
+	if (gameManager.killBoss == true)
+	{
+		SetConsoleOutputCP(CP_UTF8);
+		printCongratulations.printCongratulations();
+		SetConsoleOutputCP(OriginCP);
+	}
+
+	// 4. ê²Œì„ ì¢…ë£Œ ì‹œ ê²°ê³¼ ì¶œë ¥
+	gameManager.displayRPGResult();
 
 	return 0;
 }
