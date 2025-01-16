@@ -5,7 +5,8 @@
 
 using namespace std;
 
-class Character{
+class Character
+{
 private:
 	static Character* instance;			// 초기화 .cpp에서 해주기
 	string name;
@@ -39,11 +40,11 @@ public:
 	void sortInventoryByName();					//아이템 정렬
 	
 
-	int getLevel() { return level; }
-	string& getName() { return name; }
+	int getLevel()		{ return level; }
+	string& getName()	{ return name; }
 
-	int getGold() { return gold; }
+	int getGold()		{ return gold; }
 	void setGold(int golds) { gold = golds; }
 	
-	int getAttack() { return attack; }
+	int getAttack()		{ return attack; }
 };

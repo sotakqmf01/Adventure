@@ -4,7 +4,8 @@ using namespace std;
 
 class Item;
 
-class Monster {
+class Monster 
+{
 public:
 	virtual string getName() = 0;
 	virtual int getHealth() const = 0;

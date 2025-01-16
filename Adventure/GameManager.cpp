@@ -27,22 +27,26 @@ string GameManager::createCharacter()
 		getline(cin, name);
 		cout << endl;
 
-		if (name.find_first_of(" \n~!@#$%^&*()_=-/,.\?;:\'\"[]{}<>", 0) != string::npos) {
+		if (name.find_first_of(" \n~!@#$%^&*()_=-/,.\?;:\'\"[]{}<>", 0) != string::npos) 
+		{
 			printMessage.gotoXY(44, 4);
 			cout << "이름에는 특수문자가 들어갈 수 없습니다.";
 			Sleep(1500);
 		}
-		else if (name.length() > 12) {
+		else if (name.length() > 12) 
+		{
 			printMessage.gotoXY(42, 4);
 			cout << "이름이 너무 길어요! (이름은 최대 한글 6자리)";
 			Sleep(1500);
 		}
-		else if (name.length() <= 1) {
+		else if (name.length() <= 1) 
+		{
 			printMessage.gotoXY(42, 4);
 			cout << "이름이 너무 짧아요! (이름은 최소 한글 1자리)";
 			Sleep(1500);
 		}
-		else if (name == "nullptr") {
+		else if (name == "nullptr") 
+		{
 			printMessage.gotoXY(50, 4);
 			cout << "해컨가?...";
 			Sleep(1500);
@@ -171,7 +175,8 @@ void GameManager::battle(Character* player)
 		monster->takeDamage(player->getAttack());
 
 		// 몬스터가 죽으면 경험치와 골드 획득, 가끔 아이템도 드롭 + 전투 종료
-		if (monster->isDead()) {
+		if (monster->isDead()) 
+		{
 			// 아이템 드롭(몬스터) 및 아이템 획득(플레이어)
 			printMessage.printFrame();
 
@@ -315,6 +320,6 @@ void GameManager::displayRPGResult()
 	}
 	printMessage.printLowerFrame();
 
-	printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
+	printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동해야함. 디버그 종료 메세지가 화면 안잡아먹도록.
 	_getch();
 }

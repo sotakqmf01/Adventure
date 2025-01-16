@@ -170,9 +170,9 @@ void Character::showInventory()
 
 void Character::sortInventoryByName()                 //정렬
 {
-	sort(inventory.begin(), inventory.end(), [](Item* a, Item* b) 
+	sort(inventory.begin(), inventory.end(), [](Item* a, Item* b)
 		{
-		return a->getName() < b->getName(); // 이름을 기준으로 오름차순 정렬?
+			return a->getName() < b->getName(); // 이름을 기준으로 오름차순 정렬?
 		});
 }
 

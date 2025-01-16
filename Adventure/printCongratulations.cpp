@@ -16,7 +16,8 @@ void PrintCongratulations::gotoXY(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
-int PrintCongratulations::getcursorlocationY() {
+int PrintCongratulations::getcursorlocationY() 
+{
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     int cursorY = csbi.dwCursorPosition.Y;

@@ -60,7 +60,9 @@ int main()
 
 	// 캐릭터가 사망하여 게임 종료 시 비석 메시지 출력
 	if (player->isDead())
+	{
 		printMessage.displayEpitaph(name);
+	}
 
 	// 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
 	if (gameManager.killBoss == true)
