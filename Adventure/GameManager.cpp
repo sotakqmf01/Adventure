@@ -324,6 +324,7 @@ void GameManager::visitShop(Character* player)
 						cout << "      ▶ 아이템 번호 입력 시 판매(뒤로가기:0) : ";
 						cin >> itemSelect;
 						cin.ignore(10000, '\n');
+						cin.ignore(INT_MAX, '\n');
 
 						if (cin.fail()) {
 							cin.clear();
