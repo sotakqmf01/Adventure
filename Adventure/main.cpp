@@ -1,4 +1,5 @@
-﻿#include "Character.h"
+﻿#pragma comment(lib,"winmm.lib")
+#include "Character.h"
 #include "GameManager.h"
 #include "printMessage.h"
 #include "printCongratulations.h"
@@ -6,6 +7,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <conio.h>
+#include <mmsystem.h>
 using namespace std;
 
 int main() 
@@ -15,10 +17,16 @@ int main()
 	GameManager gameManager;
 	PrintMessage printMessage;
 	PrintCongratulations printCongratulations;
-
-	printMessage.printIntro();
+	
+	PlaySound(TEXT("opening.wav"), 0, SND_FILENAME | SND_ASYNC ); //루프 재생
+	printMessage.printOpening();
+	
+	//PlaySound(TEXT("intro2.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
+	//printMessage.printIntro();
+	
 
 	// 1. 캐릭터 생성 - createCharacter()
+
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 	printMessage.printUpperFrame();

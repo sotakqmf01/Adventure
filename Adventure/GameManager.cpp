@@ -395,7 +395,7 @@ void GameManager::displayRPGResult()
 		//printMessage.gotoXY(46, 20); cout << totalKilledSlime;
 
 		printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
-
+		_getch();
 		//printMessage.textColor(6);
 		//cout << "          |       |                                                                                     |       |" << endl;
 		//printMessage.printFrame(); 
