@@ -150,7 +150,7 @@
     <ClCompile Include="SmallPoisonPotion.cpp">
       <Filter>소스 파일\Item\Items\HealthPotion\BadPotion</Filter>
     </ClCompile>
-    <ClCompile Include="printCongraulations.cpp">
+    <ClCompile Include="printCongratulations.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
   </ItemGroup>

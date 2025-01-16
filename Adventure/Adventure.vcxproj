@@ -147,7 +147,7 @@
     <ClCompile Include="MiddlePotion.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Orc.cpp" />
-    <ClCompile Include="printCongraulations.cpp" />
+    <ClCompile Include="printCongratulations.cpp" />
     <ClCompile Include="SmallExperienceBook.cpp" />
     <ClCompile Include="SmallPoisonPotion.cpp" />
     <ClCompile Include="printMessage.cpp" />

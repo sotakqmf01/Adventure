@@ -1,4 +1,5 @@
-﻿#include "Character.h"
+﻿#pragma comment(lib,"winmm.lib")
+#include "Character.h"
 #include "GameManager.h"
 #include "printMessage.h"
 #include "printCongratulations.h"
@@ -6,6 +7,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <conio.h>
+#include <mmsystem.h>
 using namespace std;
 
 int main()
@@ -14,11 +16,17 @@ int main()
 	UINT OriginCP = GetConsoleOutputCP();	// 클리어 메세지 출력용 변수 저장
 	GameManager gameManager;
 	PrintMessage printMessage;
-	printMessage.printIntro();
 	PrintCongratulations printCongratulations;
-	//printCongratulations.printCongratulations();
+	
+	PlaySound(TEXT("opening.wav"), 0, SND_FILENAME | SND_ASYNC ); //루프 재생
+	printMessage.printOpening();
+	
+	//PlaySound(TEXT("intro2.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP); //루프 재생
+	//printMessage.printIntro();
+	
 
 	// 1. 캐릭터 생성 - createCharacter()
+
 	string name = gameManager.createCharacter();
 	Character* player = Character::getInstance(name);
 	printMessage.printUpperFrame();
@@ -58,21 +66,16 @@ int main()
 		if (player->isDead())
 			printMessage.displayEpitaph(name);
 
-		// 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
-		if (gameManager.killBoss == true)
-		{
-			printMessage.printFrame();
-			cout << "					클리어 연출이 너무 바로 나와요 중간에 뭔가 필요합니다						" << endl;
-			printMessage.printFrame();
-			cout << "					클리어 연출이 너무 바로 나와요 중간에 뭔가 필요합니다						" << endl;
-			printMessage.printFrame();
-			cout << "					클리어 연출이 너무 바로 나와요 중간에 뭔가 필요합니다						" << endl;
-			SetConsoleOutputCP(CP_UTF8);
-			printCongratulations.printCongratulations();
-			SetConsoleOutputCP(OriginCP);
-		}
-		// 4. 게임 종료 시 결과 출력
-		gameManager.displayRPGResult();
+	// 보스를 잡고 게임을 클리어 했을 때 축하 메시지 출력
+	if (gameManager.killBoss == true)
+	{
+		SetConsoleOutputCP(CP_UTF8);
+		printCongratulations.printCongratulations();
+		SetConsoleOutputCP(OriginCP);
+	}
+
+	// 4. 게임 종료 시 결과 출력
+	gameManager.displayRPGResult();
 
 		return 0;
 	}

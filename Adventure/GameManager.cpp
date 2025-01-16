@@ -248,6 +248,7 @@ void GameManager::visitShop(Character* player)
 	char visitShop;
 	cout << "      상점을 방문하시겠습니까? (Y/N) : ";
 	cin >> visitShop;
+	cin.ignore(10000, '\n');
 	if (visitShop == 'y' || visitShop == 'Y')
 	{
 		Shop shop;
@@ -259,10 +260,11 @@ void GameManager::visitShop(Character* player)
 			printMessage.printShopRoof();
 
 			printMessage.printFrame();
-			cout << "       1.아이템 구매   2.아이템 판매   3.나가기" << endl;
-			printMessage.cursorView(0);
-			menu = _getch();
-			printMessage.cursorView(1);
+			cout << "      ▶ 1.아이템 구매   2.아이템 판매   3.나가기" << endl;
+			printMessage.printFrame();
+			cout << "      ▶ 선택 : ";
+			cin >> menu;
+			cin.ignore(10000, '\n');
 
 			switch (menu)
 			{
@@ -281,6 +283,7 @@ void GameManager::visitShop(Character* player)
 					printMessage.printFrame();
 					cout << "      ▶ 선택 (리롤 " << shop.getRerollCount() << "회) : ";
 					cin >> itemSelect;
+					cin.ignore(10000, '\n');
 
 					// cin으로 입력을 받을 때 타입이 다르면 입력 실패 상태가 됨
 					// => 입력 실패 상태가 되면 해당 변수는 원래 가지고 있는 값을 그대로 가짐
@@ -316,6 +319,7 @@ void GameManager::visitShop(Character* player)
 					printMessage.printFrame();
 					cout << "      ▶ 아이템 번호 입력 시 판매(뒤로가기:0) : ";
 					cin >> itemSelect;
+					cin.ignore(10000, '\n');
 
 					if (cin.fail()) {
 						cin.clear();
@@ -357,11 +361,34 @@ void GameManager::displayRPGResult()
 	printMessage.printFrame();
 	cout << endl;
 	printMessage.printFrame();
-	cout << "      게임 결과를 보시겠습니까? (Y/N) : ";
+	cout << "             게임 결과를 보시겠습니까? (Y/N) : ";
 	cin >> lookResult;
 
 	if (lookResult == 'y' || lookResult == 'Y')
 	{
+		printMessage.printFrame();
+		cout << endl;
+		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
+		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
+		printMessage.printFrame(); cout << "         | |                모 험 결 산                 | |" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printFrame(); cout << "         | |   - 슬라임 :             " << totalKilledSlime << "  마리" << string(12 - to_string(totalKilledSlime).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - 고블린 :             " << totalKilledGoblin << "  마리" << string(12 - to_string(totalKilledGoblin).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - 오크 :               " << totalKilledOrc << "  마리" << string(12 - to_string(totalKilledOrc).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - 산적 :               " << totalKilledBandit << "  마리" << string(12 - to_string(totalKilledBandit).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - 트롤 :               " << totalKilledTroll << "  마리" << string(12 - to_string(totalKilledTroll).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |   - 악마 :               " << totalKilledBoss << "  마리" << string(12 - to_string(totalKilledBoss).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printFrame(); cout << "         | |  물리친 몬스터 : 총      " << totalKilledMonster << "  마리" << string(12 - to_string(totalKilledMonster).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "         | |  획득 골드량  :  총      " << totalGold << "  골드" << string(12 - to_string(totalGold).length(), ' ') << "| |" << endl;
+		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
+		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
+		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
+		printMessage.printLowerFrame();
+		//printMessage.gotoXY(46, 20); cout << totalKilledSlime;
+
+		printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
+		_getch();
 		//printMessage.textColor(6);
 		//cout << "          |       |                                                                                     |       |" << endl;
 		//printMessage.printFrame(); 
@@ -372,23 +399,5 @@ void GameManager::displayRPGResult()
 		//cout << "      > 획득 골드량 : " << totalGold << endl;
 		//printMessage.printFrame();
 		//cout << "      ===================================" << endl;
-		printMessage.printFrame();
-		cout << endl;
-		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
-		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
-		printMessage.printFrame(); cout << "         | |                모 험 결 산                 | |" << endl;
-		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
-		printMessage.printFrame(); cout << "         | |  물리친 몬스터  총         마리            | |" << endl;
-		printMessage.printFrame(); cout << "         | |  슬라임 :     고블린 :       오크 :        | |" << endl;
-		printMessage.printFrame(); cout << "         | |  산적 :       트롤 :         악마 :        | |" << endl;
-		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
-		printMessage.printFrame(); cout << "         | |  획득 골드량    총         골드            | |" << endl;
-		printMessage.printFrame(); cout << "       __| |____________________________________________| |__" << endl;
-		printMessage.printFrame(); cout << "      (__   ____________________________________________   __)" << endl;
-		printMessage.printFrame(); cout << "         | |                                            | |" << endl;
-		printMessage.printLowerFrame();
-		printMessage.gotoXY(46, 20); cout << totalKilledSlime;
-
-		printMessage.gotoXY(0, 29); // 좌측 맨아래로 커서 이동
 	}
 }
