@@ -33,9 +33,36 @@ void PrintMessage::textColor(unsigned short color)	// 컬러 텍스트 함수 0(
 
 void PrintMessage::printOpening()
 {
-    // 구현예정
-}
+        cursorView(0);
+        system("cls");
+        Sleep(2000);
+        textColor(15); gotoXY(48, 3); cout << "기억하지 못하시겠지만"; Sleep(2000);
+        textColor(15); gotoXY(46, 4); cout << "이것은 당신의 이야기입니다.";
+        Sleep(2000);
+        textColor(15); gotoXY(37, 6); cout << "먼 옛날, 이름조차 알려지지 않은 악마에 의해"; Sleep(2500);
+        textColor(15); gotoXY(39, 7); cout << "이 세상이 멸망의 위기에 몰린 적이 있었고"; Sleep(2500);
+        textColor(15); gotoXY(37, 8); cout << "저희는 큰 희생을 치르고 악마를 봉인하였습니다.";
+        Sleep(2500);
+        textColor(15); gotoXY(40, 10); cout << "하지만 이후로 셀 수 없는 시간이 흘렀고"; Sleep(2500);
+        textColor(15); gotoXY(30, 11); cout << "봉인이 점점 약해지며 사악한 힘이 세상을 물들이고 있었습니다.";
+        Sleep(3000);
+        textColor(15); gotoXY(52, 13); cout << "그러던 어느 날"; Sleep(2000);
+        textColor(15); gotoXY(39, 14); cout << "이름없는 모험가가 혜성처럼 나타났습니다."; Sleep(2300);
+        textColor(15); gotoXY(30, 15); cout << "그는 처음엔 약했지만, 도무지 믿기지 않는 속도로 강해졌습니다.";
+        Sleep(3000);
+        textColor(15); gotoXY(27, 17); cout << "이윽고 악마의 봉인이 깨어지자 그는 홀로 악마를 토벌해내고 말았습니다."; Sleep(3000);
+        textColor(15); gotoXY(36, 18); cout << "놀라운 업적에 모두가 그를 '용사'라고 불렀습니다."; Sleep(2500);
+        textColor(15); gotoXY(28, 19); cout << "그리고 세상을 구한 당신, 용사에게 부와 권력이 몰리기 시작했습니다.";
+        Sleep(3000);
+        textColor(15); gotoXY(37, 21); cout << "그러나 머지 않아 그는 홀연히 사라지고 말았습니다."; Sleep(2500);
+        textColor(15); gotoXY(28, 22); cout << "그럼에도 나타났을 때와 같이 사라진 그 분을 저희는 기억하고 있습니다.";
+        Sleep(3000);
+        gotoXY(52, 26); textColor(9); cout << "혜성"; textColor(15); cout << "의 용사를.";
+        cursorView(1);
 
+        Sleep(3000);
+        
+}
 void PrintMessage::askName()
 {
     system("cls");
@@ -101,6 +128,7 @@ void PrintMessage::askName()
     cout << "    \\_/___________________________/." << endl;
     textColor(7);
     gotoXY(53,16); // 이름 입력칸 좌표 (53, 16) 로 커서 갖다놓기
+    cursorView(1);
 }
 void PrintMessage::afterName(string name)
 {
@@ -198,6 +226,7 @@ void PrintMessage::afterName(string name)
 }
 void PrintMessage::printIntro()
 {   
+    system("cls");
     cursorView(0);
     gotoXY(2, 8);
 	textColor(12);
