@@ -73,8 +73,11 @@ void PrintCongratulations::printCongratulations()
 
     printFrame();
     cout << endl;
+    Sleep(800);
     printFrame();
-    cout << endl;
+    cout << endl; Sleep(800);
+    printFrame();
+    cout << endl; Sleep(800);
    
    printFrame(); textColor(6);  gotoXY(30, getcursorlocationY()); cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⣿⣿⣿⣿⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
    printFrame(); textColor(6);  gotoXY(30, getcursorlocationY()); cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣶⡾⠿⠟⠛⠉⠁⠀⠀⠀⠉⠙⠻⢿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;

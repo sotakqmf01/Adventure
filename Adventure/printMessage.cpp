@@ -1,11 +1,13 @@
 ﻿#include "printMessage.h"
 #include "Character.h"
 #include "GenerateRandomNumber.h"
+#include "GameManager.h"
 #include <iostream>
 #include <string>
 #include <windows.h>
 #include <conio.h>
 #include <fstream>
+#include <cassert>
 
 using namespace std;
 
@@ -178,6 +180,11 @@ void PrintMessage::afterName(string name)
         Sleep(2000);
         system("cls");
     }
+    else if (name == "크레딧")
+    {
+        printCredit();
+    }
+    
     else
     {
         for (int i = 10; i <= 16; i++)
@@ -411,6 +418,50 @@ void PrintMessage::cursorView(char c)
 	ConsoleCursor.bVisible = c;
 	ConsoleCursor.dwSize = 2;
 	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
+}
+
+void PrintMessage::printwithdelay(string message)
+{
+    for (char s : message)
+    {
+        cout << s;
+        Sleep(100);
+    }
+}
+
+void PrintMessage::printCredit()
+{
+    while (1)
+    {
+        system("cls");
+        printUpperFrame();
+        printFrame(); cout << endl; Sleep(1500);
+        printFrame(); cout << endl; Sleep(1500);
+        printFrame(); cout << endl; Sleep(1500);
+        PlaySound(TEXT("credit.wav"), 0, SND_FILENAME | SND_ASYNC); //한 번만 재생
+        printFrame(); cout << endl; Sleep(1500);
+        printFrame(); cout << endl; Sleep(1500);
+        printFrame(); cout << endl; Sleep(1500);
+
+        printFrame(); printwithdelay("내일배움캠프 Unreal 1기 2조\n"); printFrame(); cout << endl; printFrame(); cout << endl;
+        printFrame(); printwithdelay("프로젝트 : TD&D Adventure\n"); printFrame(); cout << endl; printFrame(); cout << endl;
+        printFrame(); printwithdelay("개발 기간 : 2025. 1. 10. (금) ~ 2025. 1. 16. (목)\n"); printFrame(); cout << endl; printFrame(); cout << endl;
+        printFrame(); printwithdelay("멤버 구성\n"); printFrame(); cout << endl;
+        printFrame(); printwithdelay("- 정재훈 : GameManager 파트, 각자 다른 파트와의 코드 조율\n"); printFrame(); cout << endl;
+        printFrame(); printwithdelay("- 김시현 : Character 파트, Inventory 포함, QA 작업\n"); printFrame(); cout << endl;
+        printFrame(); printwithdelay("- 김주영 : Item, Shop 파트, 아이템 매매 기능 및 아이템 추가\n"); printFrame(); cout << endl;
+        printFrame(); printwithdelay("- 김재석 : Monster, Art 파트, 몬스터 추가 및 UI, 연출 작업\n"); printFrame(); cout << endl; printFrame(); cout << endl; printFrame(); cout << endl;
+        printFrame(); printwithdelay("고생 많으셨습니다 .\n"); printFrame(); cout << endl;
+        printFrame(); printwithdelay("플레이 해주셔서 감사합니다.\n"); printFrame(); cout << endl;
+        printFrame(); cout << endl;
+        printFrame(); cout << endl;
+        printFrame(); cout << endl;
+        printLowerFrame();
+        Sleep(125000);
+        system("pause");
+        DebugBreak();
+    }
+    
 }
 
 void PrintMessage::bossAppears() 
