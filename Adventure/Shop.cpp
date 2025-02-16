@@ -263,7 +263,7 @@ void Shop::visitShop(Character* player, string& menu)
 						cout << "      ※ 잘못된 입력입니다 ※" << endl;
 						continue;
 					}
-					catch (const out_of_range&) {
+					catch (const out_of_range& e) {
 						printMessage.printFrame();
 						cout << "      ※ 잘못된 입력입니다 ※" << endl;
 						continue;

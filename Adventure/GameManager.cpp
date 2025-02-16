@@ -62,32 +62,51 @@ string GameManager::createCharacter()
 	return name;
 }
 
+// 예외 처리 추가
 Monster* GameManager::generateMonster(int level)
 {
 	Monster* monster = nullptr;
 
-	switch (generateRandomNumber(0, 4))
+	try 
 	{
-	case 0:
-		monster = new Slime(level);
-		break;
-	case 1:
-		monster = new Orc(level);
-		break;
-	case 2:
-		monster = new Goblin(level);
-		break;
-	case 3:
-		monster = new Troll(level);
-		break;
-	case 4:
-		monster = new Bandit(level);
-		break;
-	default:
-		break;
-	}
+		switch (generateRandomNumber(0, 4))
+		{
+		case 0:
+			monster = new Slime(level);
+			break;
+		case 1:
+			monster = new Orc(level);
+			break;
+		case 2:
+			monster = new Goblin(level);
+			break;
+		case 3:
+			monster = new Troll(level);
+			break;
+		case 4:
+			monster = new Bandit(level);
+			break;
+		default:
+			break;
+		}
 
-	return monster;
+		if (!monster) 
+		{
+			// 몬스터 생성을 실패하면 thorw로 runtime_error를 발생시키기
+			// https://modoocode.com/230
+			throw runtime_error("몬스터 생성 실패");	
+		}
+
+		return monster;
+	}
+	catch (const exception& e)
+	{
+		// cerr 객체는 오류를 출력하기 위한 표준 오류 스트림
+		// https://koey.tistory.com/27 / https://stackoverflow.com/questions/3723795/is-stdout-line-buffered-unbuffered-or-indeterminate-by-default
+		cerr << "Error : " << e.what() << endl;
+
+		return monster;
+	}
 }
 
 Monster* GameManager::generateBossMonster(int level)
